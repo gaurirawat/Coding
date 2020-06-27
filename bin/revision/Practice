@@ -1,0 +1,11 @@
+1. how to take input of tree in format 1 2 N 5 6 N N 7 8. // Tree_lc_kth_ancesterr_of_a_tree
+2. see string functions string_ls_break_permutation
+3. must revise Tree_ls_all_nodes_distance_k
+4. be very clear on how infix to postfix works
+5. practise prefix sum approach relates questions
+6. Arr_IB_max_absolute_difference
+7. Arr_IB_repeat_and_missing_no
+8. practice implementing custom comparator.
+	comparator.comparing() can be used for customising sorting of objects.
+	for other purposes use override compare.compareTo()
+Practise using StringBuilder over String. Look at the functions once.

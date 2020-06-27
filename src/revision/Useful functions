@@ -1,0 +1,29 @@
+int arr[]= brr.clone();
+Arrays.fill(arr, 10);// fills all cells of array with value 10
+System.out.println(Arrays.toString(candidates));
+Arrays.sort(arr); 
+Arrays.sort(arr, Collections.reverseOrder()); 
+Arrays.binarySearch(arr, element, comparator)
+
+Collections.reverse(Arrays.asList(a));
+Collections.sort(al, Collections.reverseOrder());
+al.toArray(new int[0][0]);
+
+String[]s= x.split(" "); // separates space separated elements into different array cells.
+
+Comparator<Employee> employeeNameComparator= Comparator.comparing(Employee::getName);//string
+Comparator<Employee> employeeNameComparatorReversed = employeeNameComparator.reversed();//string
+Comparator<Employee> employeeAgeComparator = Comparator.comparingInt(Employee::getAge);//int
+
+Comparator<Employee> employee_Age_Name_Comparator
+      = Comparator.comparing(Employee::getAge).thenComparing(Employee::getName);
+Here the ordering will be done by age, and for the values with the same age, ordering will be done by name.
+
+Comparator<Employee> employee_Name_Age_Comparator
+      = Comparator.comparing(Employee::getName).thenComparingInt(Employee::getAge);
+      
+Arrays.sort(employees, employee_Comparator)
+
+sorting of primitive type ie int does not take up a comparator.
+so to convert primitive type to reference type use:
+Integer[] a =Arrays.stream(arr).boxed().toArray(Integer[]::new);
