@@ -4,6 +4,9 @@ System.out.println(Arrays.toString(candidates));
 Arrays.sort(arr); 
 Arrays.sort(arr, Collections.reverseOrder()); 
 Arrays.binarySearch(arr, element, comparator)
+Returns:
+index of the search key, if present ; otherwise, (-(insertion point) – 1).
+if element has to be inserted at 0th position then returned position is -1.
 
 Collections.reverse(Arrays.asList(a));
 Collections.sort(al, Collections.reverseOrder());
