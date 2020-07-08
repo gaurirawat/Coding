@@ -2,7 +2,7 @@ package revision;
 
 //https://leetcode.com/problems/partition-equal-subset-sum/
 
-public class DP_lc_subset_sum_equal_partition {
+public class 	DP_lc_subset_sum_equal_partition {
 	public boolean canPartition(int[] nums) {
 		int sum=0;
 		for(int n:nums)
