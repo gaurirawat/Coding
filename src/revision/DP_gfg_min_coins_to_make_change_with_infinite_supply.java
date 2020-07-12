@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 //https://practice.geeksforgeeks.org/problems/number-of-coins/0
 
-public class DP_gfg_min_coins_to_make_value_infinite_supply {
+public class DP_gfg_min_coins_to_make_change_with_infinite_supply {
     public static void main (String[] args) {
         Scanner sc= new Scanner(System.in);
         int t= sc.nextInt();
@@ -40,4 +40,20 @@ public class DP_gfg_min_coins_to_make_value_infinite_supply {
         }
         return dp[amt][i+1];
     }
+
+    //bottum up. I cannot decide what initial value to assign.
+    /*
+    public static int change(int amount, int[] coins) {
+         int dp[][]= new int[2][amount+1];
+
+         for(int i=1; i<=coins.length;++i){
+             for(int j=0; j<=amount; ++j){
+                 dp[i%2][j]=dp[(i+1)%2][j];
+                 for(int k=1; k*coins[i-1]<=j; ++k)
+                     dp[i%2][j]=Math.min(dp[i%2][j], k+ dp[(i+1)%2][j-k*coins[i-1]] );
+             }
+         }
+         return dp[coins.length%2][amount];
+     }
+     */
 }

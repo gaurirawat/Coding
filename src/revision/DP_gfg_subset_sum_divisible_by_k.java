@@ -46,7 +46,7 @@ public class DP_gfg_subset_sum_divisible_by_k {
 	}
 
 
-//	Below soln is correct but TLE. O(m* sum) sum= sum of all m elements)
+//	Below  soln looks correct but TLE. O(m* sum) sum= sum of all m elements)
 //	public static void main(String[] args) {
 //		Scanner sc= new Scanner(System.in);
 //		int t= Integer.parseInt(sc.nextLine());
@@ -68,6 +68,7 @@ public class DP_gfg_subset_sum_divisible_by_k {
 //		}
 //	}
 //
+	//below soln is giving heap overflow
 //	public static boolean subsetSumDivisibleByKDP(int nums[], int k, int sum){
 //		boolean dp[][]= new boolean[nums.length+1][sum+1];
 //		for(int i=0; i<=nums.length;++i)
