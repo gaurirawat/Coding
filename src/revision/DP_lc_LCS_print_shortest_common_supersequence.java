@@ -1,6 +1,7 @@
 package revision;
 
-public class DP_lc_LCS_shortest_common_subsequence_print_string {
+//https://leetcode.com/problems/shortest-common-supersequence/
+public class DP_lc_LCS_print_shortest_common_supersequence {
 
 	public String shortestCommonSupersequence(String str1, String str2) {
         char[]xrr= str1.toCharArray();

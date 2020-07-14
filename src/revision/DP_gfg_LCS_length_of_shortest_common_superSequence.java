@@ -1,8 +1,8 @@
 package revision;
 
-import java.util.Scanner;
+//https://practice.geeksforgeeks.org/problems/shortest-common-supersequence/0
 
-//https://www.geeksforgeeks.org/shortest-common-supersequence/
+import java.util.Scanner;
 public class DP_gfg_LCS_length_of_shortest_common_superSequence {
     public static void main (String[] args) {
         Scanner sc = new Scanner(System.in);

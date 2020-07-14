@@ -1,0 +1,26 @@
+DP_lc_ugly_number.java
+DP_lc_fibonacci.java
+DP_lc_unique_path.java
+DP_lc_unique_path_2.java
+
+DP_gfg_matrix_chain_multiplication.java
+
+DP_gfg_01Knapsack.java
+DP_gfg_01Knapsack_duplicate_allowed.java
+
+DP_gfg_min_coins_to_make_change_with_infinite_supply.java
+DP_lc_coin_change_find_no_of_combinations.java
+
+DP_lc_LCS.java
+DP_gfg_LCS_length_of_shortest_common_superSequence.java
+DP_lc_LCS_print_shortest_common_supersequence
+DP_lc_LCS_edit_distance.java
+DP_lc_LIS.java (prefer array method)
+
+DP_lc_subset_sum_equal_partition.java
+DP_lc_subset_sum_print_combinations.java
+DP_gfg_subset_sum_divisible_by_k.java(prefer modulus method)
+
+DP_gfg_optimal_binary_search_tree
+DP_lc_longest_palindromic_subsequence
+DP_gfg_max_cut_segments
