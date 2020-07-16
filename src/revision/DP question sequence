@@ -17,6 +17,9 @@ DP_lc_LCS_print_shortest_common_supersequence
 DP_lc_LCS_edit_distance.java
 DP_lc_LIS.java (prefer array method)
 
+DP_gfg_LCSubstring
+DP_lc_LCSubstring_max_langth_of_repeated_subarray
+
 DP_lc_subset_sum_equal_partition.java
 DP_lc_subset_sum_print_combinations.java
 DP_gfg_subset_sum_divisible_by_k.java(prefer modulus method)
@@ -24,3 +27,15 @@ DP_gfg_subset_sum_divisible_by_k.java(prefer modulus method)
 DP_gfg_optimal_binary_search_tree
 DP_lc_longest_palindromic_subsequence
 DP_gfg_max_cut_segments
+DP_gfg_wildcard_pattern_matching
+DP_gfg_egg_Dropping //tough
+DP_gfg_max_sum_rectangle    //tough
+DP_lc_job_scheduling_start_end_time
+DP_lc_word_break
+
+----------
+tapping water
+max rectabgle in histogram
+max square in binary matrix filled with 1
+max rectangle -- filled with 1
+count of rectangles in binary matrix filled with 1

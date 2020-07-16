@@ -1,0 +1,32 @@
+ARRAYS
+
+Kadane’s Algorithm:
+Ref: https://www.geeksforgeeks.org/largest-sum-contiguous-subarray/
+Code: https://practice.geeksforgeeks.org/problems/kadanes-algorithm/0
+
+ 1-D Used to find the largest Sum in a Contiguous Subarray
+Initialize:
+    max_so_far = 0
+    max_ending_here = 0
+
+Loop for each element of the array
+  (a) max_ending_here = max_ending_here + a[i]
+  (b) if(max_so_far < max_ending_here)
+            max_so_far = max_ending_here
+  (c) if(max_ending_here < 0)
+            max_ending_here = 0
+return max_so_far
+
+2-D
+Ref: https://www.geeksforgeeks.org/maximum-sum-rectangle-in-a-2d-matrix-dp-27/
+
+maximum-sum-rectangle-in-a-2d-matrix
+Kadane’s algorithm for 1D array can be used to reduce the time complexity to O(n^3).
+The idea is to fix the left and right columns one by one and find the maximum sum contiguous rows for every left and
+right column pair. We basically find top and bottom row numbers (which have maximum sum) for every fixed left and
+right column pair. To find the top and bottom row numbers, calculate sun of elements in every row from left to right
+and store these sums in an array say temp[]. So temp[i] indicates sum of elements from left to right in row i. If we
+apply Kadane’s 1D algorithm on temp[], and get the maximum sum subarray of temp, this maximum sum would be the maximum
+possible sum with left and right as boundary columns. To get the overall maximum sum, we compare this sum with the
+maximum sum so far.
+-------------------------------------------------------------------------

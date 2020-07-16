@@ -1,0 +1,41 @@
+
+Peak Valley Approach:
+If we analyze the graph, we notice that the points of interest are the consecutive valleys and peaks.
+
+Mathematically speaking: Total Profit= \sum_{i}(height(peak_i)-height(valley_i))TotalProfit=∑
+
+The key point is we need to consider every peak immediately following a valley to maximize the profit.
+In case we skip one of the peaks (trying to obtain more profit), we will end up losing the profit over one of
+the transactions leading to an overall lesser profit.
+
+For example, in the above case, if we skip peak_i and valley_j trying to obtain more profit by
+considering points with more difference in heights, the net profit obtained will always be lesser than the one
+obtained by including them, since C will always be lesser than A+B.
+
+ref:
+https://leetcode.com/articles/best-time-to-buy-and-sell-stock-ii/
+
+problem:
+Array_lc_buy_sell_stock_multiple_transactions
+https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/submissions/
+
+ public int maxProfit(int[] pr) {
+        int v=0;
+        int p=0;
+        int sum=0;
+
+        int i=0;
+        while(i<pr.length-1){
+            while(i<pr.length-1 && pr[i]>=pr[i+1])
+                i++;
+            v=pr[i];
+            while(i<pr.length-1 && pr[i]<=pr[i+1])
+                i++;
+            p=pr[i];
+            sum+=(p-v);
+        }
+        return sum;
+
+    }
+
+-----------------------------------------------

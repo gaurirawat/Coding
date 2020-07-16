@@ -1,11 +1,12 @@
 int arr[]= brr.clone();
 Arrays.fill(arr, 10);// fills all cells of array with value 10
+Arrays.stream(dp).forEach(a->Arrays.fill(a,-1));
 System.out.println(Arrays.toString(candidates));
 Arrays.sort(arr); 
 Arrays.sort(arr, Collections.reverseOrder()); 
 Arrays.binarySearch(arr, element, comparator)
 Returns:
-index of the search key, if present ; otherwise, (-(insertion point) – 1).
+index of the search key, if present ; otherwise, (-(insertion point) ï¿½ 1).
 if element has to be inserted at 0th position then returned position is -1.
 
 Collections.reverse(Arrays.asList(a));
@@ -26,6 +27,9 @@ Comparator<Employee> employee_Name_Age_Comparator
       = Comparator.comparing(Employee::getName).thenComparingInt(Employee::getAge);
       
 Arrays.sort(employees, employee_Comparator)
+
+//here we didn't use getters and setters. Simply used lambda function
+Arrays.sort(jobs, Comparator.ComparingInt(a -> a.e));
 
 sorting of primitive type ie int does not take up a comparator.
 so to convert primitive type to reference type use:

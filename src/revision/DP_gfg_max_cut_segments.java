@@ -47,3 +47,21 @@ public class DP_gfg_max_cut_segments {
         return dp[len];
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
