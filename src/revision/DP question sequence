@@ -28,10 +28,15 @@ DP_gfg_optimal_binary_search_tree
 DP_lc_longest_palindromic_subsequence
 DP_gfg_max_cut_segments
 DP_gfg_wildcard_pattern_matching
-DP_gfg_egg_Dropping //tough
+DP_lc_regular_expression_matching
+DP_gfg_egg_Dropping //tough ie. revise
 DP_gfg_max_sum_rectangle    //tough
 DP_lc_job_scheduling_start_end_time
 DP_lc_word_break
+DP_lc_buy_sell_stock_atmost_k_times //mug it up
+DP_lc_jump_game_isPossible //prefer array approach
+DP_lc_min_cost_path
+DP_lc_predict_winner    //definitely revise
 
 ----------
 tapping water

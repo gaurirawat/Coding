@@ -5,6 +5,7 @@ Ref: https://www.geeksforgeeks.org/largest-sum-contiguous-subarray/
 Code: https://practice.geeksforgeeks.org/problems/kadanes-algorithm/0
 
  1-D Used to find the largest Sum in a Contiguous Subarray
+ tc= O(n) sc=O(1)
 Initialize:
     max_so_far = 0
     max_ending_here = 0
