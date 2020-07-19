@@ -3,9 +3,9 @@ package revision;
 import java.util.Scanner;
 //https://practice.geeksforgeeks.org/problems/maximum-sum-rectangle/0
 
-/*there should be atleast one non negative element in the array for this thing to work. If not be check complete soln in
-geeks article*/
-public class DP_gfg_max_sum_rectangle {
+/*Kadane's algo used. there should be atleast one non negative element in the array for this thing to work. If not be
+check complete soln in geeks article*/
+public class Matrix_DP_gfg_max_sum_rectangle {
     public static void main (String[] args) {
         Scanner sc= new Scanner(System.in);
         int t= Integer.parseInt(sc.nextLine());

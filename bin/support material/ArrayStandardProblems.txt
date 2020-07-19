@@ -1,5 +1,5 @@
 
-Max profit by infinite stock buy sell, Peak Valley Approach:
+Peak Valley Approach: Max profit by infinite stock buy sell,
 
 ref:
 https://leetcode.com/articles/best-time-to-buy-and-sell-stock-ii/
@@ -99,3 +99,35 @@ if (step == 0) {
         return -1;
     }
 ----------------------------------------------------------------------------------------------------------------
+
+Sliding window: Maximum Points You Can Obtain from Cards
+
+ref:
+https://www.geeksforgeeks.org/collect-maximum-points-array-k-moves/
+https://www.youtube.com/watch?v=1DkVU2i3sOA         (1:30 to 2:30)
+problem:
+https://leetcode.com/problems/maximum-points-you-can-obtain-from-cards/
+
+Sometimes it's not easy to identify if a problem falls under sliding window problem set.
+Here it might seem like a dp problem where we have to choose elements once form the left and once from the right.
+However if we notice closely there is a window more of a broken window a part of which is in the initial part and the remaining
+in the latter.
+Find sum of initial k elements. Now remove the innermost element form left and add innermost element to right. keep track of max sum.
+repeat this until the entire of window shifts from left to right.
+
+public int maxScore(int[] c, int k) {
+        if(c.length==0||k==0) return 0;
+        int sum=0;
+        for(int i=0;i<k && i<c.length; ++i)
+            sum+=c[i];
+        if(k>=c.length)
+            return sum;
+        int max=sum;
+        for(int i=0;i<k;++i){
+            sum=sum-c[k-i-1]+c[c.length-1-i];
+            max=Math.max(max,sum);
+        }
+        return max;
+    }
+
+-------------------------------------------------------------------------------------------------------------------

@@ -24,23 +24,25 @@ DP_lc_subset_sum_equal_partition.java
 DP_lc_subset_sum_print_combinations.java
 DP_gfg_subset_sum_divisible_by_k.java(prefer modulus method)
 
+DP_gfg_matrix_max_size_square_submatrix
+DP_lc_matrix_count_square_submatrices_with_all_ones
+DP_gfg_matrix_max_sum_rectangle                //tough use kadane's algo instead of dp
+
 DP_gfg_optimal_binary_search_tree
 DP_lc_longest_palindromic_subsequence
 DP_gfg_max_cut_segments
 DP_gfg_wildcard_pattern_matching
 DP_lc_regular_expression_matching
-DP_gfg_egg_Dropping //tough ie. revise
-DP_gfg_max_sum_rectangle    //tough
+DP_gfg_egg_Dropping                     //tough ie. revise
 DP_lc_job_scheduling_start_end_time
 DP_lc_word_break
-DP_lc_buy_sell_stock_atmost_k_times //mug it up
-DP_lc_jump_game_isPossible //prefer array approach
+DP_lc_buy_sell_stock_atmost_k_times     //mug it up
+DP_lc_jump_game_isPossible              //prefer array approach
 DP_lc_min_cost_path
-DP_lc_predict_winner    //definitely revise
-
+DP_lc_predict_winner                    //definitely revise
+DP_lc_palindrome_partitioning           //different approach
 ----------
-tapping water
-max rectabgle in histogram
+
 max square in binary matrix filled with 1
 max rectangle -- filled with 1
 count of rectangles in binary matrix filled with 1

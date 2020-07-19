@@ -3,7 +3,7 @@ package revision;
 
 //understanding: https://www.geeksforgeeks.org/find-median-row-wise-sorted-matrix/
 import java.util.*;
-public class BSearch_ib_median_of_2D_matrix {
+public class Matrix_BSearch_ib_median_of_2D_matrix {
 	public int findMedian(int[][] a) {
         int r=a.length;
         int c=a[0].length;
