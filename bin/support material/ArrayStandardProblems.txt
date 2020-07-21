@@ -38,7 +38,7 @@ obtained by including them, since C will always be lesser than A+B.
 
     }
 
------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------
 
 Min Jumps to reach end
 
@@ -52,8 +52,8 @@ tc= O(n) sc=O(1)
 
 Variables to be used:
 -maxReach The variable maxReach stores at all time the maximal reachable index in the array.
--step The variable step stores the number of steps we can still take(and is initialized with value at index 0, i.e. initial
-number of steps)
+-step The variable step stores the number of steps we can still take(and is initialized with value at index 0, i.e.
+initial number of steps)
 -jump jump stores the amount of jumps necessary to reach that maximal reachable position.
 
 Given array arr = 1, 3, 5, 8, 9, 2, 6, 7, 6, 8, 9
@@ -65,14 +65,15 @@ Now, starting iteration from index 1, the above values are updated as follows:
 First we test whether we have reached the end of the array, in that case we just need to return the jump variable.
 if (i == arr.length - 1)
     return jump;
-Next we update the maxReach. This is equal to the maximum of maxReach and i+arr[i](the number of steps we can take from the current position).
+Next we update the maxReach. This is equal to the maximum of maxReach and i+arr[i](the number of steps we can take from
+the current position).
 maxReach = Math.max(maxReach, i+arr[i]);
 We used up a step to get to the current index, so steps has to be decreased.
 step--;
-If no more steps are remaining (i.e. steps=0, then we must have used a jump. Therefore increase jump. Since we know that it is
-possible somehow to reach maxReach, we again initialize the steps to the number of steps to reach maxReach from position i. But
-before re-initializing step, we also check whether a step is becoming zero or negative. In this case, It is not possible to reach
-further.
+If no more steps are remaining (i.e. steps=0, then we must have used a jump. Therefore increase jump. Since we know that
+it is possible somehow to reach maxReach, we again initialize the steps to the number of steps to reach maxReach from
+position i. But before re-initializing step, we also check whether a step is becoming zero or negative. In this case,
+it is not possible to reach further.
 if (step == 0) {
     jump++;
     if(i>=maxReach)
@@ -106,14 +107,15 @@ ref:
 https://www.geeksforgeeks.org/collect-maximum-points-array-k-moves/
 https://www.youtube.com/watch?v=1DkVU2i3sOA         (1:30 to 2:30)
 problem:
+Array_lc_max_point_you_can_obtain_from_cards
 https://leetcode.com/problems/maximum-points-you-can-obtain-from-cards/
 
 Sometimes it's not easy to identify if a problem falls under sliding window problem set.
 Here it might seem like a dp problem where we have to choose elements once form the left and once from the right.
-However if we notice closely there is a window more of a broken window a part of which is in the initial part and the remaining
-in the latter.
-Find sum of initial k elements. Now remove the innermost element form left and add innermost element to right. keep track of max sum.
-repeat this until the entire of window shifts from left to right.
+However if we notice closely there is a window more of a broken window a part of which is in the initial part and the
+remaining in the latter.
+Find sum of initial k elements. Now remove the innermost element form left and add innermost element to right. keep
+track of max sum. repeat this until the entire of window shifts from left to right.
 
 public int maxScore(int[] c, int k) {
         if(c.length==0||k==0) return 0;
@@ -131,3 +133,40 @@ public int maxScore(int[] c, int k) {
     }
 
 -------------------------------------------------------------------------------------------------------------------
+
+Rainwater trapping using max element on left/right technique
+
+ref:
+https://www.youtube.com/watch?v=FbGG2qpNp4U
+
+prob:
+Array_lc_rainwater_trapping
+https://leetcode.com/problems/trapping-rain-water/submissions/
+
+we are given an array containing height of bars. Find total water it can trap.
+For every i find the greatest ht on the right and the left including current ht itself. Now traverse again. For each bar
+the water that can be trapped in that cell is the total ht of water possible(obtained through the min of left and right
+max) minus the occupied area ie. ht of the bar.
+
+    public int trap(int[] h) {
+        int lmax[]= new int[h.length];//contains the max element on left including itself
+        int rmax[]= new int[h.length];//contains the max element on right including itself
+
+        int max=0;
+        for(int i=0;i<h.length;++i){
+            max=Math.max(h[i],max);
+            lmax[i]= max;
+        }
+
+        max=0;
+        for(int i=h.length-1;i>=0;--i){
+            max=Math.max(h[i],max);
+            rmax[i]= max;
+        }
+
+        int sum=0;
+        for(int i=0;i<h.length;++i)
+            sum+= Math.min(lmax[i],rmax[i])-h[i];
+        return sum;
+    }
+------------------------------------------------------------------------------------------------------------------------

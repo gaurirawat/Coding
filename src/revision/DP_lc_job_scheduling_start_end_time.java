@@ -22,6 +22,14 @@ public class DP_lc_job_scheduling_start_end_time {
         }
         return map.lastEntry().getValue();
     }
+    class Job{
+        int s,e,p;
+        public Job(int s, int e, int p){
+            this.s=s;
+            this.p=p;
+            this.e=e;
+        }
+    }
 
 //    public static void main(String[] args) {
 //        int startTime[] = {2,1,3,2}, endTime[] = {2,3,5,6}, profit[] = {20,10,40,80};
@@ -29,11 +37,4 @@ public class DP_lc_job_scheduling_start_end_time {
 //    }
 }
 
-class Job{
-    int s,e,p;
-    public Job(int s, int e, int p){
-        this.s=s;
-        this.p=p;
-        this.e=e;
-    }
-}
+

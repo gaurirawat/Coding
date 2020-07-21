@@ -1,5 +1,6 @@
 package revision;
 //https://leetcode.com/problems/intersection-of-two-linked-lists/submissions/
+//https://www.interviewbit.com/problems/intersection-of-linked-lists/
 
 /* below problem has two soln. First one is amazing. second one is a bit slow. As in first works in
  * 3ms, second in 8ms. Explained better in notebook.
@@ -9,50 +10,57 @@ package revision;
 import java.util.*;
 public class LL_lc_find_intersection_point {
 	public ListNode getIntersectionNode1(ListNode a, ListNode b) {
-        if(a==null || b==null)
-            return null;
-        
+        if(a==null||b==null) return null;
+        ListNode ta=a,tb=b;
+
 //        traverse till both lists are iterable
-        ListNode pa=a, pb=b;
-        while(pa!=null && pb!=null){
-            pa=pa.next;
-            pb=pb.next;
+        while(ta!=null&&tb!=null){
+            ta=ta.next;
+            tb=tb.next;
         }
-        
-/*        we find jumpa and jumpb which contain the jump steps that need to be taken initially 
-        after which both lists shall be of equal length. At anytime either one of them will be
-        zero since one will be longer. For equal length both will be zero.
-  */
-        int jumpa=0, jumpb=0;
-        while(pa!=null){
-            pa=pa.next;
-            jumpa++;
+
+        ListNode sm,big;
+        int k=0;
+
+//        if both are same then simply put big sm as any of these lists
+        if(ta==null && tb==null){
+            sm=a;
+            big=b;
         }
-        while(pb!=null){
-            pb=pb.next;
-            jumpb++;
+//        if ta is null then a is the small list, b is the big one. Now calculate k
+        else if(ta==null){
+            sm=a;
+            big=b;
+            while(tb!=null){
+                k++;
+                tb=tb.next;
+            }
         }
-        
-        //now whichever list is smaller shall take that no of jump steps for both to have same no of 
-//        remaining nodes left
-        pa=a; pb=b;
-        while(jumpa--!=0){
-            pa=pa.next;
+//        if tb is null then b is the small list, a is the big one. Now calculate k
+        else{
+            sm=b;
+            big=a;
+            while(ta!=null){
+                k++;
+                ta=ta.next;
+            }
         }
-        while(jumpb--!=0){
-            pb=pb.next;
-        }
-        
-        //now we check for intersection when nodes are at same distance form the end.
-        while(pa!=null && pb!=null){
-            if(pa.equals(pb))
-                return pa;
-            pa=pa.next;
-            pb=pb.next;
+
+        //now move big by k steps irrespective of which one that is a or b
+        while(k--!=0)
+            big=big.next;
+
+        //both are of equal length now. Increment them together and check for equality
+        while(big!=null){
+            if(sm==big)
+                return sm;
+            sm=sm.next;
+            big=big.next;
         }
         return null;
     }
-	
+
+    //solution two
 	public ListNode getIntersectionNode2(ListNode a, ListNode b) {
         if(a==null || b==null)
             return null;

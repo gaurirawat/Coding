@@ -1,5 +1,5 @@
 
-Peak Valley Approach: Max profit by infinite stock buy sell,
+PEAK VALLEY APPROACH:MAX PROFIT BY INFINITE STOCK BUY SELL
 
 ref:
 https://leetcode.com/articles/best-time-to-buy-and-sell-stock-ii/
@@ -40,7 +40,7 @@ obtained by including them, since C will always be lesser than A+B.
 
 ------------------------------------------------------------------------------------------------------------------------
 
-Min Jumps to reach end
+MIN JUMPS TO REACH END
 
 Ref:
 https://www.geeksforgeeks.org/minimum-number-jumps-reach-endset-2on-solution/
@@ -101,7 +101,7 @@ if (step == 0) {
     }
 ----------------------------------------------------------------------------------------------------------------
 
-Sliding window: Maximum Points You Can Obtain from Cards
+SLIDING WINDOW: MAXIMUM POINTS YOU CAN OBTAIN FROM CARDS
 
 ref:
 https://www.geeksforgeeks.org/collect-maximum-points-array-k-moves/
@@ -117,7 +117,7 @@ remaining in the latter.
 Find sum of initial k elements. Now remove the innermost element form left and add innermost element to right. keep
 track of max sum. repeat this until the entire of window shifts from left to right.
 
-public int maxScore(int[] c, int k) {
+    public int maxScore(int[] c, int k) {
         if(c.length==0||k==0) return 0;
         int sum=0;
         for(int i=0;i<k && i<c.length; ++i)
@@ -134,7 +134,7 @@ public int maxScore(int[] c, int k) {
 
 -------------------------------------------------------------------------------------------------------------------
 
-Rainwater trapping using max element on left/right technique
+RAINWATER TRAPPING: USING MAX ELEMENT ON LEFT/RIGHT TECHNIQUE
 
 ref:
 https://www.youtube.com/watch?v=FbGG2qpNp4U
@@ -169,4 +169,17 @@ max) minus the occupied area ie. ht of the bar.
             sum+= Math.min(lmax[i],rmax[i])-h[i];
         return sum;
     }
+------------------------------------------------------------------------------------------------------------------------
+
+FIRST POSITIVE MISSING NUMBER
+
+Prob:
+Array_ib_first_missing_positive_integer
+
+Traverse array once. Ignore all -ve numbers and put the +ve numbers
+on index (no-1). ie if we get no 5, we swap it with element at index 4. For numbers greater than a.length we ignore them.
+Now traverse the array again. The first index which we find where no is not equal to it's index, we get our ans as
+index+1.
+
+
 ------------------------------------------------------------------------------------------------------------------------

@@ -18,3 +18,20 @@ public class Array_ib_repeat_and_missing_no {
         return ans;
     }
 }
+/*
+public int[] repeatedNumber(final int[] a) {
+        int b[]= new int[a.length+1];
+        for(int i=0;i<a.length;++i){
+            b[a[i]]++;
+        }
+        int res[]=new int[2];
+        for(int i=1;i<b.length;++i){
+            if(b[i]==2)
+                res[0]=i;
+            else if(b[i]==0)
+                res[1]=i;
+        }
+        return res;
+
+    }
+ */

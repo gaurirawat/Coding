@@ -3,6 +3,11 @@ package revision;
 import java.util.Scanner;
 
 //https://practice.geeksforgeeks.org/problems/subarray-with-given-sum/0
+
+/*
+this approach is possible only because the array contains positive numbers. Otherwise sliding window/two pointer would
+not have worked
+ */
 public class Array_gfg_subarray_with_given_sum {
     public static void main (String[] args) {
         Scanner sc= new Scanner(System.in);
