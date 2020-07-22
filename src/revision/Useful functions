@@ -3,7 +3,7 @@ Arrays.fill(arr, 10);// fills all cells of array with value 10
 Arrays.stream(dp).forEach(a->Arrays.fill(a,-1));
 System.out.println(Arrays.toString(candidates));
 Arrays.sort(arr); 
-Arrays.sort(arr, Collections.reverseOrder()); 
+Arrays.sort(arr, Collections.reverseOrder()); //for this to work arr has to be of object type ie Integer instead of int
 Arrays.binarySearch(arr, element, comparator)
 Returns:
 index of the search key, if present ; otherwise, (-(insertion point) � 1).
