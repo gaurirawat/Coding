@@ -1,0 +1,390 @@
+BFS:
+
+// https://practice.geeksforgeeks.org/problems/bfs-traversal-of-graph/1/?track=sp-graph&batchId=152
+
+uses boolean visited[] and queue
+
+outer
+visit every node which is not visited(to handle disconnected graphs)
+
+inner
+1. mark node as visited, push it into queue
+2. pop elements from queue till it is empty
+3. for each element get its adjacency list
+3. if these adjacent elements are not visited then add them to the queue and MARK THEM AS VISITED otherise they will be
+inserted into the stack again
+
+
+    static ArrayList<Integer> bfs(ArrayList<ArrayList<Integer>> g, int N) {
+        boolean visited[] = new boolean[N];
+        ArrayList<Integer> res= new ArrayList<Integer>();
+        for(int i=0; i<N;++i){
+            if(!visited[i])
+                 innerBfs(i, g, visited, res);
+        }
+        return res;
+    }
+
+    static void innerBfs(int x, ArrayList<ArrayList<Integer>> g, boolean visited[], ArrayList<Integer> res ) {
+        Deque<Integer> q= new LinkedList<Integer>();
+        ArrayList<Integer> res= new ArrayList<Integer>();
+        q.add(0);
+        boolean visited[]=new boolean[v];
+        visited[0]=true;
+        while(st.size()!=0){
+            int x=q.pollFirst();
+            res.add(x);
+            for(int y:g.get(x))
+                if(visited[y]==false)
+                    {
+                        q.addLast(y);
+                        visited[y]=true;
+                    }
+        }
+        return res;
+    }
+
+------------------------------------------------------------------------------------------------------------------------
+DFS:
+
+// https://practice.geeksforgeeks.org/problems/depth-first-traversal-for-a-graph/1/?track=sp-graph&batchId=152
+
+uses boolean visited[] and recursion
+outer
+visit every node which is not visited(to handle disconnected graphs)
+
+inner
+1. mark node as visited
+2. get the adjacent nodes list
+3. visit them if not visited by calling the same function recursively with the correct node
+
+
+    static ArrayList<Integer> dfs(ArrayList<ArrayList<Integer>> g, int v){
+        boolean visited[] = new boolean[N];
+        ArrayList<Integer> res= new ArrayList<Integer>();
+        for(int i=0; i<N;++i){
+           if(!visited[i])
+                innerDfs(i, g, visited, res);
+        }
+        return res;
+    }
+
+    static void dfsInner(ArrayList<ArrayList<Integer>> g, int v,boolean[]visited, ArrayList<Integer> res){
+        res.add(v);
+        visited[v]=true;
+        for(int x: g.get(v)){
+            if(visited[x]==false)
+                dfsInner(g,x,visited,res);
+        }
+    }
+
+------------------------------------------------------------------------------------------------------------------------
+
+CHECK IF GRAPH IS CYCLIC
+
+DIRECTED:
+
+// https://practice.geeksforgeeks.org/problems/detect-cycle-in-a-directed-graph/1/?track=sp-graph&batchId=152
+
+Uses boolean visited[] and boolean stack[]
+outer
+visit every node which is not visited(to handle disconnected graphs).
+
+inner
+1. check if node is already in stack(return true) or already visited(return false)
+2. mark node as visited and add it to stack
+3. explore it's adjacent vertices(recursively) irrespective of whether it is visited or not. Return true if any call
+returns true
+
+    public static boolean isCyclicInner(ArrayList<ArrayList<Integer>> g, int i,boolean[]visited, boolean[]stack){
+        if(stack[i]==true)
+            return true;
+        if(visited[i]==true)
+            return false;
+        visited[i]=true;
+        stack[i]=true;
+        for(int x:g.get(i)){
+            if(isCyclicInner(g,x,visited,stack))
+                return true;
+        }
+        stack[i]=false;
+        return false;
+    }
+---------------
+UNDIRECTED
+
+// https://practice.geeksforgeeks.org/problems/detect-cycle-in-an-undirected-graph/1/?track=sp-graph&batchId=152
+
+Uses boolean visited[], boolean stack[], int parent
+outer(same). Call func with parent as -1
+inner:
+Everything same. The rec call cond becomes if(i!=parent && cyclicUndirectedInner(v,i, g, visited, stack)) return true;
+
+    public boolean cyclicUndirectedInner(int parent,int v,ArrayList<ArrayList<Integer>> g,boolean[]visited,boolean[]stack){
+        if(stack[v]==true)
+            return true;
+        if(visited[v]==true)
+            return false;
+        visited[v]=true;
+        stack[v]=true;
+        for(Integer i: g.get(v)){
+            if(i!=parent && cyclicUndirectedInner(v,i, g, visited, stack))
+                return true;
+        }
+        stack[v]=false;
+        return false;
+    }
+
+------------------------------------------------------------------------------------------------------------------------
+
+TOPOLOGICAL SORT
+
+//https://practice.geeksforgeeks.org/problems/topological-sort/1
+
+Topological Sorting of a graph. In DFS, we start from a vertex, we first print it and then recursively call DFS for its
+adjacent vertices.
+In topological sorting, we use a temporary stack. We don’t print the vertex immediately, we first
+recursively call topological sorting for all its adjacent vertices, then push it to a stack. Finally, print contents of
+stack in LIFO order. Note that a vertex is pushed to stack only when all of its adjacent vertices (and adjacent
+vertices of their adjacent vertices and so on) are already in stack.
+
+    static int[] topoSort(ArrayList<ArrayList<Integer>> g, int v) {
+        boolean visited[]= new boolean[v];
+        Deque<Integer> st= new LinkedList<Integer>();
+        for(int i=0;i<v;++i){
+            if(!visited[i])
+                topologicalSortInner(i,g,visited,st);
+        }
+        int ans[]=new int[v];
+        int c=0;
+        while(st.size()!=0)
+            ans[c++]=st.pollLast();
+        return ans;
+    }
+
+    public static void topologicalSortInner(int v, ArrayList<ArrayList<Integer>> g, boolean[]visited, Deque<Integer> st){
+        visited[v]=true;
+        for(int x:g.get(v)){
+            if(!visited[x])
+                topologicalSortInner(x,g,visited,st);
+        }
+        st.addLast(v);
+    }
+
+------------------------------------------------------------------------------------------------------------------------
+
+MINIMUM SPANNING TREE: PRIM'S ALGORITHM
+
+Problem:
+Graph_gfg_MST_prims
+https://practice.geeksforgeeks.org/problems/minimum-spanning-tree/1
+
+int parent[v], boolean isSet[v](true when vertex included in MST),
+int priority[v]//contains the edge weight to reachable vertices
+
+Algorithm
+1) Create a set mstSet that keeps track of vertices already included in MST.
+2) Assign a key value to all vertices in the input graph. Initialize all key values as INFINITE. Assign key value as 0
+for the first vertex so that it is picked first.
+3) While mstSet doesn't include all vertices
+�.a) Pick a vertex u which is not there in mstSet and has minimum key value.
+�.b) Include u to mstSet.
+�.c) Update key value of all adjacent vertices of u. To update the key values, iterate through all adjacent vertices.
+For every adjacent vertex v, if weight of edge u-v is less than the previous key value of v, update the key value as
+weight of u-v
+
+better explaination in coding-> graphs.
+Here the priority contains the edge weights and not their sum(like the way it happens in dijkstra)
+
+
+    static int spanningTree(int v, int e, ArrayList<ArrayList<Integer>> g) {
+        int parent[]= new int[v];
+        boolean isSet[]= new boolean[v];
+        int priority[]= new int[v]; //contains minimum weights to reach the currently reachable vertes
+        Arrays.fill(priority, Integer.MAX_VALUE);
+
+     	priority[0]=0;
+     	parent[0]=-1;
+     	int sum=0;
+
+        /*iterate through all vertices. Out of the vertices that are not set select the one with
+         *the minimum priority. Set it and update the priority of other vertices reachable from current
+         *vertex. If any changes are made then update parent[] also.
+         */
+        for(int i=0;i<v;++i){
+        	int x=getMinEdge(priority,isSet);
+        	isSet[x]= true;
+        	sum+= (parent[x]==-1?0: g.get(x).get(parent[x]));//do not add sum for the first vertex
+        	updatePriority(x, priority,parent, isSet, g.get(x));
+        }
+        return sum;
+    }
+
+    public static void updatePriority(int x, int priority[],int parent[], boolean isSet[], ArrayList<Integer> g){
+        for(int i=0; i<priority.length; ++i ){//loop is running v times since underlying DS is adjacency matrix
+            if(!isSet[i] && g.get(i)!=0 && priority[i]>g.get(i)){
+                priority[i]=g.get(i);
+                parent[i]=x;
+            }
+        }
+    }
+
+    public static int getMinEdge(int priority[], boolean isSet[]){
+        int v=Integer.MAX_VALUE;
+        int val=Integer.MAX_VALUE;
+        for(int i=0; i< priority.length;++i){
+            if(!isSet[i] && priority[i]< val){
+                v=i;
+                val= priority[i];
+            }
+        }
+        return v;
+    }
+
+------------------------------------------------------------------------------------------------------------------------
+
+SINGLE SOURCE SHORTEST PATH: DIJKSTRA ALGORITHM
+
+
+Prob:
+Graph_gfg_SP_dijkstra_adjacency_matrix
+https://practice.geeksforgeeks.org/problems/implementing-dijkstra-set-1-adjacency-matrix/1/?track=sp-graph&batchId=152
+
+boolean isSet[v](true when vertex has been explored),
+int priority[v]//contains the distance to the reachable vertices
+
+This is similar to prims except that we keep minimum distances inside the priority array here while in prims we store
+the minimum edge. Also here we do not need the parent array since we do not need to keep track of any path. Also before
+updating the distance we check if it is !=0(ie node is connected or not)
+
+While calculating MST or SP remember to put checks for !=0 when using adacency matrix otherwise disconnented graphs will
+cause incorrect answers
+
+	static int[] dijkstra(ArrayList<ArrayList<Integer>> g, int src, int V)
+    {
+        boolean isSet[]= new boolean[V];
+        int priority[]= new int[V]; //contains minimum distance from src to the currently reachable vertes
+        Arrays.fill(priority, Integer.MAX_VALUE);
+
+     	priority[src]=0;
+
+        for(int i=0;i<V;++i){
+        	int u=getMinEdge(priority,isSet);
+        	isSet[u]= true;
+        	updatePriority(u,priority, isSet, g.get(u));
+        }
+        return priority;
+    }
+
+     public static void updatePriority(int u,int priority[], boolean isSet[], ArrayList<Integer> g){
+    	for(int v=0; v<priority.length; ++v ){
+    		if(!isSet[v] && g.get(v)!=0 && priority[v]>priority[u]+g.get(v))
+    			priority[v]=priority[u]+g.get(v);
+    	}
+    }
+
+    public static int getMinEdge(int priority[], boolean isSet[]){
+    	int v=Integer.MAX_VALUE;
+    	int val=Integer.MAX_VALUE;
+    	for(int i=0; i< priority.length;++i){
+    		if(!isSet[i] && priority[i]< val){
+    			v=i;
+    			val= priority[i];
+    		}
+    	}
+    	return v;
+    }
+
+------------------------------------------------------------------------------------------------------------------------
+
+SINGLE SOURCE SHORTEST PATH/-VE CYCLE DETECTION: BELLMAN FORD ALGORITHM
+
+
+Prob:
+Graph_lc_network_delay_time_bellman_ford
+https://practice.geeksforgeeks.org/problems/negative-weight-cycle/0#ExpectOP
+
+int distance[];
+Input: Graph and a source vertex src
+Output: Shortest distance to all vertices from src. If there is a negative weight cycle, then shortest distances are not
+ calculated, negative weight cycle is reported.
+
+1) This step initializes distances from the source to all vertices as infinite and distance to the source itself as 0.
+Create an array dist[] of size |V| with all values as infinite except dist[src] where src is source vertex.
+2) This step calculates shortest distances. Do following |V|-1 times where |V| is the number of vertices in given graph.
+    a) Do following for each edge u-v
+        If dist[v] > dist[u] + weight of edge uv, then update dist[v]
+        dist[v] = dist[u] + weight of edge uv
+3) This step reports if there is a negative weight cycle in graph. Do following for each edge u-v
+    If dist[v] > dist[u] + weight of edge uv, then "Graph contains negative weight cycle"
+The idea of step 3 is, step 2 guarantees the shortest distances if the graph doesn't contain a negative weight cycle.
+If we iterate through all edges one more time and get a shorter path for any vertex, then there is a negative weight
+cycle.
+
+
+	public static int bellmanFord(int v, ArrayList<Edge> edges){
+		int distance[]= new int[v+1];
+		/*we are doing v+1 because even when the question says so, the input for v is not v:1->v, it actually
+		actually given as v: 0-> v-1;
+		*/
+		Arrays.fill(distance, Integer.MAX_VALUE);
+		distance[0]=0;
+		for(int i=0; i<v-1;++i){
+			for(Edge e:edges){
+				if(distance[e.u]!=Integer.MAX_VALUE && distance[e.v]>distance[e.u]+e.w)
+					distance[e.v]= distance[e.u]==Integer.MAX_VALUE?0:distance[e.u]+e.w;
+			}
+		}
+        // System.out.println(distance.toString());
+		for(Edge e:edges){
+			if(distance[e.u]!=Integer.MAX_VALUE && distance[e.v]>distance[e.u]+e.w)
+				return 1;// negative cycle is detected
+		}
+		return 0;
+	}
+
+------------------------------------------------------------------------------------------------------------------------
+
+ALL PAIR SHORTEST PATH: FLOYD WARSHALL ALGORITHM
+
+
+Prob:
+Graph_gfg_APSP_floyd_warshall
+https://practice.geeksforgeeks.org/problems/implementing-floyd-warshall/0/
+
+
+We initialize the solution matrix same as the input graph matrix as a first step. Then we update the solution matrix by
+considering all vertices as an intermediate vertex. The idea is to one by one pick all vertices and updates all shortest
+paths which include the picked vertex as an intermediate vertex in the shortest path. When we pick vertex number k as an
+intermediate vertex, we already have considered vertices {0, 1, 2, .. k-1} as intermediate vertices. For every pair
+(i, j) of the source and destination vertices respectively, there are two possible cases.
+1) k is not an intermediate vertex in shortest path from i to j. We keep the value of g[i][j] as it is.
+2) k is an intermediate vertex in shortest path from i to j. We update the value of g[i][j] as
+g[i][k] + g[k][j] if g[i][j] > g[i][k] + g[k][j]
+
+    public static void floydWarshall(int V, int[][] g){
+		for(int i=0; i<V;++i){
+			for(int u=0; u<V; ++u){
+				for(int v=0; v< V;++v){//here 0 is for 0 wt, INF is for disconnected
+					g[u][v]= Math.min(g[u][v], g[u][i]+g[i][v]);
+				}
+			}
+		}
+	}
+------------------------------------------------------------------------------------------------------------------------
+
+MAZE RUNNING: LEE ALGORITHM
+
+The idea is inspired from Lee algorithm and uses BFS.
+
+We start from the source cell and calls BFS procedure.
+We maintain a queue to store the coordinates of the matrix and initialize it with the source cell.
+We also maintain a Boolean array visited of same size as our input matrix and initialize all its elements to false.
+We LOOP till queue is not empty
+Dequeue front cell from the queue
+Return if the destination coordinates have reached.
+For each of its four adjacent cells, if the value is 1 and they are not visited yet, we enqueue it in the queue and also
+mark them as visited.
+Note that BFS works here because it doesn’t consider a single path at once. It considers all the paths starting from the
+source and moves ahead one unit in all those paths at the same time which makes sure that the first time when the
+destination is visited, it is the shortest path.

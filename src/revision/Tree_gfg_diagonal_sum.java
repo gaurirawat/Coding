@@ -26,17 +26,17 @@ public class Tree_gfg_diagonal_sum {
         innerDiagonalSum(node.left,diag+1);
         innerDiagonalSum(node.right, diag);
     }
-}
-
-class Node {
-    int data;
-    Node left;
-    Node right;
-    Node() {}
-    Node(int data) { this.data = data; }
-    Node(int data, Node left, Node right) {
-        this.data = data;
-        this.left = left;
-        this.right = right;
+    class Node {
+        int data;
+        Node left;
+        Node right;
+        Node() {}
+        Node(int data) { this.data = data; }
+        Node(int data, Node left, Node right) {
+            this.data = data;
+            this.left = left;
+            this.right = right;
+        }
     }
 }
+

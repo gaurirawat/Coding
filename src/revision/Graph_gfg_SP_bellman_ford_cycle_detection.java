@@ -2,7 +2,8 @@ package revision;
 // https://practice.geeksforgeeks.org/problems/negative-weight-cycle/0#ExpectOP
 
 /*
-Input: Graph and a source vertex src Output: Shortest distance to all vertices from src. If there is a negative weight cycle, then shortest distances are not calculated, negative weight cycle is reported.
+Input: Graph and a source vertex src
+Output: Shortest distance to all vertices from src. If there is a negative weight cycle, then shortest distances are not calculated, negative weight cycle is reported.
 
 1) This step initializes distances from the source to all vertices as infinite and distance to the source itself as 0. Create an array dist[] of size |V| with all values as infinite except dist[src] where src is source vertex.
 2) This step calculates shortest distances. Do following |V|-1 times where |V| is the number of vertices in given graph.

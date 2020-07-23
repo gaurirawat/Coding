@@ -16,7 +16,7 @@ as g[i][k] + g[k][j] if g[i][j] > g[i][k] + g[k][j]
 
 import java.util.*;
 import java.io.*;
-public class Graph_gfg__APSP_floyd_warshall {
+public class Graph_gfg_APSP_floyd_warshall {
 	public static void main (String[] args)throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		int t= Integer.parseInt(br.readLine());
@@ -28,7 +28,13 @@ public class Graph_gfg__APSP_floyd_warshall {
 				for(int j=0; j<v; ++j)
 					g[i][j]= arr[j].equals("INF")?Integer.MAX_VALUE:Integer.parseInt(arr[j]);
 				}
-		floydWarshall(v, g);
+			floydWarshall(v, g);
+			for(int u_=0; u_<v; ++u_){
+				for(int v_=0; v_< v;++v_){
+					System.out.print(g[u_][v_]==Integer.MAX_VALUE?"INF":g[u_][v_]+ " ");
+				}
+				System.out.println();
+			}
 		}
 	}
 
@@ -40,12 +46,5 @@ public class Graph_gfg__APSP_floyd_warshall {
 				}
 			}
 		}
-
-		for(int u=0; u<V; ++u){
-			for(int v=0; v< V;++v){
-				System.out.print(g[u][v]==Integer.MAX_VALUE?"INF":g[u][v]+ " ");	
-			}
-			System.out.println();
-		}	
 	}
 }

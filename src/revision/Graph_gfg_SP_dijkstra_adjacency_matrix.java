@@ -1,5 +1,6 @@
 package revision;
 // https://practice.geeksforgeeks.org/problems/implementing-dijkstra-set-1-adjacency-matrix/1/?track=sp-graph&batchId=152
+//https://practice.geeksforgeeks.org/problems/implementing-dijkstra-set-1-adjacency-matrix/1
 
 /* this is similar to prims except that we keep minimum distances inside the priority array here while
 in prims we store the minimum edge. Also here we n=do not need the parent array since we do not need 
