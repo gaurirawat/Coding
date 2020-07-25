@@ -1,7 +1,7 @@
 package revision;
 //https://leetcode.com/problems/count-complete-tree-nodes/submissions/
 
-public class Tree_lc_count_Leaves {
+public class Tree_lc_count_nodes {
 	 public int countNodes(TreeNode root) {
 	        if(root== null)
 	            return 0;

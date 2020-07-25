@@ -24,9 +24,11 @@ DP_lc_subset_sum_equal_partition.java
 DP_lc_subset_sum_print_combinations.java
 DP_gfg_subset_sum_divisible_by_k.java(prefer modulus method)
 
-DP_gfg_matrix_max_size_square_submatrix
-DP_lc_matrix_count_square_submatrices_with_all_ones
-DP_gfg_matrix_max_sum_rectangle                //tough use kadane's algo instead of dp
+Matrix_DP_gfg_max_size_square_submatrix_given_binary_matrix
+Matrix_DP_gfg_max_sum_rectangle
+Matrix_DP_lc_count_all_submatrices_with_ones
+Matrix_DP_lc_count_square_submatrices_with_all_ones
+Matrix_Stack_lc_max_sum_rectangle_given_binary_matrix
 
 DP_gfg_optimal_binary_search_tree
 DP_lc_longest_palindromic_subsequence
@@ -41,8 +43,3 @@ DP_lc_jump_game_isPossible              //prefer array approach
 DP_lc_min_cost_path
 DP_lc_predict_winner                    //definitely revise
 DP_lc_palindrome_partitioning           //different approach
-----------
-
-max square in binary matrix filled with 1
-max rectangle -- filled with 1
-count of rectangles in binary matrix filled with 1

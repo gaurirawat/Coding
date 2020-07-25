@@ -1,0 +1,109 @@
+LL
+
+K-REVERSE
+
+//https://www.interviewbit.com/problems/k-reverse-linked-list/
+
+list is reversed in ses of k. Ie reverse only k part of the list and call the func recursively for the next k set.
+actual head of every set becomes last element which is supposed to point to the next set of elements.
+Head of reversed list is returned.
+
+public class LL_ib_k_reverse_LL {
+    public ListNode reverseList(ListNode head, int k) {
+        if(head==null||head.next==null||k<=1) return head;
+        int c=0;
+        ListNode node=head;
+        ListNode curr=head,prev=null,next=null;
+        while(c<k && curr!=null){
+            c++;
+            next=curr.next;
+            curr.next=prev;
+            prev=curr;
+            curr=next;
+        }
+        head.next=reverseList(curr,k);  //imp
+        return prev;                    //imp
+    }
+------------------------------------------------------------------------------------------------------------------------
+
+CYCLE DETECTION: FLOYD'S CYCLE DETECTION
+
+Prob:
+LL_gfg_loop_detection
+https://practice.geeksforgeeks.org/problems/detect-loop-in-linked-list/1
+
+Take 2 pointers, slow fast. inc slow by 1, fast by 2.
+if they match then there is a loop. Else the end would be reached.
+
+    public static boolean detectLoop(Node head){
+        if(head==null||head.next==null) return false;
+        Node slow=head,fast=head;
+        while(fast!=null){
+            slow=slow.next;
+            fast=fast.next==null?fast.next:fast.next.next;
+            if(fast==slow)
+                return true;
+        }
+        return false;
+    }
+
+------------------------------------------------------------------------------------------------------------------------
+
+FIND STARTING POINT OF LOOP AND LOOP REMOVAL
+
+Prob:
+LL_gfg_remove_a_loop
+https://practice.geeksforgeeks.org/problems/remove-loop-in-linked-list/1
+
+1. Check if loop exists. Use above method to find the loop.
+2. Now start traversing again from slow/fast and find the length of the loop.
+3. start again from head. take fast pointer ahead by steps equal to the length of the cycle. Now both start traversing
+the LL together. Whenever both are equal, that node is the starting point of the cycle.
+4. traverse again to find the last node of the cycle and make it point to null.
+
+    public static void removeLoop(Node2 head){
+        if(head==null) return;
+        Node2 slow=head;
+        Node2 fast=head;
+        while(fast!=null){
+            slow=slow.next;
+            fast=fast.next!=null? fast.next.next: fast.next;
+            if(slow==fast)
+                break;
+        }
+        if(fast==null) return;
+
+        //if we come here, it we got a loop
+        //now calculate the length of the loop.
+        int k=0;
+        Node2 target=slow;
+        int len=1;
+        slow=slow.next;
+        while(target!=slow){
+            len++;
+            slow=slow.next;
+        }
+        System.out.println(len);
+        /*
+        start again from head. take fast pointer ahead by steps equal
+        to the length of the cycle. Now both start traversing the LL together.
+        whenever both are at the same Node2 we have found the starting point of the cycle
+        */
+        slow=head;
+        fast=head;
+        while(len--!=0)
+            fast=fast.next;
+
+        //we find the starting of the loop
+        while(slow!=fast){
+            slow=slow.next;
+            fast=fast.next;
+        }
+
+        //now search for the last node of the loop
+        while(fast.next!=slow)
+            fast=fast.next;
+        fast.next=null;
+    }
+
+------------------------------------------------------------------------------------------------------------------------

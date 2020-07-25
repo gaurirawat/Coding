@@ -469,3 +469,51 @@ the current path length will definitely be larger than the one that is already a
     }
 
 ------------------------------------------------------------------------------------------------------------------------
+
+SNAKES AND lADDER: 1D BFS
+
+Prob:
+Graph_gfg_snakes_and_ladder
+https://practice.geeksforgeeks.org/problems/snake-and-ladder-problem/0
+
+int distance[] to store the no of moves. queue for BFS.
+
+Simple BFS. From every node, do a BFS to every reachable node ie +1...+6. Where ever there is a snake/ladder in the grid
+ie g[] !=0 then on visiting that node automatically move to the destination node(where the snake/ladder takes) without
+increasing any extra move. We prefer BFS over DFS since BFS helps us reach the end in min no of moves since all possible
+moves are considered parallelly.
+
+
+ public static int snakesAndLadderBFS(int[]g){
+        int distance[]=new int[30];
+        Deque<Integer> q= new LinkedList<Integer>();
+        q.add(0);
+        distance[0]=0;
+        while(q.size()!=0){
+            int x=q.pollFirst();
+            if(x==29)
+                break;
+            for(int j=x+1;j<=x+6 && j<30;++j){
+                if(distance[j]==0 && j!=0){
+                    if(g[j]!=0){
+                        q.addLast(g[j]);
+                        distance[g[j]]=(distance[g[j]]!=0?Math.min(distance[g[j]],distance[x]+1):distance[x]+1);
+                    }
+                    else{
+                        q.addLast(j);
+                        distance[j]=distance[x]+1;
+                    }
+                }
+            }
+        }
+        return distance[29];
+    }
+
+------------------------------------------------------------------------------------------------------------------------
+
+STRONGLY CONNECTED COMPONENTS: KOSARAJU'S ALGO
+
+The above algorithm is DFS based. It does DFS two times. DFS of a graph produces a single tree if all vertices are
+reachable from the DFS starting point. Otherwise DFS produces a forest.
+So we do DFS once. Find the transpose of the graph and do DFS again.
+

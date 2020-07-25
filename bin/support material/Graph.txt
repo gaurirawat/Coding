@@ -352,7 +352,6 @@ Prob:
 Graph_gfg_APSP_floyd_warshall
 https://practice.geeksforgeeks.org/problems/implementing-floyd-warshall/0/
 
-
 We initialize the solution matrix same as the input graph matrix as a first step. Then we update the solution matrix by
 considering all vertices as an intermediate vertex. The idea is to one by one pick all vertices and updates all shortest
 paths which include the picked vertex as an intermediate vertex in the shortest path. When we pick vertex number k as an
@@ -375,6 +374,14 @@ g[i][k] + g[k][j] if g[i][j] > g[i][k] + g[k][j]
 
 MAZE RUNNING: LEE ALGORITHM
 
+
+Ref:
+https://www.geeksforgeeks.org/shortest-path-in-a-binary-maze/
+
+Prob:
+Graph_gfg_shortest_path_in_a_maze
+https://practice.geeksforgeeks.org/problems/shortest-source-to-destination-path/0
+
 The idea is inspired from Lee algorithm and uses BFS.
 
 We start from the source cell and calls BFS procedure.
@@ -388,3 +395,125 @@ mark them as visited.
 Note that BFS works here because it doesn’t consider a single path at once. It considers all the paths starting from the
 source and moves ahead one unit in all those paths at the same time which makes sure that the first time when the
 destination is visited, it is the shortest path.
+
+    public static int shortestPathInAMazeBFS(int[][]arr, Coordinate dest){
+        if(arr[0][0]==0) return -1;
+        int r=arr.length;
+        int c=arr[0].length;
+        boolean visited[][]=new boolean[r][c];
+        Deque<Coordinate> q= new LinkedList<Coordinate>();
+        q.addLast(new Coordinate(0,0,0));
+        int destPath=-1;
+        while(q.size()!=0){
+            Coordinate curr=q.pollFirst();
+            int i=curr.i;
+            int j=curr.j;
+            if(i==dest.i && j==dest.j){
+                destPath=curr.path;
+                break;
+            }
+            visited[i][j]=true;
+            if(i<r-1 && !visited[i+1][j] && arr[i+1][j]==1)
+                q.add(new Coordinate(i+1,j,curr.path+1));
+            if(j<c-1 && !visited[i][j+1] && arr[i][j+1]==1)
+                q.add(new Coordinate(i,j+1,curr.path+1));
+            if(i>0 && !visited[i-1][j] && arr[i-1][j]==1)
+                q.add(new Coordinate(i-1,j,curr.path+1));
+            if(j>0 && !visited[i][j-1] && arr[i][j-1]==1)
+                q.add(new Coordinate(i,j-1,curr.path+1));
+        }
+        return destPath;
+    }
+
+------------------------------------------------------------------------------------------------------------------------
+
+
+SHORTEST PATH IN MATRIX: 2D DIJKSTRA
+
+Prob:
+Graph_gfg_find_min_path_up_down_left_right_movement
+https://practice.geeksforgeeks.org/problems/minimum-cost-path/0
+
+distance[l][l]; heap sorted on the distance of the coordinates
+We keep all visited nodes in the min heap(based on distance).
+Every time we choose a node to visit it is the one with the minimum path length. Now when the adj cells are being
+updated we update only the ones that are not visited and also mark them as visited.
+This is because we shall not have to visit them again since the path length is cumulative ie if we visit them again then
+the current path length will definitely be larger than the one that is already assigned to the node.
+
+    public static int dijkstra2D(int arr[][], int l){
+        int distance[][]= new int[l][l];
+        for(int i=0;i<l;++i)
+            Arrays.fill(distance[i],Integer.MAX_VALUE);
+        PriorityQueue<Coordinate> heap= new PriorityQueue<Coordinate>(
+                Comparator.comparingInt(a->a.path));
+        heap.add(new Coordinate(0,0,arr[0][0]));
+        boolean[][]visited= new boolean[l][l];
+        visited[0][0]=true;
+        while(heap.size()!=0){
+            Coordinate curr=heap.poll();
+            if(curr.i==l-1 && curr.j==l-1)
+                return curr.path;
+            int dx[]={0,0,1,-1};
+            int dy[]={1,-1,0,0};
+            for(int x=0;x<4;++x){
+                int newi=curr.i+dx[x];
+                int newj=curr.j+dy[x];
+                if(newi>=0 && newi<l && newj>=0 && newj<l && !visited[newi][newj]){
+                    visited[newi][newj]=true;
+                    heap.add(new Coordinate(newi, newj, curr.path+arr[newi][newj]));
+                }
+            }
+        }
+        return -1;
+    }
+
+------------------------------------------------------------------------------------------------------------------------
+
+SNAKES AND lADDER: 1D BFS
+
+Prob:
+Graph_gfg_snakes_and_ladder
+https://practice.geeksforgeeks.org/problems/snake-and-ladder-problem/0
+
+int distance[] to store the no of moves. queue for BFS.
+
+Simple BFS. From every node, do a BFS to every reachable node ie +1...+6. Where ever there is a snake/ladder in the grid
+ie g[] !=0 then on visiting that node automatically move to the destination node(where the snake/ladder takes) without
+increasing any extra move. We prefer BFS over DFS since BFS helps us reach the end in min no of moves since all possible
+moves are considered parallelly.
+
+
+ public static int snakesAndLadderBFS(int[]g){
+        int distance[]=new int[30];
+        Deque<Integer> q= new LinkedList<Integer>();
+        q.add(0);
+        distance[0]=0;
+        while(q.size()!=0){
+            int x=q.pollFirst();
+            if(x==29)
+                break;
+            for(int j=x+1;j<=x+6 && j<30;++j){
+                if(distance[j]==0 && j!=0){
+                    if(g[j]!=0){
+                        q.addLast(g[j]);
+                        distance[g[j]]=(distance[g[j]]!=0?Math.min(distance[g[j]],distance[x]+1):distance[x]+1);
+                    }
+                    else{
+                        q.addLast(j);
+                        distance[j]=distance[x]+1;
+                    }
+                }
+            }
+        }
+        return distance[29];
+    }
+
+------------------------------------------------------------------------------------------------------------------------
+
+STRONGLY CONNECTED COMPONENTS: KOSARAJU'S ALGO
+
+The above algorithm is DFS based. It does DFS two times. DFS of a graph produces a single tree if all vertices are
+reachable from the DFS starting point. Otherwise DFS produces a forest.
+So we do DFS once. Find the transpose of the graph and do DFS again.
+
