@@ -1,7 +1,8 @@
 package revision;
 //https://www.hackerrank.com/challenges/ctci-merge-sort/problem
+//https://practice.geeksforgeeks.org/problems/inversion-of-array/0/
 
-public class Array_hr_inverion_pair {
+public class Array_hr_inversion_pair {
 	 public long countInversions(int[] nums) {
 		return innercountInv(nums,0, nums.length-1);
     }

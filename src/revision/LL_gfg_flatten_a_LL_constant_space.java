@@ -1,6 +1,6 @@
 package revision;
 //https://practice.geeksforgeeks.org/problems/flattening-a-linked-list/1
-public class LL_flatten_a_LL_constant_space {
+public class LL_gfg_flatten_a_LL_constant_space {
     public Node flatten(Node root)
     {
         if(root==null || root.next==null) return root;

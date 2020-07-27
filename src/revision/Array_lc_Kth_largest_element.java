@@ -4,11 +4,21 @@ import java.util.*;
 public class Array_lc_Kth_largest_element {
 
 	public int findKthLargest(int[] nums, int k) {
-        if(nums.length==1)
-            return nums[0];
-        else
-            return findRank(nums, 0,nums.length-1,nums.length-k+1);  
-    }
+		PriorityQueue<Integer> q= new PriorityQueue<Integer>(Collections.reverseOrder());
+		for(int i=0;i<nums.length;++i){
+			q.add(nums[i]);
+		}
+		while(--k!=0)
+			q.poll();
+		return q.poll();
+	}
+
+//	public int findKthLargest(int[] nums, int k) {
+//        if(nums.length==1)
+//            return nums[0];
+//        else
+//            return findRank(nums, 0,nums.length-1,nums.length-k+1);
+//    }
 
     public int findRank(int arr[], int l, int r, int k){
         	if(l==r)

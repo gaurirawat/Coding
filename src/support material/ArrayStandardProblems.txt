@@ -183,3 +183,53 @@ index+1.
 
 
 ------------------------------------------------------------------------------------------------------------------------
+
+INVERSION PAIR:EASY
+
+Find count of inversion pairs where a[i] and a[j] form an inversion if a[i] > a[j] and i < j.
+
+Use divide and conquer technique (application of merge sort).
+1. We divide until there is just single element left.
+2. At the time of merge, the left and the right parts of the area being considered are individually sorted and we merge
+them again to give sorted order.
+3. While merging if left side element is smaller or "EQUAL" then count doesn't change. If it is larger then inc count by:
+no of elements in the left array that are smaller than the right element. And that shall be = counter-(mid+1).
+
+    public static long inversionPair(int arr[], int l,int r){
+	    if(l<r){
+	        int mid=l+(r-l)/2;
+	        return inversionPair(arr,l,mid)+inversionPair(arr,mid+1,r)+merge(arr,l,r, mid);
+	    }
+	    return 0;
+	}
+
+	public static long merge(int[]arr, int l, int r, int mid){
+	    if(l==r)return 0;
+
+	    int i=l;
+	    int j=mid+1;
+	    long c=0;
+	    int temp[]=new int[r-l+1];
+	    int tc=0;
+	    while(i<=mid&&j<=r){
+	        if(arr[j]>=arr[i]){     //just understand that <= is being used instead of just <
+	            c+=(j-(mid+1));
+	            temp[tc++]=arr[i++];
+	        }
+	        else
+	            temp[tc++]=arr[j++];
+	    }
+	    while(i<=mid){
+	        c+=(j-(mid+1));
+	        temp[tc++]=arr[i++];
+	    }
+	    while(j<=r)
+	        temp[tc++]=arr[j++];
+
+	    for(i=0;i<temp.length;++i)
+	        arr[l+i]=temp[i];
+
+	    return c;
+	}
+
+------------------------------------------------------------------------------------------------------------------------
