@@ -6,6 +6,10 @@ Input: candidates = [10,1,2,7,6,1,5], target = 8,
 A solution set is: [  [1, 7],  [1, 2, 5],  [2, 6],  [1, 1, 6]]
 Here set [1,7] can be created twice therefore an extra Set is used to handle this case.
 */
+
+//CHECK THE LOWER COMMENTED SOLUTION FIRST
+
+
 import java.util.*;
 public class DP_lc_subset_sum_print_combinations {
 
@@ -74,3 +78,51 @@ public class DP_lc_subset_sum_print_combinations {
         }
     }
 }
+
+/*
+    List<List<Integer>>ans;
+    Set<List<Integer>>set;
+
+    public List<List<Integer>> combinationSum2(int[] candidates, int target) {
+        ans= new ArrayList<List<Integer>>();
+        set= new HashSet<List<Integer>>();
+        Arrays.sort(candidates);
+        boolean dp[][]=new boolean[candidates.length+1][target+1];
+        Arrays.stream(dp).forEach(a->Arrays.fill(a, true));
+        combinationSumDP(candidates.length,target,candidates,  dp, new ArrayList<Integer>());
+        return ans;
+    }
+
+    public boolean combinationSumDP(int i, int j, int[]nums, boolean dp[][], ArrayList<Integer> l){
+        if(j==0){
+           if(!set.contains(l)){
+                ArrayList<Integer> newl = new ArrayList<Integer>(l);
+                ans.add(newl);
+                set.add(newl);
+            }
+            return true;
+        }
+        if(i<=0 || j<=0)
+            return false;
+        if(dp[i][j]==false)
+            return false;
+
+//        If we had created a new list here then it is important to do this first because here we are
+//        adding elements of l to a new list. If we keep if after the other call then l will get modified
+//        and we will get wrong answer.
+
+        if(nums[i-1]<=j){
+            // System.out.println("inside"+i+" "+j +" "+newl.toString());
+            l.add(nums[i-1]);
+            dp[i][j]= combinationSumDP(i-1,j-nums[i-1],nums,dp,l);
+            l.remove(new Integer(nums[i-1]));
+            }
+
+            //VVIMP. In a case where we need all the solutions MAKE SURE TO PUT THE CALL FIRST because here since we are using
+            // || operator then if we have true from above then the second call will not happen at all. But we need that call.
+            dp[i][j]=combinationSumDP(i-1,j,nums,dp,l)||dp[i][j];
+            return dp[i][j];
+            }
+ */
+
+

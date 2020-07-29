@@ -3,7 +3,7 @@ package revision;
 import java.util.Arrays;
 //https://www.youtube.com/watch?v=-fx6aDxcWyg&list=PL_z_8CaSLPWekqhdCPmFohncHwz8TY2Go&index=25
 //https://leetcode.com/problems/edit-distance/submissions/
-public class DP_lc_LCS_edit_distance {
+public class DP_lc_edit_distance {
     public int minDistance(String str1, String str2) {
         char[]xrr= str1.toCharArray();
         char[]yrr=str2.toCharArray();

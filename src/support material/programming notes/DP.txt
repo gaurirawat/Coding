@@ -1,0 +1,499 @@
+MATRIX CHAIN MULTIPLICATION
+
+Prob:
+DP_gfg_matrix_chain_multiplication
+https://practice.geeksforgeeks.org/problems/matrix-chain-multiplication/0
+
+print the minimum number of operations needed to multiply the chain.
+Input: p[] = {40, 20, 30, 10, 30}   There are 4 matrices of dimensions 40x20, 20x30, 30x10 and 10x30.
+
+Algo:
+1. we take starting and end of the matrix being considered.
+2. If the matrix cannot be divided ie i==j return 0.
+3. Otherwise we split it in all possible ways, calculate their values recursively and find the min out of those.
+
+    public static int matrixMultiplicationDP(int dp[][], int arr[], int i, int j){
+        if(i>=j) return 0;
+        if(dp[i][j]!=0) return dp[i][j];
+
+        dp[i][j]=Integer.MAX_VALUE;
+        for(int k=i; k<j; ++k){
+            dp[i][j]= Math.min(dp[i][j],
+                    matrixMultiplicationDP(dp, arr, i, k)+ matrixMultiplicationDP(dp, arr, k+1, j)+
+                            arr[i]*arr[k+1]*arr[j+1]);//row of i matrix, column of k matrix and column of j matrix
+
+        }
+        return dp[i][j];
+    }
+------------------------------------------------------------------------------------------------------------------------
+
+
+0/1 KNAPSACK
+
+REPETITION NOT ALLOWED
+
+Prob:
+DP_gfg_01Knapsack
+https://practice.geeksforgeeks.org/problems/0-1-knapsack-problem/0
+
+Given weights, values and max weight W, what is the maximum value we can achieve if we can pick any weight only once?
+Simple concept. Take max of-
+If we don't include the weight then- max value without element i
+If we include then- current val+max value with the remaining wt and without element i
+
+    public static int knapsackDP(int value[], int weight[], int wt){
+        int dp[][]= new int[value.length+1][wt+1];
+        for(int i=1; i<=value.length; ++i){
+            for(int j=1; j<=wt; ++j){
+                dp[i][j]= Math.max(dp[i-1][j],
+                        weight[i-1]<=j? (value[i-1]+dp[i-1][j-weight[i-1]]):0);
+            }
+        }
+        return dp[value.length][wt];
+    }
+
+--------------------------------------
+
+REPETITION ALLOWED
+
+Prob:
+DP_gfg_01Knapsack_duplicate_allowed
+https://practice.geeksforgeeks.org/problems/knapsack-with-duplicate-items/0/?ref=self
+
+Given weights and values what is the maximum value we can achieve if we can pick any weights any number of times for a
+total allowed weight of W?
+
+approach will be same as previous one. Only that here when we include the element we'll try to include it as many times
+as possible and the max of these profits shall be taken
+
+    public static int knapsackDPDuplicateAllowed(int value[], int weight[], int wt){
+        int dp[][]= new int[value.length+1][wt+1];
+        for(int i=1; i<=value.length; ++i){
+            for(int j=1; j<=wt; ++j){
+                //first case of excluding the element
+                dp[i][j]= dp[i-1][j];
+
+                //calculate value by including the element as many times as possible
+                for(int k=1; (weight[i-1]*k)<=j; ++k)
+                    dp[i][j]= Math.max(dp[i][j], value[i-1]*k + dp[i-1][j-(weight[i-1]*k)]);
+            }
+            // System.out.println(Arrays.toString(dp[i]));
+        }
+        return dp[value.length][wt];
+    }
+
+------------------------------------------------------------------------------------------------------------------------
+
+LCS AND ASSOCIATED QUESTIONS
+
+1. LSC
+
+Prob:
+DP_lc_LCS
+https://leetcode.com/problems/longest-common-subsequence/submissions/
+
+    public int longestCommonSubsequence(String t1, String t2) {
+        int m=t1.length();
+        int n= t2.length();
+        int dp[][]= new int[2][n+1];
+        for(int i=1; i<=m; ++i){
+            for(int j=1; j<=n ;++j){
+                if(t1.charAt(i-1)== t2.charAt(j-1))
+                    dp[i%2][j]= dp[(i-1)%2][j-1]+1;
+                else
+                    dp[i%2][j]= Math.max( dp[i%2][j-1], dp[(i-1)%2][j] );
+            }
+        }
+        return dp[m%2][n];
+    }
+---------------------
+2. LENGTH OF SHORTEST COMMON SUPER-SEQUENCE
+
+Prob:
+DP_gfg_LCS_length_of_shortest_common_superSequence
+https://practice.geeksforgeeks.org/problems/shortest-common-supersequence/0
+
+The longest common super sequence for "abcd" and "xycd" would be: "abxycd".
+ie soln would be: x.length()+y.length()-length(lcs)
+
+-----------------------
+3. PRINT THE SHORTEST COMMON SUPER-SEQUENCE
+
+Prob:
+DP_lc_LCS_print_shortest_common_supersequence
+https://leetcode.com/problems/shortest-common-supersequence/
+
+1. Do basic LCS.
+2. Now using that we traverse again on the resulting dp matrix from the end. i, j are iterating var of str a,b.
+    If char are equal then add that char to the front of the result string. (result is generated from last to front)
+    If they are not then compare dp[i-1][j], dp[i][j-1] to dp[i][j].
+        if cur val is coming from i-1 the add the char of "a" string to the result and decrement i by one.
+        if cur val is coming from j-1 the add the char of "b" string to the result and decrement j by one.
+
+    public String getShortestCommonSupersequence(char[]xrr, char[]yrr, int dp[][]){
+            int i=xrr.length;
+            int j=yrr.length;
+            String s="";
+            while(i>0 &&j>0){
+                if(xrr[i-1]==yrr[j-1]){
+                    s=xrr[i-1]+s;
+                    --i;--j;
+                }
+                else if(dp[i][j]==dp[i][j-1])
+                    s=yrr[j-- -1]+s;
+                else
+                    s=xrr[i-- -1]+s;
+            }
+            while(i>0)
+                s=xrr[i-- -1]+s;
+            while(j>0)
+                s=yrr[j-- -1]+s;
+            return s;
+        }
+
+-----------------------
+
+4. LENGTH OF LIS(LONGEST INCREASING SUBSEQUENCE)
+
+Prob:
+DP_lc_LIS
+https://leetcode.com/problems/longest-increasing-subsequence/
+
+First approach is to sort the array and then do LCS(array, sorted array). o(m^2).
+
+Another approach:
+The idea is that as you iterate the sequence, you keep track of the minimum value a subsequence of given length might
+end with, for all so far possible subsequence lengths. So dp[i] is the minimum value a subsequence of length i+1 might
+end with. Having this info, for each new number we iterate to, we can determine the longest subsequence where it can be
+appended using binary search. The final answer is the length of the longest subsequence we found so far.The idea is that
+as you iterate the sequence, you keep track of the minimum value a subsequence of given length might end with, for all
+so far possible subsequence lengths. So dp[i] is the minimum value a subsequence of length i+1 might end with. Having
+this info, for each new number we iterate to, we can determine the longest subsequence where it can be appended using
+binary search. The final answer is the length of the longest subsequence we found so far.
+
+    public int lengthOfLIS(int[] nums) {
+        ArrayList<Integer> l= new ArrayList<Integer>();
+        for(int i=0;i<nums.length;++i){
+            int pos=Collections.binarySearch(l,nums[i]);
+            if(pos<0)
+                pos=Math.abs(pos+1);
+            if(pos==l.size())
+                l.add(nums[i]);
+            else
+                l.set(pos,nums[i]);
+        }
+        return l.size();
+    }
+
+------------------------------------------------------------------------------------------------------------------------
+
+EDIT DISTANCE
+
+Prob:
+DP_lc_edit_distance
+https://leetcode.com/problems/edit-distance/submissions/
+
+find min no of operations(add/delete/replace) required to change string1 to string2.
+*Whenever doing string related problems prefer traversing from the end.
+
+    int dp[][]= new int[xrr.length+1][yrr.length+1];
+    Arrays.stream(dp).forEach(a->Arrays.fill(a,-1));
+    return editDistanceDP(xrr,yrr,dp, xrr.length, yrr.length);
+
+    public int editDistanceDP(char[]xrr,char[]yrr, int dp[][], int i, int j){
+        if(i<=0)
+            return j;
+        if(j<=0)
+            return i;
+        if(dp[i][j]!=-1)
+            return dp[i][j];
+
+        if(xrr[i-1]==yrr[j-1])
+            dp[i][j]=editDistanceDP(xrr, yrr,dp,i-1,j-1);
+        else
+            //1 is added since the current op is being considered
+            dp[i][j]= 1+ Math.min(editDistanceDP(xrr,yrr, dp, i-1,j),//delete element from x to become y
+                            Math.min(editDistanceDP(xrr,yrr, dp, i,j-1),//add element to x to become y
+                            editDistanceDP(xrr,yrr, dp, i-1,j-1)));//replace element x with y
+        return dp[i][j];
+    }
+
+------------------------------------------------------------------------------------------------------------------------
+
+SUBSET SUM: PRINT ALL POSSIBLE COMBINATIONS. (Easy question)
+
+Prob:
+DP_lc_subset_sum_print_combinations
+https://leetcode.com/problems/combination-sum-ii/submissions/
+
+Since we have to print the combinations, what is important is that we pass the same list and remove or add elements as
+and when required. Every time we add the list to the result we have to make a new list and then save that otherwise it
+is going to refer to the same list object and in total there shall be just one list in the result no matter how many
+times we add it.
+Whenever we are dealing with boolean dp array. Make it a point to make the recursive call first and then do the OR with
+the current value otherwise if there is already a true then the second call wont happen at all.
+
+    public boolean combinationSumDP(int i, int j, int[]nums, boolean dp[][], ArrayList<Integer> l){
+        if(j==0){
+           if(!set.contains(l)){
+                ArrayList<Integer> newl = new ArrayList<Integer>(l);
+                ans.add(newl);
+                set.add(newl);
+            }
+            return true;
+        }
+        if(i<=0 || j<=0)
+            return false;
+        if(dp[i][j]==false)
+            return false;
+
+//        If we had created a new list here then it is important to do this first because here we are
+//        adding elements of l to a new list. If we keep if after the other call then l will get modified
+//        and we will get wrong answer.
+
+        if(nums[i-1]<=j){
+            // System.out.println("inside"+i+" "+j +" "+newl.toString());
+            l.add(nums[i-1]);
+            dp[i][j]= combinationSumDP(i-1,j-nums[i-1],nums,dp,l);
+            l.remove(new Integer(nums[i-1]));
+            }
+
+    //VVIMP. In a case where we need all the solutions MAKE SURE TO PUT THE CALL FIRST because here since we are using
+    // || operator then if we have true from above then the second call will not happen at all. But we need that call.
+        dp[i][j]=combinationSumDP(i-1,j,nums,dp,l)||dp[i][j];
+        return dp[i][j];
+            }
+
+
+------------------------------------------------------------------------------------------------------------------------
+
+SUBSET SUM DIVISIBLE BY K: BOOLEAN RESULT
+
+Prob:
+DP_gfg_subset_sum_divisible_by_k
+https://leetcode.com/problems/combination-sum-ii/submissions/
+
+any problem which has anything to do with "divisible by k", try going for the use of modulus.
+Algo:
+use pigeonhole principle. So if m<n.length then sum divisible by k is possible. otherwise we try to keep track of all
+the sum%m values that are possible.
+
+    public static boolean subsetSumDP(int nums[], int k){
+        if(nums.length>k) return true;
+        boolean dp[]= new boolean[k];
+        for(int x: nums){
+            if(dp[0]) return true;
+            boolean temp[]= new boolean[k];
+            for(int i=0;i<k;++i){
+                if(dp[i])
+                    temp[(i+x)%k]=true;
+            }
+            for(int i=0 ;i<k;++i){
+                dp[i]= dp[i]|| temp[i];
+            }
+            dp[x%k]=true;
+        }
+        return dp[0];
+    }
+
+------------------------------------------------------------------------------------------------------------------------
+
+MATRIX DP:
+
+1. MAX SIZE SQUARE IN A BINARY MATRIX
+
+Prob:
+Matrix_DP_gfg_max_size_square_submatrix_given_binary_matrix
+https://practice.geeksforgeeks.org/problems/largest-square-formed-in-a-matrix/0
+
+Alog:
+1. For every cell we calculate the max matrix of 1s possible with that cell as the rightmost corner cell.
+2. traverse the matrix row wise/column wise and where ever the cell value=1 we find the min value in the [i-1][j-1],
+[i-1][j],[i][j-1] cells. Add one to it and store here.
+3. For max value keep track of the max value encountered so far.
+
+    public static int maxSizeSquareSubmatrix(int m[][]){
+        int dp[][]= new int[m.length][m[0].length];
+        int max=0;
+        for(int i=0;i<m.length;++i){
+            for(int j=0;j<m[0].length;++j){
+                if(i==0||j==0)
+                    dp[i][j]=m[i][j];
+                else if(m[i][j]==1)
+                    dp[i][j]=Math.min(dp[i-1][j-1], Math.min(dp[i][j-1],dp[i-1][j]))+1;
+                else
+                    dp[i][j]=0;
+                max=Math.max(max,dp[i][j]);
+            }
+        }
+        return max;
+    }
+
+----------------------------------
+2. FIND NUMBER OF SQUARE MATRIX FORMED WITH ALL ONES
+
+Prob:
+Matrix_DP_lc_count_square_submatrices_with_all_ones
+https://leetcode.com/problems/count-square-submatrices-with-all-ones/submissions/
+
+use the method of the previous question. Add the value we get at each cell to get the final result.
+
+----------------------------------
+3.MAX SUM RECTANGLE
+
+Prob:
+Matrix_DP_gfg_max_sum_rectangle
+https://practice.geeksforgeeks.org/problems/maximum-sum-rectangle/0
+
+Kadane's algo used. there should be atleast one non negative element in the array for this thing to work.
+
+1. we consider all pairs of columns which could be the boundaries of our rectangles
+2. we pre compute the prefix sum for every row.
+3. for each pair of column now we can get the sum of elements for each row falling in that area. consider it as an whole
+and apply kadane's algo vertically taking each row sum(within range) as one element. we can get the max sum possible for
+each set of column pairs. Keep track of the overall max.
+
+    public static int maxSumRectangle(int arr[][], int r, int c){
+            // int psum[][]= new int[r][c];
+            for(int i=0;i<r;++i){
+                for(int j=0;j<c-1;++j){
+                    arr[i][j+1]=arr[i][j]+arr[i][j+1];
+                }
+            }
+            int mxSum=0;
+            int sRow=0,eRow=0,sCol=0,eCol=0;
+            for(int st=0;st<c;++st){
+                for(int end=st;end<c;++end){
+                    //since the start and the end row are fixed we need to
+                    // apply kadanes vertically taking the valid row area of every
+                    //row as one cell
+                    int kCurrSum=0, kMaxSoFar=0, kSt=0;
+                    for(int i=0;i<r; ++i){
+                        int cell= st==0? arr[i][end]: arr[i][end]-arr[i][st-1];
+                        kCurrSum+=cell;
+                        if(kCurrSum>kMaxSoFar){
+                            kMaxSoFar=kCurrSum;
+                            sRow=st;
+                            eRow=end;
+                            sCol=kSt;
+                            eCol=i;
+                        }
+                        if(kCurrSum<0){
+                            kCurrSum=0;
+                            kSt=i+1;
+                        }
+                    }
+                    mxSum=Math.max(mxSum,kMaxSoFar);
+                }
+            }
+            return mxSum;
+        }
+
+----------------------------------
+4. NO OF SUB MATRICES WITH ALL ONES
+
+Prob:
+Matrix_DP_lc_count_all_submatrices_with_ones
+https://leetcode.com/problems/count-submatrices-with-all-ones/submissions/
+
+Algo:
+1. iterate to every cell and calculate the no of sub matrices possible with that cell as the top-left cell.
+2. pre compute the no of continuous ones on the right of every cell in prefix[][]
+3. for each cell we do the following
+4. iterate the remaining cells of that column in prefix[]. these values in logic would be the width of the sub matrix.
+keep adding the no of continuous ones.
+    If for particular cell[1][5] the precomputed[5] column has values= {3,4,5,2,4,0,5} as the remaining column then the no
+    of sub-matrices that can be made by keeping cell[1][5] as the top-left point are=
+    4(leave out 3 since cell is at row0.Now 4 mat can be formed of size 1*1,1*2,1*3,1*4)
+    +4 (4 mat can be formed of size 2*1,2*2,2*3,2*4)
+    +2 (min of (4,2) is taken. so 2 mat can be formed of size 3*1,3*2)
+    +2
+    +0 (we stop here since no matrix can be formed now)
+
+    public int numSubmat(int[][] m) {
+        int cnt[][]=new int[m.length][m[0].length];
+        //contains length of continuous ones starting from cell i. (type pf prefix sum)
+        for(int i=0;i<m.length;++i){
+            int c=0;
+            for(int j=m[0].length-1;j>=0;--j){
+                if(m[i][j]==1)
+                    cnt[i][j]=++c;
+                else
+                    c=0;
+            }
+        }
+
+        int sum=0;
+        for(int i=0;i<m.length;++i){
+            for(int j=0;j<m[0].length;++j){
+                if(m[i][j]==1)
+                    sum+=submarticesWithCurrentCellAsTopLeftCell(cnt,i,j);
+            }
+        }
+        return sum;
+    }
+
+    public int submarticesWithCurrentCellAsTopLeftCell(int cnt[][],int x,int y){
+        int sum=cnt[x][y];
+        int mxWidth=cnt[x][y];
+        for(int i=x+1;i<cnt.length;++i){
+            if(cnt[i][y]==0)
+                break;
+            else{
+                mxWidth=Math.min(mxWidth,cnt[i][y]);
+                sum+=mxWidth;
+            }
+        }
+        return sum;
+    }
+
+----------------------------------
+5. MAX AREA IN A BINARY MATRIX WITH ALL ONES
+
+Prob:
+Matrix_Stack_lc_max_sum_rectangle_given_binary_matrix
+https://leetcode.com/problems/maximal-rectangle/
+
+Algo:
+1. build a matrix column wise where every cell contains no of continuous ones above if.
+2. for each pre computed row consider it to be a histogram problem and find the max area rectangle possible.
+
+    public int maximalRectangle(char[][] m) {
+        if(m.length==0) return 0;
+        int arr[]=new int[m[0].length];
+        int max=0;
+        for(int i=0;i<m.length;++i){
+            for(int j=0;j<m[0].length;++j)
+                arr[j]=m[i][j]=='1'?arr[j]+1:0;
+            max= Math.max(max, maximumAreaHistogram(arr));
+        }
+        return max;
+    }
+
+    public int maximumAreaHistogram(int h[]){
+        int nsl[]=new int[h.length];
+        int nsr[]=new int[h.length];
+        int st[]=new int[h.length];
+
+        int top=-1;
+        for(int i=0;i<h.length;++i){
+            while(top!=-1 && h[st[top]]>=h[i])
+                top--;
+            nsl[i]=top==-1?-1:st[top];
+            st[++top]=i;
+        }
+
+        top=-1;
+        for(int i=h.length-1;i>=0;--i){
+            while(top!=-1 && h[st[top]]>=h[i])
+                top--;
+            nsr[i]=top==-1?h.length:st[top];
+            st[++top]=i;
+        }
+
+        int max=0;
+        for(int i=0;i<h.length;++i){
+            max=Math.max(max, (nsr[i]-nsl[i]-1)*h[i]);
+        }
+        return max;
+    }

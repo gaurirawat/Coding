@@ -186,17 +186,17 @@ need the tail, we have to traverse again from the head that we just received fro
 
 //        CASE 2: child exists
         else{
-//            flatten the child and find the tail
+//           flatten the child and find the tail
             Node child=flatten(head.child);
             while(child.next!=null)
                 child=child.next;
 
-//            connect tail and the next of the head
+//           connect tail and the next of the head
             child.next=head.next;
             if(head.next!=null)
                 head.next.prev=child;
 
-//            bring the child on the same level
+//           bring the child on the same level
             head.next=head.child;
             head.child.prev=head;
             head.child=null;
@@ -208,6 +208,7 @@ need the tail, we have to traverse again from the head that we just received fro
 ------------------------------------------------------------------------------------------------------------------------
 
 RECURSIVE APPROACH.
+
 For basic question like "pairwise swap" or "add two numbers in LL" or "merge Two Lists"prefer to go for a recursive
 approach as it is more error proof. In a general scenario the recursive soln always returns the head, so whenever we
 need the tail, we have to traverse again from the head that we just received from the recursive function

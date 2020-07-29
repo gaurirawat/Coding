@@ -24,7 +24,20 @@ public class DP_lc_LIS {
 		Arrays.sort(brr);
         return integerLCS(nums, brr);
     }
-	
+	//BETTER METHOD
+    public int lengthOfLIS1(int[] nums) {
+		ArrayList<Integer> l= new ArrayList<Integer>();
+		for(int i=0;i<nums.length;++i){
+			int pos=Collections.binarySearch(l,nums[i]);
+			if(pos<0)
+				pos=Math.abs(pos+1);
+			if(pos==l.size())
+				l.add(nums[i]);
+			else
+				l.set(pos,nums[i]);
+		}
+		return l.size();
+	}
 	public int integerLCS(int arr[], int brr[]) {
 		int dp[]= new int[brr.length+1];
 		for(int i=1; i<=arr.length; ++i) {

@@ -233,3 +233,11 @@ no of elements in the left array that are smaller than the right element. And th
 	}
 
 ------------------------------------------------------------------------------------------------------------------------
+
+ZIG-ZAG MAINTAIN RELATIVE ORDERING
+
+In a general case zig zag ordering sort the array and swap adjacent pairs.
+
+For an ordering where we need to maintain relative ordering, simply check element with the next one to see if zigzag
+order is being maintained otherwise swap.
+------------------------------------------------------------------------------------------------------------------------

@@ -1,6 +1,6 @@
 package revision;
-
-public class DP_lc_LCSubstring_max_langth_of_repeated_subarray {
+//https://leetcode.com/problems/maximum-length-of-repeated-subarray/
+public class DP_lc_LCSubstring_max_length_of_repeated_subarray {
     public int findLength(int[] a, int[] b) {
         int la=a.length;
         int lb=b.length;
