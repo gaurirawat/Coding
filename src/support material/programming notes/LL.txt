@@ -209,7 +209,7 @@ need the tail, we have to traverse again from the head that we just received fro
 
 RECURSIVE APPROACH.
 
-For basic question like "pairwise swap" or "add two numbers in LL" or "merge Two Lists"prefer to go for a recursive
+For basic question like "pairwise swap" or "add two numbers in LL" or "merge Two Lists" prefer to go for a recursive
 approach as it is more error proof. In a general scenario the recursive soln always returns the head, so whenever we
 need the tail, we have to traverse again from the head that we just received from the recursive function
 

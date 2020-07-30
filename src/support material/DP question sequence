@@ -50,8 +50,6 @@ DP_lc_min_cost_path
 DP_lc_predict_winner                    //definitely revise
 DP_lc_palindrome_partitioning           //different approach
 
-
-
 manhattan distance
 handlock algo
 rotten orange

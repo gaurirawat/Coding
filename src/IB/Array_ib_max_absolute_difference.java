@@ -1,6 +1,7 @@
 package IB;
 //https://www.interviewbit.com/problems/maximum-absolute-difference/
 //concept clarity: https://www.geeksforgeeks.org/maximum-absolute-difference-value-index-sums/
+
 public class Array_ib_max_absolute_difference {
     public int maxArr(int[] a) {
         int mxs=Integer.MIN_VALUE, mxd=Integer.MIN_VALUE;

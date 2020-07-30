@@ -1,3 +1,5 @@
+BABY QUESTIONS:
+
 DP_lc_ugly_number.java
 DP_lc_fibonacci.java
 DP_lc_unique_path.java
@@ -12,22 +14,26 @@ DP_gfg_min_coins_to_make_change_with_infinite_supply.java
 DP_lc_coin_change_find_no_of_combinations.java
 
 DP_lc_LCS.java
-DP_gfg_LCS_length_of_shortest_common_superSequence.java
-DP_lc_LCS_print_shortest_common_supersequence
-DP_lc_LCS_edit_distance.java
-DP_lc_LIS.java (prefer array method)
+DP_gfg_LCS_length_of_shortest_common_superSequence
+DP_lc_LIS (prefer array method)
 
 DP_gfg_LCSubstring
-DP_lc_LCSubstring_max_langth_of_repeated_subarray
+DP_lc_LCSubstring_max_length_of_repeated_subarray
 
-DP_lc_subset_sum_equal_partition.java
-DP_lc_subset_sum_print_combinations.java
-DP_gfg_subset_sum_divisible_by_k.java(prefer modulus method)
+DP_lc_subset_sum_equal_partition
+DP_gfg_subset_sum_divisible_by_k (prefer modulus method)
+-------------------
 
-Matrix_DP_gfg_max_size_square_submatrix_given_binary_matrix
+NOT SO BABY QUESTIONS:
+
+DP_lc_LCS_print_shortest_common_supersequence
+DP_lc_edit_distance
+DP_lc_subset_sum_print_combinations
+
 Matrix_DP_gfg_max_sum_rectangle
-Matrix_DP_lc_count_all_submatrices_with_ones
+Matrix_DP_gfg_max_size_square_submatrix_given_binary_matrix
 Matrix_DP_lc_count_square_submatrices_with_all_ones
+Matrix_DP_lc_count_all_submatrices_with_ones
 Matrix_Stack_lc_max_sum_rectangle_given_binary_matrix
 
 DP_gfg_optimal_binary_search_tree
@@ -43,3 +49,7 @@ DP_lc_jump_game_isPossible              //prefer array approach
 DP_lc_min_cost_path
 DP_lc_predict_winner                    //definitely revise
 DP_lc_palindrome_partitioning           //different approach
+
+manhattan distance
+handlock algo
+rotten orange

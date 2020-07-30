@@ -25,7 +25,7 @@ here we fill up arr.length if there is no small element on the right side
 
 --------------------------------------------------------------------------------------------------
 
-max area histogram
+MAX AREA HISTOGRAM
 
 ref:
 https://www.youtube.com/watch?v=J2X70jj_I1o&list=RDCMUC5WO7o71wvxMxEtLRkPhiQQ&start_radio=1&t=95

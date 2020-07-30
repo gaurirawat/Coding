@@ -30,4 +30,21 @@ and store these sums in an array say temp[]. So temp[i] indicates sum of element
 apply Kadane’s 1D algorithm on temp[], and get the maximum sum subarray of temp, this maximum sum would be the maximum
 possible sum with left and right as boundary columns. To get the overall maximum sum, we compare this sum with the
 maximum sum so far.
--------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------
+
+COUNTING SORT
+
+Ref: https://www.geeksforgeeks.org/counting-sort/
+In a case where there are only positive numbers we can simply create an array and keep inc the index=number.
+Works just for +ve numbers.
+
+PIGEONHOLE SORT:
+
+Ref: https://www.geeksforgeeks.org/pigeonhole-sort/
+In case when negatives are also present in the array, we find the min and inc the (number-min) index.
+ie if no are {-5, -5, 0, -3, 4, 5, -1, 3}, then min is -10 range would be 5-(-5)+1=11. resulting array would be
+{2,0,1,0,1,1,0,0,1,1,1 }. -5 appears twice therefore count at -5-(-5)=0th index has been incremented twice.
+
+------------------------------------------------------------------------------------------------------------------------
+
+
