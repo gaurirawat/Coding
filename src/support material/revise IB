@@ -1,0 +1,8 @@
+
+**  Array_ib_maximum_consecutive_gap    //bucketing + pigeonhole
+**  Array_ib_maximum_distance   //max j-i where arr[j]>arr[i]
+
+    Array_ib_largest_number     //comparator usage and implementation
+
+    Map_ib_longest_consecutive_sequence
+**  Heap_ib_LRU_cache   //map implementation and function clarity

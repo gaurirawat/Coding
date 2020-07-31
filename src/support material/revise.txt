@@ -1,7 +1,4 @@
-    Array_ib_largest_number     //comparator usage and implementation
     Array_hr_inversion_pair
-**  Array_ib_maximum_consecutive_gap    //bucketing + pigeonhole
-**  Array_ib_maximum_distance   //max j-i where arr[j]>arr[i]
 
     DP_gfg_matrix_chain_multiplication.java
     DP_lc_coin_change_find_no_of_combinations.java
@@ -10,12 +7,11 @@
     DP_lc_LCS_print_shortest_common_supersequence
 *   DP_lc_subset_sum_print_combinations
 
-    Map_ib_longest_consecutive_sequence
-
 *   Matrix_DP_gfg_max_sum_rectangle
 *   Matrix_Stack_lc_max_sum_rectangle_given_binary_matrix
 
     Graph_gfg_find_min_path_up_down_left_right_movement
+    Graph_lc_course_scheduling_topo_sort_kahn_algo      //kahn algo
 
     LL_gfg_reverse_LL
     LL_lc_flatten_a_multilevel_DLL
