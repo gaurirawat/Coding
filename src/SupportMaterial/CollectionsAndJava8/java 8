@@ -1,0 +1,237 @@
+Lambda
+http://tutorials.jenkov.com/java/lambda-expressions.html
+https://www.geeksforgeeks.org/lambda-expressions-java-8/
+Lambda expressions basically express instances of functional interfaces (An interface with single abstract method is called functional interface. An example is java.lang.Runnable). lambda expressions implement the only abstract function and therefore implement functional interfaces
+lambda expressions are added in Java 8 and provide below functionalities.
+•	Enable to treat functionality as a method argument, or code as data.
+•	A function that can be created without belonging to any class.
+•	A lambda expression can be passed around as if it was an object and executed on demand.
+Note that lambda expressions can only be used to implement functional interfaces. In the above example also, the lambda expression implements Consumer Functional Interface.
+A Java program to demonstrate working of lambda expression with two arguments.
+public class Test
+{
+    // operation is implemented using lambda expressions
+    interface FuncInter1
+    {
+        int operation(int a, int b);
+    }
+
+    // sayMessage() is implemented using lambda expressions
+    // above
+    interface FuncInter2
+    {
+        void sayMessage(String message);
+    }
+
+    // Performs FuncInter1's operation on 'a' and 'b'
+    private int operate(int a, int b, FuncInter1 fobj)
+    {
+        return fobj.operation(a, b);
+    }
+
+    public static void main(String args[])
+    {
+        // lambda expression for addition for two parameters
+        // data type for x and y is optional.
+        // This expression implements 'FuncInter1' interface
+        FuncInter1 add = (int x, int y) -> x + y;
+
+        // lambda expression multiplication for two parameters
+        // This expression also implements 'FuncInter1' interface
+        FuncInter1 multiply = (int x, int y) -> x * y;
+
+        // Creating an object of Test to call operate using
+        // different implementations using lambda Expressions
+        Test tobj = new Test();
+
+        // Add two numbers using lambda expression
+        System.out.println("Addition is " +
+                          tobj.operate(6, 3, add));
+
+        // Multiply two numbers using lambda expression
+        System.out.println("Multiplication is " +
+                          tobj.operate(6, 3, multiply));
+
+        // lambda expression for single parameter
+        // This expression implements 'FuncInter2' interface
+        FuncInter2 fobj = message ->System.out.println("Hello "
+                                                 + message);
+        fobj.sayMessage("Geek");
+    }
+}
+
+The following interface can be implemented with a lambda expression:
+import java.io.IOException;
+import java.io.OutputStream;
+
+public interface MyInterface {
+
+    void printIt(String text);
+
+    default public void printUtf8To(String text, OutputStream outputStream){
+        try {
+            outputStream.write(text.getBytes("UTF-8"));
+        } catch (IOException e) {
+            throw new RuntimeException("Error writing String as UTF-8 to OutputStream", e);
+        }
+    }
+
+    static void printItToSystemOut(String text){
+        System.out.println(text);
+    }
+}
+Even though this interface contains 3 methods it can be implemented by a lambda expression, because only one of the methods is unimplemented. Here is how the implementation looks:
+MyInterface myInterface = (String text) -> {
+    System.out.print(text);
+};
+Zero Parameters
+If the method you are matching your lambda expression against takes no parameters, then you can write your lambda expression like this:
+() -> System.out.println("Zero parameter lambda");
+Notice how the parentheses have no content in between. That is to signal that the lambda takes no parameters.
+One Parameter
+If the method you are matching your Java lambda expression against takes one parameter, you can write the lambda expression like this:
+(param) -> System.out.println("One parameter: " + param);
+Notice the parameter is listed inside the parentheses.
+When a lambda expression takes a single parameter, you can also omit the parentheses, like this:
+ param -> System.out.println("One parameter: " + param);
+Multiple Parameters
+If the method you match your Java lambda expression against takes multiple parameters, the parameters need to be listed inside parentheses. Here is how that looks in Java code:
+(p1, p2) -> System.out.println("Multiple parameters: " + p1 + ", " + p2);
+Only when the method takes a single parameter can the parentheses be omitted.
+Parameter Types
+Specifying parameter types for a lambda expression may sometimes be necessary if the compiler cannot infer the parameter types from the functional interface method the lambda is matching. Don't worry, the compiler will tell you when that is the case. Here is a Java lambda parameter type example:
+(Car car) -> System.out.println("The car is: " + car.getName());
+As you can see, the type (Car) of the car parameter is written in front of the parameter name itself, just like you would when declaring a parameter in a method elsewhere, or when making an anonymous implementation of an interface.
+var Parameter Types from Java 11
+From Java 11 you can use the var keyword as parameter type. The var keyword was introduced in Java 10 as local variable type inference. From Java 11 var can also be used for lambda parameter types. Here is an example of using the Java var keyword as parameter types in a lambda expression:
+Function<String, String> toLowerCase = (var input) -> input.toLowerCase();
+The type of the parameter declared with the var keyword above will be inferred to the type String, because the type declaration of the variable has its generic type set to Function<String, String>, which means that the parameter type and return type of the Function is String.
+Returning a Value From a Lambda Expression
+You can return values from Java lambda expressions, just like you can from a method. You just add a return statement to the lambda function body, like this:
+
+(param) -> {
+    System.out.println("param: " + param);
+    return "return value";
+  }
+In case all your lambda expression is doing is to calculate a return value and return it, you can specify the return value in a shorter way. Instead of this:
+ (a1, a2) -> { return a1 > a2; }
+You can write:
+ (a1, a2) -> a1 > a2;
+The compiler then figures out that the expression a1 > a2 is the return value of the lambda expression (hence the name lambda expressions - as expressions return a value of some kind).
+Lambdas as Objects
+A Java lambda expression is essentially an object. You can assign a lambda expression to a variable and pass it around, like you do with any other object. Here is an example:
+public interface MyComparator {
+
+    public boolean compare(int a1, int a2);
+
+}
+MyComparator myComparator = (a1, a2) -> return a1 > a2;
+
+boolean result = myComparator.compare(2, 5);
+The first code block shows the interface which the lambda expression implements. The second code block shows the definition of the lambda expression, how the lambda expression is assigned to variable, and finally how the lambda expression is invoked by invoking the interface method it implements.
+Method References as Lambdas
+In the case where all your lambda expression does is to call another method with the parameters passed to the lambda, the Java lambda implementation provides a shorter way to express the method call. First, here is an example single function interface:
+public interface MyPrinter{
+    public void print(String s);
+}
+And here is an example of creating a Java lambda instance implementing the MyPrinter interface:
+MyPrinter myPrinter = (s) -> { System.out.println(s); };
+Because the lambda body only consists of a single statement, we can actually omit the enclosing { } brackets. Also, since there is only one parameter for the lambda method, we can omit the enclosing ( ) brackets around the parameter. Here is how the resulting lambda declaration looks:
+MyPrinter myPrinter = s -> System.out.println(s);
+Since all the lambda body does is forward the string parameter to the System.out.println() method, we can replace the above lambda declaration with a method reference. Here is how a lambda method reference looks:
+MyPrinter myPrinter = System.out::println;
+Notice the double colons :: . These signal to the Java compiler that this is a method reference. The method referenced is what comes after the double colons. Whatever class or object that owns the referenced method comes before the double colons.
+You can reference the following types of methods:
+•	Static method
+•	Instance method on parameter objects
+•	Instance method
+•	Constructor
+Each of these types of method references are covered in the following sections.
+Static Method References
+The easiest methods to reference are static methods. Here is first an example of a single function interface:
+public interface Finder {
+    public int find(String s1, String s2);
+}
+And here is a static method that we want to create a method reference to:
+public class MyClass{
+    public static int doFind(String s1, String s2){
+        return s1.lastIndexOf(s2);
+    }
+}
+And finally here is a Java lambda expression referencing the static method:
+Finder finder = MyClass::doFind;
+Since the parameters of the Finder.find() and MyClass.doFind() methods match, it is possible to create a lambda expression that implements Finder.find() and references the MyClass.doFind() method.
+Instance Method References
+Third, it is also possible to reference an instance method from a lambda definition. First, let us look at a single method interface definition:
+public interface Deserializer {
+    public int deserialize(String v1);
+}
+This interface represents a component that is capable of "deserializing" a String into an int.
+Now look at this StringConverter class:
+public class StringConverter {
+    public int convertToInt(String v1){
+        return Integer.valueOf(v1);
+    }
+}
+The convertToInt() method has the same signature as the deserialize() method of the Deserializer deserialize() method. Because of that, we can create an instance of StringConverter and reference its convertToInt() method from a Java lambda expression, like this:
+StringConverter stringConverter = new StringConverter();
+
+Deserializer des = stringConverter::convertToInt;
+The lambda expression created by the second of the two lines references the convertToInt method of the StringConverter instance created on the first line.
+
+
+Java 8 Lambda changes
+https://www.baeldung.com/java-8-lambda-expressions-tips
+Consider an interface Foo:
+	@FunctionalInterface
+	public interface Foo {
+	String method(String string);
+	}
+and a method add() in some class UseFoo, which takes this interface as a parameter:
+	public String add(String string, Foo foo) {
+	return foo.method(string);
+	}
+To execute it, you would write:
+	Foo foo = parameter -> parameter + " from lambda";
+	String result = useFoo.add("Message ", foo);
+--------------
+Look closer and you will see that Foo is nothing more than a function that accepts one argument and produces a result. Java 8 already provides such an interface in Function<T,R> from the java.util.function package.
+Now we can remove interface Foo completely and change our code to:
+	public String add(String string, Function<String, String> fn) {
+	return fn.apply(string);
+	}
+To execute this, we can write:
+	Function<String, String> fn =
+	parameter -> parameter + " from lambda";
+	String result = useFoo.add("Message ", fn);
+
+Sorting
+List<Human> humans = Lists.newArrayList(
+	      new Human("Sarah", 10),
+	      new Human("Jack", 12)
+	    );
+
+Without lambda:
+Collections.sort(humans, new Comparator<Human>() {
+    @Override
+    public int compare(Human h1, Human h2) {
+        return h1.getName().compareTo(h2.getName());
+    }
+});
+
+With lambda:
+humans.sort((Human h1, Human h2) -> h1.getName().compareTo(h2.getName()));
+or
+humans.sort((h1, h2) -> h1.getName().compareTo(h2.getName()));
+or
+humans.sort(Human::compareByNameThenAge);
+or
+Collections.sort(humans, Comparator.comparing(Human::getName));
+
+Reversed:
+Comparator<Human> comparator= (h1, h2) -> h1.getName().compareTo(h2.getName());
+humans.sort(comparator.reversed());
+
+Sorting with conditions:
+humans.sort(Comparator.comparing(Human::getName).thenComparing(Human::getAge));
+

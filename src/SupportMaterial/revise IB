@@ -6,3 +6,5 @@
 
     Map_ib_longest_consecutive_sequence
 **  Heap_ib_LRU_cache   //map implementation and function clarity
+
+    Tree_construct_using_postorder_and_inorder  //use hashmap to store elements and their indices.

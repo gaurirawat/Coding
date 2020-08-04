@@ -2,10 +2,10 @@ package IB;
 
 import java.util.*;
 
-public class Heap_ib_LRU_cache {
+public class Map_ib_LRU_cache {
     int cap;
     LinkedHashMap<Integer, Integer> map;
-    public Heap_ib_LRU_cache(int capacity) {
+    public Map_ib_LRU_cache(int capacity) {
         this.cap=capacity;
         map=new LinkedHashMap<Integer, Integer>();
     }

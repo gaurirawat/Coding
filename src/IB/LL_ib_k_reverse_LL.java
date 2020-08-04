@@ -3,6 +3,8 @@ package IB;
 //https://www.interviewbit.com/problems/k-reverse-linked-list/
 //https://practice.geeksforgeeks.org/problems/reverse-a-linked-list-in-groups-of-given-size/1
 
+import java.util.*;
+
 public class LL_ib_k_reverse_LL {
     public ListNode reverseList(ListNode head, int k) {
         if(head==null||head.next==null||k<=1) return head;
@@ -16,7 +18,11 @@ public class LL_ib_k_reverse_LL {
             prev=curr;
             curr=next;
         }
+
+        Deque<Integer> st = new LinkedList<Integer>();
+
         head.next=reverseList(curr,k);
         return prev;
+
     }
 }
