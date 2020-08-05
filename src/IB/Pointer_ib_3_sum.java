@@ -1,13 +1,8 @@
-package revision;
-import java.util.*;
+package IB;
+
+import java.util.Arrays;
 //https://www.interviewbit.com/problems/3-sum/
-/*concept:
- * for condition: a+b+c=0;
- * we put sum as -c and then use two pointer method to find if condition is true anywhere.
- * For target ie. a+b+c=target, put sum as target-c and then use two pointer to calculate if for any 
- * a+b, we get the sum as target-c;
- */
-public class Pointer_ib_3_sum_target_k {
+public class Pointer_ib_3_sum {
     public int threeSumClosest(int[] a, int k) {
         long ans=Integer.MAX_VALUE;
         Arrays.sort(a);

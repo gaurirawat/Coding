@@ -10,6 +10,3 @@
     Tree_construct_using_postorder_and_inorder  //use hashmap to store elements and their indices.
 *   Tree_ib_next_right_pointer_tree
     Tree_ib_iterative_inorder   //standard approach
-
-*   Pointer_ib_3_array_pointer  //wierd breaking cases
-*   Pointer_ib_3_sum_target_k   //
