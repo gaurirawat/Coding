@@ -1,8 +1,9 @@
-
 **  Array_ib_maximum_consecutive_gap    //bucketing + pigeonhole
 **  Array_ib_maximum_distance   //max j-i where arr[j]>arr[i]
-
     Array_ib_largest_number     //comparator usage and implementation
+
+    DP_ib_tushars_birthday_bombs
+    DP_ib_longest_AP
 
     Map_ib_longest_consecutive_sequence
 **  Heap_ib_LRU_cache   //map implementation and function clarity
@@ -13,3 +14,5 @@
 
 *   Pointer_ib_3_array_pointer  //wierd breaking cases
 *   Pointer_ib_3_sum_target_k   //
+
+    Stack_ib_simplify_directory_path    //see how the use of stringBuilder can reduce time complexity by manifolds

@@ -22,6 +22,8 @@ DP_lc_LCSubstring_max_length_of_repeated_subarray
 
 DP_lc_subset_sum_equal_partition
 DP_gfg_subset_sum_divisible_by_k (prefer modulus method)
+
+DP_lc_no_of_subarray_with_odd_sum
 -------------------
 
 NOT SO BABY QUESTIONS:
@@ -49,6 +51,11 @@ DP_lc_jump_game_isPossible              //prefer array approach
 DP_lc_min_cost_path
 DP_lc_predict_winner                    //definitely revise
 DP_lc_palindrome_partitioning           //different approach
+
+DP_ib_tushars_birthday_bombs
+DP_ib_longest_AP
+DP_ib_longest_increasing_decreasing_subsequence
+
 
 manhattan distance
 handlock algo

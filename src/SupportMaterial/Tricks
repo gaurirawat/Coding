@@ -1,0 +1,32 @@
+delete a node from LL:
+    copy value from next node. delete next one. doesn't work for last node.
+
+find first duplicate in array with no 1->n:
+	for every element x in arr, make arr[x] as -ve. if arr[x] is already -ve then no is duplicate.
+
+find starting point of loop:
+	use two pointer approach to find if there is a loop. now from the point where the two pointers meet, start a
+	traversing again and start another pointer from the head. The point where these meet will be the starting point of
+	loop.
+
+subset sum:
+	Anywhere subset sum is mentioned got for prefix sum approach(Arr_lc_PS_subarray_sum_divisible_by_k).
+	Other than that for true false go for standard DP solution.(DP_gfg_subset_sum_divisible_by_k)
+
+Duplicate set handling:
+	whenever ArrayList<List<Integer>> is used and we need to track make sure no duplicate lists are present inside
+	arraylist then create another set. Every time new list is added to arraylist do
+	if(!set.contains(list)){
+    		    al.add(list);
+                set.add(l);                
+	} 
+	Set checks for duplicate lists by automatically comparing lists element by element.
+
+wherever the question asks for nlogn complexity , first approach is to see is sorting can be used and second is to go
+    for binary search for each element x.
+
+Where ever we need subset sum or subarray try to go with sliding window concept.
+
+StringBuilder:
+    When ever there are multiple modification being done on any string, go for string builder. Using a string might end
+    up giving TLE
