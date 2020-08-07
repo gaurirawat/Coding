@@ -7,7 +7,7 @@ public class DP_lc_predict_winner {
             return true;
 
         /*dp[l][r] stores max value possible for that pair of l and r
-        irrespestive of that being for whichever player.*/
+        irrespective of that being for whichever player.*/
         int dp[][]= new int[nums.length][nums.length];
 
         int tot=0;

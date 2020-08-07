@@ -1,5 +1,7 @@
     Array_hr_inversion_pair
 *   Array_lc_minimum_inc_on_subarray_to_form_target_array
+*   Array_lc_no_of_subarray_with_sum_equal_to_k
+    Array_lc_min_diff_btw_largest_and_smallest_in_3_moves
 
     DP_gfg_matrix_chain_multiplication.java
     DP_lc_coin_change_find_no_of_combinations.java
