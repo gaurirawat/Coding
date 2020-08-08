@@ -20,3 +20,5 @@
     LL_lc_flatten_a_multilevel_DLL
 
 *   Tree_gfg_bottom_view_of_tree
+
+**  BSearch_lc_first_and_last_occurrence_of_element
