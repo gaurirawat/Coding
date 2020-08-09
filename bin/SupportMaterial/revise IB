@@ -1,12 +1,25 @@
-
 **  Array_ib_maximum_consecutive_gap    //bucketing + pigeonhole
 **  Array_ib_maximum_distance   //max j-i where arr[j]>arr[i]
-
     Array_ib_largest_number     //comparator usage and implementation
+
+    DP_ib_tushars_birthday_bombs
+    DP_ib_longest_AP
+    Matrix_DP_ib_no_of_submatrix_with_sum_zero
 
     Map_ib_longest_consecutive_sequence
 **  Heap_ib_LRU_cache   //map implementation and function clarity
 
+*   String_ib_KMP_implement_strstr
+    String_ib_min_char_to_make_string_palindrome
+    String_ib_string_to_integer
+
     Tree_construct_using_postorder_and_inorder  //use hashmap to store elements and their indices.
 *   Tree_ib_next_right_pointer_tree
     Tree_ib_iterative_inorder   //standard approach
+
+*   Pointer_ib_3_array_pointer  //wierd breaking cases
+*   Pointer_ib_3_sum_target_k   //
+
+    Stack_ib_simplify_directory_path    //see how the use of stringBuilder can reduce time complexity by manifolds
+
+**  BSearch_ib_matrix_median
