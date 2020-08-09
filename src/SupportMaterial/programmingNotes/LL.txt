@@ -271,3 +271,45 @@ https://leetcode.com/problems/merge-two-sorted-lists/
     }
 
 ------------------------------------------------------------------------------------------------------------------------
+
+REVERSE PART OF LIST: RECURSIVE
+
+Prob:
+LL_ib_reverse_part_of_list
+https://www.interviewbit.com/problems/reverse-link-list-ii/
+
+Take problem as simply reverse the list for initial x elements.
+If the head is itself the starting point then the returned head becomes head here also. Otherwise go the node prev to
+where the reverse is starting. The next pointer of this node will point to the head of the modified list which gets
+modified by the reverse function.
+
+ public ListNode reverseBetween(ListNode head, int m, int n) {
+        if(head==null||head.next==null)return head;
+        ListNode temp=head;
+        int size=n-m+1;
+        if(m==1)
+            head=rev(temp,size);
+        else{
+            while(m>2){
+                temp=temp.next;
+                --m;
+            }
+            temp.next=rev(temp.next,size);
+        }
+        return head;
+    }
+
+    public ListNode rev(ListNode head, int size){
+        ListNode curr=head,prev=null,next=null;
+        while(size>=1){
+            size--;
+            next=curr.next;
+            curr.next=prev;
+            prev=curr;
+            curr=next;
+        }
+        head.next=curr;
+        return prev;
+    }
+
+------------------------------------------------------------------------------------------------------------------------

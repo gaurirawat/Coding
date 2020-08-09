@@ -23,3 +23,7 @@
     Stack_ib_simplify_directory_path    //see how the use of stringBuilder can reduce time complexity by manifolds
 
 **  BSearch_ib_matrix_median
+
+    LL_ib_reverse_part_of_list
+
+*   Maths_ib_gcd
