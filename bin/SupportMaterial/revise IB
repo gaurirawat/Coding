@@ -8,6 +8,10 @@
 
     Map_ib_longest_consecutive_sequence
 **  Heap_ib_LRU_cache   //map implementation and function clarity
+    Hashing_ib_colorful_number
+*   Hashing_ib_anagram  //important. Still don't remember the correct map functions
+    Hashing_ib_points_on_a_line //thousand corner cases
+**  Hashing_ib_equal_sums_pair   //pathetic piece of shit
 
 *   String_ib_KMP_implement_strstr
     String_ib_min_char_to_make_string_palindrome
@@ -23,3 +27,8 @@
     Stack_ib_simplify_directory_path    //see how the use of stringBuilder can reduce time complexity by manifolds
 
 **  BSearch_ib_matrix_median
+
+    LL_ib_reverse_part_of_list
+
+*   Maths_ib_gcd
+

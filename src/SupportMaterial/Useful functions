@@ -41,3 +41,7 @@ Integer[] a =Arrays.stream(arr).boxed().toArray(Integer[]::new);
 Arrays.stream(arr).forEach(a -> Arrays.fill(a, 0));
 
 When ever we need to use mod do: int mod = (int)Math.pow(10, 9) + 7;
+
+To convert char array to string, use
+String str = new String(ch);
+String str2 = String.valueOf(ch);

@@ -1,6 +1,6 @@
 package IB;
 //https://www.interviewbit.com/problems/reverse-link-list-recursion/
-public class LL_ib_reverse_LL_recursiely {
+public class LL_ib_reverse_LL_recursively {
     ListNode head;
     public ListNode reverseList(ListNode node) {
         head=null;

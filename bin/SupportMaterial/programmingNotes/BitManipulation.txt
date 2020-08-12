@@ -1,0 +1,75 @@
+MST-most significant bit(leftmost bit since it stores the sign)
+LSB-least significant bit(rightmost bit)
+
+Little endian-LSB has smallest address
+Big endian-LSB has largest address
+
+Range:
+These are stored in 2s complement form
+byte: -128 to 127
+short:  -32,768 to 32,767 ie or -2^15 to 2^15 – 1
+int: -2^31 to 2^31– 1
+long: -2^63 to 2^63 – 1
+float: 32 bit precision, 1.4 x 10^-45 and as big as 3.4 x 10^38
+double: 64 bit precision
+
+Bitwise AND :
+ A = 21 ( 10101 ) and B = 6  ( 110 )
+       A & B =
+                        1 0 1 0 1
+                    &   0 0 1 1 0
+                    ------------------
+                        0 0 1 0 0  =  4.
+
+Bitwise OR :
+A = 21 ( 10101 ) and B = 6  ( 110 )
+       A | B =
+                        1 0 1 0 1
+                    |   0 0 1 1 0
+                    ------------------
+                        1 0 1 1 1  =  23.
+Bitwise XOR :
+A = 21 ( 10101 ) and B = 6  ( 110 )
+       A ^ B =
+                        1 0 1 0 1
+                    ^   0 0 1 1 0
+                    ------------------
+                        1 0 0 1 1  =  19.
+
+Bitwise NOT :
+A = 21 ( 10101 ) and A is a char ( 1 byte )
+        ~A =
+            0 0 0 1 0 1 0 1
+          --------------------------
+            1 1 1 0 1 0 1 0  = -22 ( Sign bit is 1 ).
+
+Right Shift Operators :
+A = 29 ( 11101 ) and x = 2, so A >> 2 means
+             0 0 1 1 1 0 1 >> 2
+                       ====  -> is lost
+            ========== -----> this sequence of digit shifts to the right by 2 positions
+            ----------------
+             0 0 0 0 1 1 1 = 7
+
+Left shift operators :
+A = 29 ( 11101 ) and x = 2, so A << 2 means
+             0 0 1 1 1 0 1 << 2
+             =============  ------> this sequence of digit shifts to the left by 2 positions
+            ----------------
+             1 1 1 0 1 0 0  = 116
+
+
+Tricks:
+x & (x-1) will clear the lowest set bit of x
+    010010->010000
+x & ~(x-1) extracts the lowest set bit of x (all others are clear). Pretty patterns when applied to a linear sequence.
+    010010->000010
+x & (x + (1 << n)) :x, with the run of set bits (possibly length 0) starting at bit n cleared.
+x & ~(x + (1 << n)) : the run of set bits (possibly length 0) in x, starting at bit n.
+x | (x + 1) :x with the lowest cleared bit set.
+    101100->101101
+x | ~(x + 1) : extracts the lowest cleared bit of x (all others are set).
+    101011->111011
+x | (x - (1 << n)) : x, with the run of cleared bits (possibly length 0) starting at bit n set.
+x | ~(x - (1 << n)) = the lowest run of cleared bits (possibly length 0) in x, starting at bit n are the only clear bits.
+
