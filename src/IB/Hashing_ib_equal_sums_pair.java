@@ -38,32 +38,32 @@ public class Hashing_ib_equal_sums_pair {
         }
         return ansl;
     }
-}
-class Four {
-    int i;
-    int j;
-    int k;
-    int l;
-    public Four(int a, int b, int c, int d){
-        i=a;
-        j=b;
-        k=c;
-        l=d;
+    class Four {
+        int i;
+        int j;
+        int k;
+        int l;
+        public Four(int a, int b, int c, int d){
+            i=a;
+            j=b;
+            k=c;
+            l=d;
+        }
+        public Four(){}
+        public String toString(){
+            return "["+i+" "+j+" "+k+" "+l+"]";
+        }
     }
-    public Four(){}
-    public String toString(){
-        return "["+i+" "+j+" "+k+" "+l+"]";
-    }
-}
-class Index{
-    int i;
-    int j;
-    public Index(int x, int y){
-        i=x;
-        j=y;
-    }
-    public Index(){}
-    public String toString(){
-        return "["+i+" "+j+"]";
+    class Index{
+        int i;
+        int j;
+        public Index(int x, int y){
+            i=x;
+            j=y;
+        }
+        public Index(){}
+        public String toString(){
+            return "["+i+" "+j+"]";
+        }
     }
 }

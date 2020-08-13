@@ -21,9 +21,14 @@
 *   Tree_ib_next_right_pointer_tree
     Tree_ib_iterative_inorder   //standard approach
 *   Tree_ib_generate_unique_BST
+    Tree_ib_recover_binary_tree
+    Tree_ib_binary_iterator
+    Tree_ib_vertical_order_with_same_level_pre_order
 
 *   Pointer_ib_3_array_pointer  //weird breaking cases
-*   Pointer_ib_3_sum_target_k   //
+*   Pointer_ib_3_sum_target_k
+    Pointer_ib_3_sum_zero
+    Pointer_ib_water_container  //rainwater trapping variation, very easy method. Have a look
 
     Stack_ib_simplify_directory_path    //see how the use of stringBuilder can reduce time complexity by manifolds
 
@@ -33,3 +38,6 @@
 
 *   Maths_ib_gcd
 
+    Graph_ib_valid_path
+    Graph_ib_largest_distance_between_nodes //standard problem
+**  Graph_ib_capture_regions_on_board

@@ -1,4 +1,4 @@
-BFS:
+tBFS:
 
 // https://practice.geeksforgeeks.org/problems/bfs-traversal-of-graph/1/?track=sp-graph&batchId=152
 
@@ -517,3 +517,102 @@ The above algorithm is DFS based. It does DFS two times. DFS of a graph produces
 reachable from the DFS starting point. Otherwise DFS produces a forest.
 So we do DFS once. Find the transpose of the graph and do DFS again.
 
+------------------------------------------------------------------------------------------------------------------------
+
+TOPOLOGICAL SORTING: KAHN'S ALGORITHM
+
+Prob:
+Graph_lc_course_scheduling_topo_sort_kahn_algo
+https://leetcode.com/problems/course-schedule-ii/
+
+Ref:
+https://www.youtube.com/watch?v=tggiFvaxjrY
+https://www.geeksforgeeks.org/topological-sorting-indegree-based-solution/
+
+Algo:
+First of all we say that topological sorting is possible only for DAG.
+Algorithm: Steps involved in finding the topological ordering of a DAG:
+Step-1: Compute in-degree (number of incoming edges) for each of the vertex present in the DAG and initialize the count
+of visited nodes as 0.
+Step-2: Pick all the vertices with in-degree as 0 and add them into a queue (Enqueue operation)
+Step-3: Remove a vertex from the queue (Dequeue operation) and then.
+    Increment count of visited nodes by 1.
+    Decrease in-degree by 1 for all its neighboring nodes.
+    If in-degree of a neighboring nodes is reduced to zero, then add it to the queue.
+Step 5: Repeat Step 3 until the queue is empty.
+Step 5: If count of visited nodes is not equal to the number of nodes in the graph then the topological sort is not
+possible for the given graph.
+
+    public int topologicalSort(int n,int[]ans, ArrayList<ArrayList<Integer>> g){
+        int ind[]=new int[n];
+        for(ArrayList<Integer> l: g){
+            for(int x: l)
+                ind[x]++;
+        }
+        int c=0;
+        Deque<Integer> q= new LinkedList<Integer>();
+        for(int i=0;i<ind.length;++i)
+            if(ind[i]==0)
+                q.add(i);
+        while(q.size()!=0){
+            int x=q.pollFirst();
+            ans[c++]=x;
+            for(int y:g.get(x)){
+                ind[y]--;
+                if(ind[y]==0)
+                    q.addLast(y);
+            }
+        }
+        return c;
+    }
+------------------------------------------------------------------------------------------------------------------------
+
+DISJOINT SET: UNION-FIND ALGORITHM
+
+Used mainly for identifying connected components.
+
+Prob:
+Graph_ib_commutable_islands
+https://www.interviewbit.com/problems/commutable-islands/
+
+Algo:
+We keep an array of size n where n equals the total number of elements. At any time the set[i] contains the identifier
+for the set that the i-th element belongs to.
+For eg here initially we take every element belonging to its own set. Ie no of sets is equal to the no of elements.
+Given a set of edges(in this problem) we go to each of them one by one and see if both nodes(u,v) belong to the same
+connected component. This is done by find(). In case they belong to different sets and there exists an edge then we
+put  both of these into the same set using union().
+
+    int set[]=new int[a];
+
+    public boolean find(int x, int y, int[]set){
+        if(set[x]==set[y])
+            return true;
+        return false;
+    }
+
+    //the parent has to be updated at the time of union. Both the sets should point to the same parent.
+    public void union(int x, int y, int[]set){
+        int sety=set[y];
+        for(int i=0;i<set.length;++i){
+            if(set[i]==sety)
+                set[i]=set[x];
+        }
+    }
+
+Another technique to keeping sets is to consider it to be a treelike structure than all pointing to the same parent. In
+this case whenever we need to find if two sets belong to the same set we keep iterating to the root of both the sets. If
+they are same then we say that they belong to the same set. At the time of union we simply make root of one set point to
+the other one.
+
+eg: 1   2   3   4   5   6   7   8
+    -1  1   2   1   -1  5   6   2
+
+here we see that there are two disjoint sets with roots as 1 and 5. so every time we try to find the root for any
+element we keep going to its parent until we encounter -1.
+
+here trees wil be
+     1             5
+   2   4         6
+  3 8          7
+------------------------------------------------------------------------------------------------------------------------

@@ -31,6 +31,9 @@ Comparator<Employee> employee_Name_Age_Comparator
       
 Arrays.sort(employees, employee_Comparator)
 
+//here we need to sort a list of list on the basis of the third character of the inner list.
+Collections.sort(g, Comparator.comparing(x->x.get(2)));
+
 //here we didn't use getters and setters. Simply used lambda function
 Arrays.sort(jobs, Comparator.ComparingInt(a -> a.e));
 
@@ -45,3 +48,14 @@ When ever we need to use mod do: int mod = (int)Math.pow(10, 9) + 7;
 To convert char array to string, use
 String str = new String(ch);
 String str2 = String.valueOf(ch);
+
+Whenever comparing two integers from an arraylist do this a.get(i).equals(a.get(j)) otherwise it will compare object
+addresses
+
+
+
+
+
+
+click on project structure. then Ctrl+F
+

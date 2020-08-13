@@ -1,7 +1,5 @@
 package IB;
-
 import java.util.ArrayList;
-
 //https://www.interviewbit.com/problems/unique-binary-search-trees/
 public class Tree_ib_generate_unique_BST {
     public ArrayList<TreeNode> generateTrees(int n) {
