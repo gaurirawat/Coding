@@ -1,6 +1,7 @@
 **  Array_ib_maximum_consecutive_gap    //bucketing + pigeonhole
 **  Array_ib_maximum_distance   //max j-i where arr[j]>arr[i]
     Array_ib_largest_number     //comparator usage and implementation
+**  Array_ib_merge_intrevals    //10thousand edge cases. REVISE
 
     DP_ib_tushars_birthday_bombs
     DP_ib_longest_AP
@@ -8,6 +9,8 @@
 
     Map_ib_longest_consecutive_sequence
 **  Heap_ib_LRU_cache   //map implementation and function clarity
+    Arrays_ib_max_n_pair_combination    //minH and maxH implementation. Important
+
     Hashing_ib_colorful_number
 *   Hashing_ib_anagram  //important. Still don't remember the correct map functions
 *   Hashing_ib_points_on_a_line //thousand corner cases
@@ -25,6 +28,7 @@
     Tree_ib_binary_iterator
     Tree_ib_vertical_order_with_same_level_pre_order
 
+    Pointer_ib_remove_duplicate_form_sorted_array   //important to clear concept of item comparison
 *   Pointer_ib_3_array_pointer  //weird breaking cases
 *   Pointer_ib_3_sum_target_k
     Pointer_ib_3_sum_zero
@@ -37,6 +41,9 @@
     LL_ib_reverse_part_of_list
 
 *   Maths_ib_gcd
+    Math_ib_excel_to_column     //interesting corner case
+
+*   BM_ib_sum_of_pairwise_hamming_distance  //extreme issue with int and long limits
 
     Graph_ib_valid_path
     Graph_ib_largest_distance_between_nodes //standard problem
