@@ -37,8 +37,10 @@
     Stack_ib_simplify_directory_path    //see how the use of stringBuilder can reduce time complexity by manifolds
 
 **  BSearch_ib_matrix_median
+    BSearch_ib_power_function   //important for overflow handling
 
     LL_ib_reverse_part_of_list
+    LL_ib_insertion_sort    //fuck-all question
 
 *   Maths_ib_gcd
     Math_ib_excel_to_column     //interesting corner case
