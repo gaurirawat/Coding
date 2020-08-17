@@ -3,7 +3,7 @@ package IB;
 import java.util.Arrays;
 
 //https://www.interviewbit.com/problems/longest-palindromic-subsequence/
-public class DP_ib_longest_palindromic_subsequence {
+public class DP_ib_longest_palindromic_subsequence{
     public int solve(String s) {
         char ch[]=s.toCharArray();
         int dp[][]=new int[ch.length+1][ch.length+1];

@@ -5,7 +5,10 @@
 
     DP_ib_tushars_birthday_bombs
     DP_ib_longest_AP
+    DP_ib_jump_game_array   // very easy but even easier to mess up
     Matrix_DP_ib_no_of_submatrix_with_sum_zero
+**  DP_ib_coin_change_infinite_2
+    DP_ib_max_sum_without_adjacent_elements
 
     Map_ib_longest_consecutive_sequence
 **  Heap_ib_LRU_cache   //map implementation and function clarity

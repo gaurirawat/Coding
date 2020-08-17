@@ -2,7 +2,7 @@ package IB;
 
 import java.util.*;
 //https://www.interviewbit.com/problems/smallest-sequence-with-given-primes/
-public class DP_ib_smallest_sequence_with_given_primes {
+public class DP_ib_smallest_sequence_with_given_primes{
     public int[] solve(int a, int b, int c, int n) {
         if(n==0) return new int[0];
         int ans[]=new int[n];

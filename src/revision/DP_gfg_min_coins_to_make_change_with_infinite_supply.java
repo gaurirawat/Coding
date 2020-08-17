@@ -43,17 +43,24 @@ public class DP_gfg_min_coins_to_make_change_with_infinite_supply {
 
     //bottum up. I cannot decide what initial value to assign.
     /*
-    public static int change(int amount, int[] coins) {
-         int dp[][]= new int[2][amount+1];
-
-         for(int i=1; i<=coins.length;++i){
-             for(int j=0; j<=amount; ++j){
-                 dp[i%2][j]=dp[(i+1)%2][j];
-                 for(int k=1; k*coins[i-1]<=j; ++k)
-                     dp[i%2][j]=Math.min(dp[i%2][j], k+ dp[(i+1)%2][j-k*coins[i-1]] );
-             }
-         }
-         return dp[coins.length%2][amount];
-     }
+    public int coinchange2(int[] arr, int n) {
+        int mod=(int)Math.pow(10,6)+7;
+        Arrays.sort(arr);
+        int dp[][]=new int[2][n+1];
+        dp[0][0]=dp[1][0]=1;
+        for(int i=1;i<=arr.length;++i){
+            for(int j=1;j<=n; ++j)
+            {
+                long temp=0;
+                for(int k=0;k*arr[i-1]<=j;++k){
+                    temp+=(dp[(i-1)%2][j-(k*arr[i-1])]);
+                    temp=temp%mod;
+                }
+                dp[i%2][j]=(int)temp;
+            }
+            // System.out.println(Arrays.toString(dp[i%2]));
+        }
+        return dp[arr.length%2][n];
+    }
      */
 }

@@ -28,6 +28,7 @@ DP_lc_no_of_subarray_with_odd_sum
 
 NOT SO BABY QUESTIONS:
 
+DP_ib_max_sum_without_adjacent_elements
 DP_lc_LCS_print_shortest_common_supersequence
 DP_lc_edit_distance
 DP_lc_subset_sum_print_combinations
