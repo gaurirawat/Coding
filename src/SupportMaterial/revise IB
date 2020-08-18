@@ -9,6 +9,8 @@
     Matrix_DP_ib_no_of_submatrix_with_sum_zero
 **  DP_ib_coin_change_infinite_2
     DP_ib_max_sum_without_adjacent_elements
+    DP_ib_ways_to_evaluate_expression_to_true   //something new
+    DP_ib_min_jumps_in_array
 
     Map_ib_longest_consecutive_sequence
 **  Heap_ib_LRU_cache   //map implementation and function clarity
