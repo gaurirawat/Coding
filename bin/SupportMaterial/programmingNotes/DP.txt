@@ -296,6 +296,33 @@ the sum%m values that are possible.
     }
 
 ------------------------------------------------------------------------------------------------------------------------
+MAX SUM WITHOUT ADJACENT ELEMENTS
+
+Prob:(a tiny modified version of the actual problem: here the array has two rows.)
+DP_ib_max_sum_without_adjacent_elements
+https://www.interviewbit.com/problems/max-sum-without-adjacent-elements/
+
+Ref:
+https://www.youtube.com/watch?v=UtGtF6nc35g
+
+Simple include exclude maintained for each element.
+We say that include contains the max sum possible till that element including that element itself while exclude is the
+max sum possible without including that element.
+
+    public int adjacent(int[][] arr) {
+        int inc=0;
+        int exc=0;
+        for(int i=0;i<arr[0].length;++i){
+            int nexc=Math.max(inc,exc);
+            int ninc=Math.max(exc+Math.max(arr[0][i],arr[1][i]),inc);
+
+            inc=ninc;
+            exc=nexc;
+        }
+        return Math.max(inc,exc);
+    }
+
+------------------------------------------------------------------------------------------------------------------------
 
 MATRIX DP:
 

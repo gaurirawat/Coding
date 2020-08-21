@@ -4,7 +4,7 @@ Prob:
 BSearch_lc_BS
 https://leetcode.com/problems/binary-search/submissions/
 
-A general thing. If we are making changes to both l nad r then upper condition will most likely be l<=r.
+A general thing. If we are making changes to both l and r then upper condition will most likely be l<=r.
 Else the cond is l<r only when we are making changes to only pointer out of l and r.
 
 A basic code for searching t in arr[].
@@ -88,8 +88,8 @@ BSearch_lc_minimum_in_rotated_array
 https://www.interviewbit.com/problems/rotated-array/
 
 Algo:
-if mid element>right element then that mid lies inside the rotated array. So that element can't be minimum. we inc by 1;
-but otherwise the element can be the min. so we just do r=mid;
+if mid element>right element then that mid lies inside the rotated array. So that element can't be minimum. we inc l by
+mid+1;  but otherwise the element can be the min. so we just do r=mid;
 
     public class BSearch_lc_minimum_in_rotated_array {
         public int findMin(int[] nums) {
@@ -113,8 +113,8 @@ BSearch_ib_search_element_in_rotated_array
 https://www.interviewbit.com/problems/rotated-sorted-array-search/
 
 Algo:
-find index of min element element in the rotated array.
-Now if min element element is present at 0th index or if element is less than last array element the search on right
+find index of min element in the rotated array.
+Now if min element element is present at 0th index or if element is less than last array element then search on right
 array otherwise left array.
     if(r==0||k<=a[a.length-1])
         return binarySearch(r,a.length-1,k,a);

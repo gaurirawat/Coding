@@ -189,7 +189,7 @@ INVERSION PAIR:EASY
 Find count of inversion pairs where a[i] and a[j] form an inversion if a[i] > a[j] and i < j.
 
 Use divide and conquer technique (application of merge sort).
-1. We divide until there is just single element left.
+1. We divide until there is just a single element left.
 2. At the time of merge, the left and the right parts of the area being considered are individually sorted and we merge
 them again to give sorted order.
 3. While merging if left side element is smaller or "EQUAL" then count doesn't change. If it is larger then inc count by:

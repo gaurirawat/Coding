@@ -28,9 +28,11 @@ DP_lc_no_of_subarray_with_odd_sum
 
 NOT SO BABY QUESTIONS:
 
+DP_ib_max_sum_without_adjacent_elements
 DP_lc_LCS_print_shortest_common_supersequence
 DP_lc_edit_distance
 DP_lc_subset_sum_print_combinations
+DP_ib_min_sign_flips_for_sum_closest_to_zero
 
 Matrix_DP_gfg_max_sum_rectangle
 Matrix_DP_gfg_max_size_square_submatrix_given_binary_matrix
@@ -39,6 +41,7 @@ Matrix_DP_lc_count_all_submatrices_with_ones
 Matrix_Stack_lc_max_sum_rectangle_given_binary_matrix
 Matrix_DP_ib_no_of_submatrix_with_sum_zero
 
+DP_ib_ways_to_evaluate_expression_to_true
 DP_gfg_optimal_binary_search_tree
 DP_lc_longest_palindromic_subsequence
 DP_gfg_max_cut_segments
@@ -58,6 +61,8 @@ DP_lc_predict_winner                    //definitely revise
 DP_ib_tushars_birthday_bombs
 DP_ib_longest_AP
 DP_ib_longest_increasing_decreasing_subsequence
+
+
 
 
 manhattan distance

@@ -13,7 +13,6 @@ public class Hashing_ib_points_on_a_line {
             int same=0;
             int t=0;
             for(int j=0;j<x.size();++j){
-                if(i==j) continue;
                 int jx=x.get(j);
                 int jy=y.get(j);
                 double num=jy-iy;
@@ -40,7 +39,7 @@ public class Hashing_ib_points_on_a_line {
             // for(Map.Entry<Double,Integer> p:map.entrySet())
             //    System.out.println(p.getKey()+" "+p.getValue());
         }
-        return max+1;
+        return max;
     }
 
 }
