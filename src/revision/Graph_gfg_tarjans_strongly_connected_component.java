@@ -3,6 +3,7 @@ package revision;
 import java.util.*;
 // Ref: https://www.geeksforgeeks.org/tarjan-algorithm-find-strongly-connected-components/
 //Ref: https://www.youtube.com/watch?v=TyWtx7q2D7Y
+
 //https://practice.geeksforgeeks.org/problems/strongly-connected-components-kosarajus-algo/1
 public class Graph_gfg_tarjans_strongly_connected_component {
     int c;
