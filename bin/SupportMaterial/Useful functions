@@ -1,0 +1,61 @@
+int arr[]= brr.clone();
+Arrays.fill(arr, 10);// fills all cells of array with value 10
+Arrays.fill(ar, 1, 5, 10);  // Fill from index 1 to index 4.
+Arrays.stream(dp).forEach(a->Arrays.fill(a,-1));
+System.out.println(Arrays.toString(candidates));
+
+Arrays.sort(arr);
+Arrays.sort(arr, Collections.reverseOrder()); //for this to work arr has to be of object type ie Integer instead of int
+
+Arrays.binarySearch(arr, element, comparator)
+Returns:
+index of the search key, if present ; otherwise, (-(insertion point) � 1).
+if element has to be inserted at 0th position then returned position is -1.
+
+Collections.reverse(Arrays.asList(a));
+Collections.sort(al, Collections.reverseOrder());
+al.toArray(new int[0][0]);
+
+String[]s= x.split(" "); // separates space separated elements into different array cells.
+
+Comparator<Employee> employeeNameComparator= Comparator.comparing(Employee::getName);//string
+Comparator<Employee> employeeNameComparatorReversed = employeeNameComparator.reversed();//string
+Comparator<Employee> employeeAgeComparator = Comparator.comparingInt(Employee::getAge);//int
+
+Comparator<Employee> employee_Age_Name_Comparator
+      = Comparator.comparing(Employee::getAge).thenComparing(Employee::getName);
+Here the ordering will be done by age, and for the values with the same age, ordering will be done by name.
+
+Comparator<Employee> employee_Name_Age_Comparator
+      = Comparator.comparing(Employee::getName).thenComparingInt(Employee::getAge);
+      
+Arrays.sort(employees, employee_Comparator)
+
+//here we need to sort a list of list on the basis of the third character of the inner list.
+Collections.sort(g, Comparator.comparing(x->x.get(2)));
+
+//here we didn't use getters and setters. Simply used lambda function
+Arrays.sort(jobs, Comparator.ComparingInt(a -> a.e));
+
+sorting of primitive type ie int does not take up a comparator.
+so to convert primitive type to reference type use:
+Integer[] a =Arrays.stream(arr).boxed().toArray(Integer[]::new);
+
+Arrays.stream(arr).forEach(a -> Arrays.fill(a, 0));
+
+When ever we need to use mod do: int mod = (int)Math.pow(10, 9) + 7;
+
+To convert char array to string, use
+String str = new String(ch);
+String str2 = String.valueOf(ch);
+
+Whenever comparing two integers from an arraylist do this a.get(i).equals(a.get(j)) otherwise it will compare object
+addresses
+
+
+
+
+
+
+click on project structure. then Ctrl+F
+

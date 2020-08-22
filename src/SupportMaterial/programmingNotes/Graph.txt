@@ -1,4 +1,4 @@
-tBFS:
+BFS:
 
 // https://practice.geeksforgeeks.org/problems/bfs-traversal-of-graph/1/?track=sp-graph&batchId=152
 
@@ -616,3 +616,16 @@ here trees wil be
    2   4         6
   3 8          7
 ------------------------------------------------------------------------------------------------------------------------
+
+STRONGLY CONNECTED COMPONENTS: TARJAN'S ALGORITHM
+
+Ref:
+https://www.youtube.com/watch?v=TyWtx7q2D7Y
+
+Algo:
+1. On visiting a node, we assign it an id and a low link value. Also mark current node as visited and add them to the
+seen stack
+2. On DFS callback, if the previous node is on the stack then min the current node's low-link value with the last node's
+low-link value.
+3. After visiting all neighbours, if the current node started a connected component then pop nodes off the stack until
+current node is visited

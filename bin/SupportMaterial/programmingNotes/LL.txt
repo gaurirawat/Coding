@@ -1,0 +1,315 @@
+LL
+
+INTERSECTION POINT OF TWO LL
+
+Prob:
+LL_lc_find_intersection_point
+//https://www.interviewbit.com/problems/intersection-of-linked-lists/
+
+Algo:
+1. find length of both. O(m+n)
+2. traverse again from start. Identify longer LL based on length. increment that one by the diff in length.
+3. now increment both together. If nodes become equal then that is the intersection point otherwise return null.
+
+------------------------------------------------------------------------------------------------------------------------
+
+K-REVERSE: RECURSIVE SOLUTION
+
+//https://www.interviewbit.com/problems/k-reverse-linked-list/
+
+list is reversed in set of k. Ie reverse only k part of the list and call the func recursively for the next k set.
+actual head of every set becomes last element which is supposed to point to the next set of elements.
+Head of reversed list is returned.
+
+public class LL_ib_k_reverse_LL {
+    public ListNode reverseList(ListNode head, int k) {
+        if(head==null||head.next==null||k<=1) return head;
+        int c=0;
+        ListNode node=head;
+        ListNode curr=head,prev=null,next=null;
+        while(c<k && curr!=null){
+            c++;
+            next=curr.next;
+            curr.next=prev;
+            prev=curr;
+            curr=next;
+        }
+        head.next=reverseList(curr,k);  //imp
+        return prev;                    //imp
+    }
+------------------------------------------------------------------------------------------------------------------------
+
+CYCLE DETECTION: FLOYD'S CYCLE DETECTION
+
+Prob:
+LL_gfg_loop_detection
+https://practice.geeksforgeeks.org/problems/detect-loop-in-linked-list/1
+
+Take 2 pointers, slow fast. inc slow by 1, fast by 2.
+if they match then there is a loop. Else the end would be reached.
+
+    public static boolean detectLoop(Node head){
+        if(head==null||head.next==null) return false;
+        Node slow=head,fast=head;
+        while(fast!=null){
+            slow=slow.next;
+            fast=fast.next==null?fast.next:fast.next.next;
+            if(fast==slow)
+                return true;
+        }
+        return false;
+    }
+
+------------------------------------------------------------------------------------------------------------------------
+
+FIND STARTING POINT OF LOOP AND LOOP REMOVAL
+
+Prob:
+LL_gfg_remove_a_loop
+https://practice.geeksforgeeks.org/problems/remove-loop-in-linked-list/1
+
+1. Check if loop exists. Use above method to find the loop.
+2. Now start traversing again from slow/fast and find the length of the loop.
+3. start again from head. take fast pointer ahead by steps equal to the length of the cycle. Now both start traversing
+the LL together. Whenever both are equal, that node is the starting point of the cycle.
+4. traverse again to find the last node of the cycle and make it point to null to remove the loop.
+
+    public static void removeLoop(Node2 head){
+        if(head==null) return;
+        Node2 slow=head;
+        Node2 fast=head;
+        while(fast!=null){
+            slow=slow.next;
+            fast=fast.next!=null? fast.next.next: fast.next;
+            if(slow==fast)
+                break;
+        }
+        if(fast==null) return;
+
+        //if we come here, it we got a loop
+        //now calculate the length of the loop.
+        int k=0;
+        Node2 target=slow;
+        int len=1;
+        slow=slow.next;
+        while(target!=slow){
+            len++;
+            slow=slow.next;
+        }
+        System.out.println(len);
+        /*
+        start again from head. take fast pointer ahead by steps equal
+        to the length of the cycle. Now both start traversing the LL together.
+        whenever both are at the same Node2 we have found the starting point of the cycle
+        */
+        slow=head;
+        fast=head;
+        while(len--!=0)
+            fast=fast.next;
+
+        //we find the starting of the loop
+        while(slow!=fast){
+            slow=slow.next;
+            fast=fast.next;
+        }
+
+        //now search for the last node of the loop
+        while(fast.next!=slow)
+            fast=fast.next;
+        fast.next=null;
+    }
+
+------------------------------------------------------------------------------------------------------------------------
+
+FLATTEN A MULTILEVEL LL WITH O(1) SPACE COMPLEXITY
+
+Ref:
+https://www.geeksforgeeks.org/flattening-a-linked-list/
+
+Prob:
+LL_gfg_flatten_a_LL_constant_space
+https://practice.geeksforgeeks.org/problems/flattening-a-linked-list/1
+
+Problem statement:
+Given a linked list where every node represents a linked list and contains two pointers of its type:
+(i) Pointer to next node in the main list (we call it ‘right’ pointer in below code)
+(ii) Pointer to a linked list where this node is head (we call it ‘down’ pointer in below code).
+All linked lists are sorted.
+Write a function flatten() to flatten the lists into a single linked list which grows towards bottom with O(1) SC.
+
+Algo:
+The idea is to use Merge() process of merge sort for linked lists. We use merge() to merge lists one by one. We recursively merge() the current list with already flattened list.
+The down pointer is used to link nodes of the flattened list.
+
+    public Node flatten(Node root)
+    {
+        if(root==null || root.next==null) return root;
+	    Node root2=flatten(root.next);
+	    root.next=null;
+	    Node head=merge(root, root2);
+	    return head;
+    }
+
+    public Node merge(Node a,Node b){
+        if(b==null) return a;
+        if(a==null) return b;
+        if(a.data<=b.data){
+            a.bottom=merge(a.bottom,b);
+            return a;
+        }
+        else{
+            b.bottom=merge(a,b.bottom);
+            return b;
+        }
+    }
+
+------------------------------------------------------------------------------------------------------------------------
+
+FLATTEN A MULTILEVEL DLL: O(1) SPACE COMPLEXITY
+
+Prob:
+LL_lc_flatten_a_multilevel_DLL
+https://leetcode.com/problems/flatten-a-multilevel-doubly-linked-list/
+
+Approach:
+Keep traversing right if child doesn't exist.
+We recursively flatten the child if it exists. Now traverse to the tail for the flattened child chain and connect the
+next of current node to the tail of the child chain. Now goto the next of the current node and continue the e procedure.
+In a general scenario the recursive soln always returns the head, so whenever we
+need the tail, we have to traverse again from the head that we just received from the recursive function
+
+ public Node flatten(Node head) {
+        if(head==null) return head;
+//        CASE 1: when there is no child
+        if(head.child==null)
+            flatten(head.next);
+
+//        CASE 2: child exists
+        else{
+//           flatten the child and find the tail
+            Node child=flatten(head.child);
+            while(child.next!=null)
+                child=child.next;
+
+//           connect tail and the next of the head
+            child.next=head.next;
+            if(head.next!=null)
+                head.next.prev=child;
+
+//           bring the child on the same level
+            head.next=head.child;
+            head.child.prev=head;
+            head.child=null;
+            flatten(child.next);
+        }
+        return head;
+    }
+
+------------------------------------------------------------------------------------------------------------------------
+
+RECURSIVE APPROACH.
+
+For basic question like "pairwise swap" or "add two numbers in LL" or "merge Two Lists" prefer to go for a recursive
+approach as it is more error proof. In a general scenario the recursive soln always returns the head, so whenever we
+need the tail, we have to traverse again from the head that we just received from the recursive function
+
+eg:
+pairwise swap
+https://leetcode.com/problems/swap-nodes-in-pairs/submissions/
+
+public ListNode swapPairs(ListNode head) {
+        if(head==null||head.next==null) return head;
+        ListNode nextSet=head.next.next;
+        ListNode first=head;
+        ListNode second=head.next;
+        second.next=first;
+        head=second;
+        first.next=swapPairs(nextSet);
+        return head;
+    }
+
+eg:
+LL_ib_add_two_no_as_list
+https://www.interviewbit.com/problems/add-two-numbers-as-lists/
+
+    public ListNode addTwoNumbers (ListNode a, ListNode b){
+        a = reverse(a);
+        b = reverse(b);
+        ListNode c = add(a, b, 0);
+        return reverse(c);
+    }
+
+    public ListNode add (ListNode a, ListNode b,int carry){
+        if (a == null && b == null) {
+            if (carry == 0)
+                return null;
+            else
+                return new ListNode(carry);
+        }
+        int aval = a == null ? 0 : a.val;
+        int bval = b == null ? 0 : b.val;
+        ListNode node = new ListNode((aval + bval + carry) % 10);
+        node.next = add(a == null ? a : a.next, b == null ? b : b.next, (aval + bval + carry) / 10);
+        return node;
+    }
+
+eg:
+LL_lc_merge_two_sorted_ll
+https://leetcode.com/problems/merge-two-sorted-lists/
+
+    public ListNode mergeTwoLists(ListNode a, ListNode b) {
+        if(a==null) return b;
+        if(b==null) return a;
+        if(a.val<=b.val){
+            a.next=mergeTwoLists(a.next,b);
+            return a;
+        }
+        else{
+            b.next=mergeTwoLists(a,b.next);
+            return b;
+        }
+    }
+
+------------------------------------------------------------------------------------------------------------------------
+
+REVERSE PART OF LIST: RECURSIVE
+
+Prob:
+LL_ib_reverse_part_of_list
+https://www.interviewbit.com/problems/reverse-link-list-ii/
+
+Take problem as simply reverse the list for initial x elements.
+If the head is itself the starting point then the returned head becomes head here also. Otherwise go the node prev to
+where the reverse is starting. The next pointer of this node will point to the head of the modified list which gets
+modified by the reverse function.
+
+ public ListNode reverseBetween(ListNode head, int m, int n) {
+        if(head==null||head.next==null)return head;
+        ListNode temp=head;
+        int size=n-m+1;
+        if(m==1)
+            head=rev(temp,size);
+        else{
+            while(m>2){
+                temp=temp.next;
+                --m;
+            }
+            temp.next=rev(temp.next,size);
+        }
+        return head;
+    }
+
+    public ListNode rev(ListNode head, int size){
+        ListNode curr=head,prev=null,next=null;
+        while(size>=1){
+            size--;
+            next=curr.next;
+            curr.next=prev;
+            prev=curr;
+            curr=next;
+        }
+        head.next=curr;
+        return prev;
+    }
+
+------------------------------------------------------------------------------------------------------------------------

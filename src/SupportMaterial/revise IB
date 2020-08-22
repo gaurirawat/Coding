@@ -1,7 +1,8 @@
 **  Array_ib_maximum_consecutive_gap    //bucketing + pigeonhole
 **  Array_ib_maximum_distance   //max j-i where arr[j]>arr[i]
     Array_ib_largest_number     //comparator usage and implementation
-**  Array_ib_merge_intrevals    //10thousand edge cases. REVISE
+**  Array_ib_merge_intervals    //10thousand edge cases. REVISE
+    Arrays_ib_next_permutations
 
     DP_ib_tushars_birthday_bombs
     DP_ib_longest_AP
@@ -33,6 +34,9 @@
     Tree_ib_recover_binary_tree
     Tree_ib_binary_iterator
     Tree_ib_vertical_order_with_same_level_pre_order
+    Tree_ib_inorder_cartesian   //build a heap using inorder traversal
+    Tree_ib_least_common_ancestor   //uptil now we were using incorrect approach
+    Tree_ib_iterative_postorder //revise all iterative traversals
 
     Pointer_ib_remove_duplicate_form_sorted_array   //important to clear concept of item comparison
 *   Pointer_ib_3_array_pointer  //weird breaking cases
@@ -49,7 +53,9 @@
     LL_ib_insertion_sort    //fuck-all question
 
 *   Maths_ib_gcd
+*   Math_ib_largest_coprime_divisor //intuitive concept.
     Math_ib_excel_to_column     //interesting corner case
+    Math_ib_sorted_permutation_rank
 
 *   BM_ib_sum_of_pairwise_hamming_distance  //extreme issue with int and long limits
 
