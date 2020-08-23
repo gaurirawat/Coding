@@ -13,6 +13,8 @@
     DP_ib_ways_to_evaluate_expression_to_true   //something new
     DP_ib_min_jumps_in_array
     DP_ib_min_sign_flips_for_sum_closest_to_zero
+**  DP_ib_buy_sell_stock_k
+**  DP_ib_partitions
 
     Map_ib_longest_consecutive_sequence
 **  Heap_ib_LRU_cache   //map implementation and function clarity
@@ -62,3 +64,5 @@
     Graph_ib_valid_path
     Graph_ib_largest_distance_between_nodes //standard problem
 **  Graph_ib_capture_regions_on_board
+
+    Greedy_ib_gas_station
