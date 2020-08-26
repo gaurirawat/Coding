@@ -1,6 +1,6 @@
 package IB;
 //https://www.interviewbit.com/problems/insertion-sort-list/
-public class LL_ib_insertion_sort {
+public class LL_ib_sorting_insertion_sort {
     public ListNode insertionSortList(ListNode head) {
         if(head==null||head.next==null) return head;
         ListNode curr=head, next=curr.next;
