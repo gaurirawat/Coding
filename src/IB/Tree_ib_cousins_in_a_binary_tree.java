@@ -34,14 +34,14 @@ public class Tree_ib_cousins_in_a_binary_tree {
             ans.remove(new Integer(foundN.parent.right.val));
         return ans;
     }
-}
-class Pair{
-    TreeNode root;
-    TreeNode parent;
-    int level;
-    public Pair(TreeNode r, TreeNode p,int l){
-        root=r;
-        parent=p;
-        level=l;
+    class Pair{
+        TreeNode root;
+        TreeNode parent;
+        int level;
+        public Pair(TreeNode r, TreeNode p,int l){
+            root=r;
+            parent=p;
+            level=l;
+        }
     }
 }
