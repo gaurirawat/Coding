@@ -1,4 +1,4 @@
-package IB;
+package revision;
 
 public class Wallmart {
 

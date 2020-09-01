@@ -12,7 +12,7 @@ simple logic:
 3. Otherwise traverse again from the end to find the smallest element that is greater than e.\
 4. swap e with this element. Sort all elements after the old pos of e.
  */
-public class Arrays_ib_next_permutations {
+public class Array_ib_next_permutations {
     public int[] nextPermutation(int[] nums) {
         if(nums.length<=1) return nums;
         int i;

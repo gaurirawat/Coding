@@ -3,7 +3,7 @@ package IB;
 import java.util.Arrays;
 
 //https://www.interviewbit.com/problems/triplets-with-sum-between-given-range/
-public class Arrays_ib_triplets_with_sum_between_range {
+public class Array_ib_triplets_with_sum_between_range {
     public int solve(String[] a) {
         double d[]=new double[a.length];
         for(int i=0;i<a.length;++i)

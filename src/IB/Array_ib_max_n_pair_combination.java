@@ -2,7 +2,7 @@ package IB;
 
 import java.util.*;
 //https://www.interviewbit.com/problems/n-max-pair-combinations/
-public class Arrays_ib_max_n_pair_combination {
+public class Array_ib_max_n_pair_combination {
     public int[] solve(int[] a, int[] b) {
         PriorityQueue<Integer> minH=new PriorityQueue<Integer>();
         Arrays.sort(a);

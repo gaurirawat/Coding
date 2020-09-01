@@ -3,6 +3,7 @@
     Array_ib_largest_number     //comparator usage and implementation
 **  Array_ib_merge_intervals    //10thousand edge cases. REVISE
     Arrays_ib_next_permutations
+**  Arrays_ib_flip
 
     DP_ib_tushars_birthday_bombs
     DP_ib_longest_AP
@@ -14,9 +15,11 @@
     DP_ib_min_jumps_in_array
     DP_ib_min_sign_flips_for_sum_closest_to_zero
 **  DP_ib_buy_sell_stock_k  //complex soln
+    DP_ib_buy_sell_stock_2
 *** DP_ib_partitions    //weird concept
-    DP_ib_n_digit_numbers_with_digit_sum    //ser how extra conditions can be added to bring down the time complexity
+    DP_ib_n_digit_numbers_with_digit_sum    //see how extra conditions can be added to bring down the time complexity
     DP_ib_arrange_horses    //different
+    DP_ib_longest_valid_parenthesis
     DP_ib_tushars_birthday_party_knapsack   //we are still not 100% clear with knapsack
 
     Map_ib_longest_consecutive_sequence

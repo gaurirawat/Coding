@@ -7,17 +7,17 @@ public class Graph_ib_clone_graph {
     HashMap<Integer, UndirectedGraphNode> map;
     public UndirectedGraphNode cloneGraph(UndirectedGraphNode node) {
         map=new HashMap<Integer, UndirectedGraphNode> ();
-        populateMapwithAllNodes(node);
+        populateMapWithAllNodes(node);
         HashSet<Integer> set =new HashSet<Integer>();
         createNewGraph(node, set);
         return map.get(node.label);
     }
 
-    public void populateMapwithAllNodes(UndirectedGraphNode node){
+    public void populateMapWithAllNodes(UndirectedGraphNode node){
         map.put(node.label, new UndirectedGraphNode(node.label));
         for(UndirectedGraphNode child: node.neighbors){
             if(map.get(child.label)==null)
-                populateMapwithAllNodes(child);
+                populateMapWithAllNodes(child);
         }
     }
 
@@ -31,9 +31,10 @@ public class Graph_ib_clone_graph {
         }
         map.get(node.label).neighbors=l;
     }
-}
-class UndirectedGraphNode {
-    int label;
-    List<UndirectedGraphNode> neighbors;
-    UndirectedGraphNode(int x) { label = x; neighbors = new ArrayList<UndirectedGraphNode>(); }
+
+    class UndirectedGraphNode {
+        int label;
+        List<UndirectedGraphNode> neighbors;
+        UndirectedGraphNode(int x) { label = x; neighbors = new ArrayList<UndirectedGraphNode>(); }
+    }
 }
