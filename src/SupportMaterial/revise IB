@@ -67,11 +67,13 @@
     Math_ib_sorted_permutation_rank
 
 *   BM_ib_sum_of_pairwise_hamming_distance  //extreme issue with int and long limits
+    BM_ib_total_set_bits_from_1_to_n    //vertical counting of bits using concept of inversion of bits after intervals
 
     Graph_ib_valid_path
     Graph_ib_largest_distance_between_nodes //standard problem
 **  Graph_ib_capture_regions_on_board
     Graph_ib_word_ladder    //see how graphs are being used here
     Graph_ib_clone_graph    //revise method
+    Graph_ib_smallest_multiple_with_0_and_1
 
 *   Greedy_ib_gas_station
