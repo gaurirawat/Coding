@@ -21,6 +21,7 @@
     DP_ib_arrange_horses    //different
     DP_ib_longest_valid_parenthesis
     DP_ib_tushars_birthday_party_knapsack   //we are still not 100% clear with knapsack
+*   DP_ib_palindrome_partitioning_2
 
     Map_ib_longest_consecutive_sequence
 **  Heap_ib_LRU_cache   //map implementation and function clarity
@@ -34,6 +35,7 @@
 *   String_ib_KMP_implement_strstr
     String_ib_min_char_to_make_string_palindrome
     String_ib_string_to_integer
+    String_ib_zigzag_string
 
     Tree_construct_using_postorder_and_inorder  //use hashmap to store elements and their indices.
 *   Tree_ib_next_right_pointer_tree
@@ -77,3 +79,5 @@
     Graph_ib_smallest_multiple_with_0_and_1
 
 *   Greedy_ib_gas_station
+
+    Backtracking_ib_kth_permutation_sequence
