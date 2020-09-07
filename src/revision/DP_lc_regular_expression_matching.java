@@ -5,7 +5,7 @@ public class DP_lc_regular_expression_matching {
         if(p.length()==0 && s.length()==0) return true;
         if(p.length()==0) return false;
         int dp[][]= new int[s.length()][p.length()];
-        return isMatchDP(s,p,s.length()-1,p.length()-1,dp)==1?true:false;
+        return isMatchDP(s, p, s.length() - 1, p.length() - 1, dp) == 1;
     }
 
     public int isMatchDP(String s, String p, int i, int j, int dp[][]){
