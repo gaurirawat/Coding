@@ -2,7 +2,7 @@ package IB;
 
 import java.util.*;
 //https://www.interviewbit.com/problems/binary-tree-from-inorder-and-postorder/
-public class Tree_construct_using_postorder_and_inorder {
+public class Tree_ib_construct_using_postorder_and_inorder {
     int c;
     public TreeNode buildTree(ArrayList<Integer> io, ArrayList<Integer> po){
         if(io==null||io.size()==0) return null;
