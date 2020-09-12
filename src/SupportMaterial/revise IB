@@ -23,6 +23,7 @@
     DP_ib_tushars_birthday_party_knapsack   //we are still not 100% clear with knapsack
 *   DP_ib_palindrome_partitioning_2
     DP_ib_coins_in_a_line
+*   DP_ib_kth_manhattan_distance    //unique problem
 
     Map_ib_longest_consecutive_sequence
 **  Heap_ib_LRU_cache   //map implementation and function clarity
@@ -38,6 +39,7 @@
     String_ib_string_to_integer
     String_ib_zigzag_string
     String_ib_shortest_unique_prefix
+    String_ib_compare_versions
 
     Tree_construct_using_postorder_and_inorder  //use hashmap to store elements and their indices.
 *   Tree_ib_next_right_pointer_tree
@@ -56,6 +58,7 @@
 *   Pointer_ib_3_sum_target_k
     Pointer_ib_3_sum_zero
     Pointer_ib_water_container  //rainwater trapping variation, very easy method. Have a look
+    Pointer_ib_max_continuous_series_of_one     //practice
 
     Stack_ib_simplify_directory_path    //see how the use of stringBuilder can reduce time complexity by manifolds
 
