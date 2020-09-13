@@ -32,7 +32,8 @@ public class Graph_codenation {
     public int getAns(int s, int d, int k, int root, ArrayList<ArrayList<Integer>> l, int wt[]){
         int a=valLessThanK(root, -1,s,k, l, wt);
         int b=valLessThanK(root, -1,d,k, l, wt);
-        int x=LCA(s, d,root, l);
+//        int x=CA(s, d,root, l);
+        int x=0;
         int c=valLessThanK(root, -1,x,k, l, wt);
         return a+b-c+ (wt[x]>k?1:0);
     }
@@ -40,6 +41,6 @@ public class Graph_codenation {
     public int valLessThanK(int root, int parent, int x, int k, ArrayList<ArrayList<Integer>> l, int wt[]){
         if(root==x)
             return wt[root]<=k? 1:0;
-
+        return 0;
     }
 }

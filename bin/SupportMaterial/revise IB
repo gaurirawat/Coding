@@ -3,6 +3,7 @@
     Array_ib_largest_number     //comparator usage and implementation
 **  Array_ib_merge_intervals    //10thousand edge cases. REVISE
     Arrays_ib_next_permutations
+**  Arrays_ib_flip
 
     DP_ib_tushars_birthday_bombs
     DP_ib_longest_AP
@@ -14,10 +15,15 @@
     DP_ib_min_jumps_in_array
     DP_ib_min_sign_flips_for_sum_closest_to_zero
 **  DP_ib_buy_sell_stock_k  //complex soln
+    DP_ib_buy_sell_stock_2
 *** DP_ib_partitions    //weird concept
-    DP_ib_n_digit_numbers_with_digit_sum    //ser how extra conditions can be added to bring down the time complexity
+    DP_ib_n_digit_numbers_with_digit_sum    //see how extra conditions can be added to bring down the time complexity
     DP_ib_arrange_horses    //different
+    DP_ib_longest_valid_parenthesis
     DP_ib_tushars_birthday_party_knapsack   //we are still not 100% clear with knapsack
+*   DP_ib_palindrome_partitioning_2
+    DP_ib_coins_in_a_line
+*   DP_ib_kth_manhattan_distance    //unique problem
 
     Map_ib_longest_consecutive_sequence
 **  Heap_ib_LRU_cache   //map implementation and function clarity
@@ -31,6 +37,9 @@
 *   String_ib_KMP_implement_strstr
     String_ib_min_char_to_make_string_palindrome
     String_ib_string_to_integer
+    String_ib_zigzag_string
+    String_ib_shortest_unique_prefix
+    String_ib_compare_versions
 
     Tree_construct_using_postorder_and_inorder  //use hashmap to store elements and their indices.
 *   Tree_ib_next_right_pointer_tree
@@ -49,6 +58,7 @@
 *   Pointer_ib_3_sum_target_k
     Pointer_ib_3_sum_zero
     Pointer_ib_water_container  //rainwater trapping variation, very easy method. Have a look
+    Pointer_ib_max_continuous_series_of_one     //practice
 
     Stack_ib_simplify_directory_path    //see how the use of stringBuilder can reduce time complexity by manifolds
 
@@ -64,11 +74,15 @@
     Math_ib_sorted_permutation_rank
 
 *   BM_ib_sum_of_pairwise_hamming_distance  //extreme issue with int and long limits
+    BM_ib_total_set_bits_from_1_to_n    //vertical counting of bits using concept of inversion of bits after intervals
 
     Graph_ib_valid_path
     Graph_ib_largest_distance_between_nodes //standard problem
 **  Graph_ib_capture_regions_on_board
     Graph_ib_word_ladder    //see how graphs are being used here
     Graph_ib_clone_graph    //revise method
+    Graph_ib_smallest_multiple_with_0_and_1
 
 *   Greedy_ib_gas_station
+
+    Backtracking_ib_kth_permutation_sequence
