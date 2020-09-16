@@ -33,6 +33,8 @@
 *   Hashing_ib_anagram  //important. Still don't remember the correct map functions
 *   Hashing_ib_points_on_a_line //thousand corner cases
 **  Hashing_ib_equal_sums_pair   //pathetic piece of shit
+    Hashing_ib_4_sum    //comparator problem
+    Hashing_ib_fraction
 
 *   String_ib_KMP_implement_strstr
     String_ib_min_char_to_make_string_palindrome

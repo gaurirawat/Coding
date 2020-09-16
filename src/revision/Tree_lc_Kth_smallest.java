@@ -2,7 +2,7 @@ package revision;
 
 // https://leetcode.com/problems/kth-smallest-element-in-a-bst/submissions/
 // check soln : https://leetcode.com/problems/kth-smallest-element-in-a-bst/discuss/643054/100-Faster-Java-Code
-public class BST_lc_Kth_smallest {
+public class Tree_lc_Kth_smallest {
 	 String ans=null;
 	public int kthSmallest(TreeNode root, int k) {
         ans= null;
