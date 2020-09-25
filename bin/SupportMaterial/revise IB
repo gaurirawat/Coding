@@ -33,6 +33,8 @@
 *   Hashing_ib_anagram  //important. Still don't remember the correct map functions
 *   Hashing_ib_points_on_a_line //thousand corner cases
 **  Hashing_ib_equal_sums_pair   //pathetic piece of shit
+    Hashing_ib_4_sum    //comparator problem
+    Hashing_ib_fraction
 
 *   String_ib_KMP_implement_strstr
     String_ib_min_char_to_make_string_palindrome
@@ -40,6 +42,8 @@
     String_ib_zigzag_string
     String_ib_shortest_unique_prefix
     String_ib_compare_versions
+    String_ib_power_of_two
+
 
     Tree_construct_using_postorder_and_inorder  //use hashmap to store elements and their indices.
 *   Tree_ib_next_right_pointer_tree
@@ -52,6 +56,7 @@
     Tree_ib_least_common_ancestor   //uptil now we were using incorrect approach
     Tree_ib_iterative_postorder //revise all iterative traversals
     Tree_ib_cousins_in_a_binary_tree
+    Tree_ib_sum_root_to_leaf_numbers    //bigInteger
 
     Pointer_ib_remove_duplicate_form_sorted_array   //important to clear concept of item comparison
 *   Pointer_ib_3_array_pointer  //weird breaking cases
@@ -64,6 +69,7 @@
 
 **  BSearch_ib_matrix_median
     BSearch_ib_power_function   //important for overflow handling
+*** BSearch_ib_painters_partition_problem
 
     LL_ib_reverse_part_of_list
     LL_ib_insertion_sort    //fuck-all question
