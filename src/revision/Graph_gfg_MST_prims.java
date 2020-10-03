@@ -59,3 +59,50 @@ public class Graph_gfg_MST_prims {
     	return v;
     }
 }
+/*
+Min Heap implementation:
+
+	static int spanningTree(int n, int E, ArrayList<ArrayList<Integer>> g) {
+        int sum=0;
+        int dist[]=new int[n];
+        boolean visited[]=new boolean[n];
+        Arrays.fill(dist,Integer.MAX_VALUE);
+
+        PriorityQueue<Edge> minH=new PriorityQueue<Edge>(Comparator.comparingInt(a->a.cost));
+        minH.add(new Edge(0,0));
+        dist[0]=0;
+        visited[0]=true;
+        while(!minH.isEmpty()){
+            Edge e=minH.poll();
+            visited[e.v]=true;
+            sum+=e.cost;
+            int u=e.v;
+            for(int v=0;v<n;++v){
+                if(!visited[v] && dist[v]>g.get(u).get(v)){
+                    minH.remove(new Edge(v,dist[v]));
+                    minH.add(new Edge(v,g.get(u).get(v)));
+                    dist[v]=g.get(u).get(v);
+                }
+            }
+        }
+
+        return sum;
+    }
+
+	class Edge{
+		int v;
+		int cost;
+		public Edge(int v, int cost){
+			this.v=v;
+			this.cost=cost;
+		}
+		@Override
+		public boolean equals(Object o) {
+			if (this == o) return true;
+			if (!(o instanceof Edge)) return false;
+			Edge edge = (Edge) o;
+			return v == edge.v &&
+					cost == edge.cost;
+		}
+	}
+ */

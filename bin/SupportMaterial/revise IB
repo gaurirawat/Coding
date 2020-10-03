@@ -43,7 +43,7 @@
     String_ib_shortest_unique_prefix
     String_ib_compare_versions
     String_ib_power_of_two
-
+    String_ib_justified_text
 
     Tree_construct_using_postorder_and_inorder  //use hashmap to store elements and their indices.
 *   Tree_ib_next_right_pointer_tree
@@ -64,6 +64,7 @@
     Pointer_ib_3_sum_zero
     Pointer_ib_water_container  //rainwater trapping variation, very easy method. Have a look
     Pointer_ib_max_continuous_series_of_one     //practice
+    Pointer_ib_sort_by_color    //how <O(n) works
 
     Stack_ib_simplify_directory_path    //see how the use of stringBuilder can reduce time complexity by manifolds
 
@@ -92,3 +93,4 @@
 *   Greedy_ib_gas_station
 
     Backtracking_ib_kth_permutation_sequence
+    Backtracking_ib_subsets_2

@@ -1,3 +1,22 @@
+Topics:
+BFS
+DFS
+CHECK FOR CYCLIC GRAPH (DIRECTED/UNDIRECTED)
+MINIMUM SPANNING TREE: PRIMS
+SINGLE SOURCE SHORTEST PATH: DIJKSTRA
+SINGLE SOURCE SHORTEST PATH/ -VE CYCLE DETECTION: BELLMAN FORD
+MULTIPLE SOURCE SHORTEST PATH: FLOYD WARSHALL
+MAZE RUNNING: LEE'S ALGORITHM
+SINGLE SOURCE SHORTEST PATH IN MATRIX: 2D-DIJKSTRA
+SNAKES AND LADDER: 1-D BFS
+TOPOLOGICAL SORT
+TOPOLOGICAL SORT: KAHN'S ALGO
+DISJOINT SET: UNION FIND
+STRONGLY CONNECTED COMPONENT: KOSARAJU'S ALGO
+STRONGLY CONNECTED COMPONENT: TARJAN'S ALGO
+
+------------------------------------------------------------------------------------------------------------------------
+
 BFS:
 
 // https://practice.geeksforgeeks.org/problems/bfs-traversal-of-graph/1/?track=sp-graph&batchId=152
@@ -62,7 +81,7 @@ inner
     static ArrayList<Integer> dfs(ArrayList<ArrayList<Integer>> g, int v){
         boolean visited[] = new boolean[N];
         ArrayList<Integer> res= new ArrayList<Integer>();
-        for(int i=0; i<N;++i){
+        for(int i=0;i<N;++i){
            if(!visited[i])
                 innerDfs(i, g, visited, res);
         }
@@ -117,10 +136,12 @@ UNDIRECTED
 
 Uses boolean visited[], boolean stack[], int parent
 outer(same). Call func with parent as -1
-inner:
-Everything same. The rec call cond becomes if(i!=parent && cyclicUndirectedInner(v,i, g, visited, stack)) return true;
 
-    public boolean cyclicUndirectedInner(int parent,int v,ArrayList<ArrayList<Integer>> g,boolean[]visited,boolean[]stack){
+inner:
+Everything same. The rec call cond becomes if(i!=parent && cyclicUndirected(v,i, g, visited, stack)) return true;
+
+    public boolean cyclicUndirected(int parent,int v,ArrayList<ArrayList<Integer>> g,boolean[]visited,boolean[]stack)
+    {
         if(stack[v]==true)
             return true;
         if(visited[v]==true)
@@ -133,42 +154,6 @@ Everything same. The rec call cond becomes if(i!=parent && cyclicUndirectedInner
         }
         stack[v]=false;
         return false;
-    }
-
-------------------------------------------------------------------------------------------------------------------------
-
-TOPOLOGICAL SORT
-
-//https://practice.geeksforgeeks.org/problems/topological-sort/1
-
-Topological Sorting of a graph. In DFS, we start from a vertex, we first print it and then recursively call DFS for its
-adjacent vertices.
-In topological sorting, we use a temporary stack. We don’t print the vertex immediately, we first
-recursively call topological sorting for all its adjacent vertices, then push it to a stack. Finally, print contents of
-stack in LIFO order. Note that a vertex is pushed to stack only when all of its adjacent vertices (and adjacent
-vertices of their adjacent vertices and so on) are already in stack.
-
-    static int[] topoSort(ArrayList<ArrayList<Integer>> g, int v) {
-        boolean visited[]= new boolean[v];
-        Deque<Integer> st= new LinkedList<Integer>();
-        for(int i=0;i<v;++i){
-            if(!visited[i])
-                topologicalSortInner(i,g,visited,st);
-        }
-        int ans[]=new int[v];
-        int c=0;
-        while(st.size()!=0)
-            ans[c++]=st.pollLast();
-        return ans;
-    }
-
-    public static void topologicalSortInner(int v, ArrayList<ArrayList<Integer>> g, boolean[]visited, Deque<Integer> st){
-        visited[v]=true;
-        for(int x:g.get(v)){
-            if(!visited[x])
-                topologicalSortInner(x,g,visited,st);
-        }
-        st.addLast(v);
     }
 
 ------------------------------------------------------------------------------------------------------------------------
@@ -193,14 +178,14 @@ for the first vertex so that it is picked first.
 For every adjacent vertex v, if weight of edge u-v is less than the previous key value of v, update the key value as
 weight of u-v
 
-better explaination in coding-> graphs.
+better explanation in coding-> graphs.
 Here the priority contains the edge weights and not their sum(like the way it happens in dijkstra)
 
 
     static int spanningTree(int v, int e, ArrayList<ArrayList<Integer>> g) {
         int parent[]= new int[v];
         boolean isSet[]= new boolean[v];
-        int priority[]= new int[v]; //contains minimum weights to reach the currently reachable vertes
+        int priority[]= new int[v]; //contains minimum weights to reach the currently reachable vertices
         Arrays.fill(priority, Integer.MAX_VALUE);
 
      	priority[0]=0;
@@ -257,13 +242,13 @@ This is similar to prims except that we keep minimum distances inside the priori
 the minimum edge. Also here we do not need the parent array since we do not need to keep track of any path. Also before
 updating the distance we check if it is !=0(ie node is connected or not)
 
-While calculating MST or SP remember to put checks for !=0 when using adacency matrix otherwise disconnented graphs will
+While calculating MST or SP remember to put checks for !=0 when using adjacency matrix otherwise disconnected graphs will
 cause incorrect answers
 
 	static int[] dijkstra(ArrayList<ArrayList<Integer>> g, int src, int V)
     {
         boolean isSet[]= new boolean[V];
-        int priority[]= new int[V]; //contains minimum distance from src to the currently reachable vertes
+        int priority[]= new int[V]; //contains minimum distance from src to the currently reachable vertices
         Arrays.fill(priority, Integer.MAX_VALUE);
 
      	priority[src]=0;
@@ -427,8 +412,7 @@ destination is visited, it is the shortest path.
 
 ------------------------------------------------------------------------------------------------------------------------
 
-
-SHORTEST PATH IN MATRIX: 2D DIJKSTRA
+SHORTEST PATH IN MATRIX: 2D DIJKSTRA (SINGLE SOURCE SINGLE DESTINATION)
 
 Prob:
 Graph_gfg_find_min_path_up_down_left_right_movement
@@ -469,6 +453,7 @@ the current path length will definitely be larger than the one that is already a
     }
 
 ------------------------------------------------------------------------------------------------------------------------
+
 
 SNAKES AND lADDER: 1D BFS
 
@@ -511,11 +496,39 @@ moves are considered parallelly.
 
 ------------------------------------------------------------------------------------------------------------------------
 
-STRONGLY CONNECTED COMPONENTS: KOSARAJU'S ALGO
+TOPOLOGICAL SORT
 
-The above algorithm is DFS based. It does DFS two times. DFS of a graph produces a single tree if all vertices are
-reachable from the DFS starting point. Otherwise DFS produces a forest.
-So we do DFS once. Find the transpose of the graph and do DFS again.
+//https://practice.geeksforgeeks.org/problems/topological-sort/1
+
+Topological Sorting of a graph. In DFS, we start from a vertex, we first print it and then recursively call DFS for its
+adjacent vertices.
+In topological sorting, we use a temporary stack. We don’t print the vertex immediately, we first
+recursively call topological sorting for all its adjacent vertices, then push it to a stack. Finally, print contents of
+stack in LIFO order. Note that a vertex is pushed to stack only when all of its adjacent vertices (and adjacent
+vertices of their adjacent vertices and so on) are already in stack.
+
+    static int[] topoSort(ArrayList<ArrayList<Integer>> g, int v) {
+        boolean visited[]= new boolean[v];
+        Deque<Integer> st= new LinkedList<Integer>();
+        for(int i=0;i<v;++i){
+            if(!visited[i])
+                topologicalSortInner(i,g,visited,st);
+        }
+        int ans[]=new int[v];
+        int c=0;
+        while(st.size()!=0)
+            ans[c++]=st.pollLast();
+        return ans;
+    }
+
+    public static void topologicalSortInner(int v, ArrayList<ArrayList<Integer>> g, boolean[]visited, Deque<Integer> st){
+        visited[v]=true;
+        for(int x:g.get(v)){
+            if(!visited[x])
+                topologicalSortInner(x,g,visited,st);
+        }
+        st.addLast(v);
+    }
 
 ------------------------------------------------------------------------------------------------------------------------
 
@@ -622,6 +635,10 @@ STRONGLY CONNECTED COMPONENTS: KOSARAJU'S ALGORITHM
 Ref:
 https://www.youtube.com/watch?v=paexK7dOGL8
 
+
+The above algorithm is DFS based. It does DFS two times. DFS of a graph produces a single tree if all vertices are
+reachable from the DFS starting point. Otherwise DFS produces a forest.
+So we do DFS once. Find the transpose of the graph and do DFS again.
 Algo:
 1) Create an empty stack ‘S’ and do DFS traversal of a graph. In DFS traversal, after calling recursive DFS for adjacent
 vertices of a vertex, push the vertex to stack. In the above graph, if we start DFS from vertex 0, we get vertices in
@@ -630,7 +647,6 @@ stack as 1, 2, 4, 3, 0.
 3) One by one pop a vertex from S while S is not empty. Let the popped vertex be ‘v’. Take v as source and do DFS
 (call DFSUtil(v)). The DFS starting from v prints strongly connected component of v. In the above example, we process
 vertices in order 0, 3, 4, 2, 1 (One by one popped from stack).
-
 
 ------------------------------------------------------------------------------------------------------------------------
 

@@ -4,10 +4,10 @@ DFS
 CHECK FOR CYCLIC GRAPH (DIRECTED/UNDIRECTED)
 MINIMUM SPANNING TREE: PRIMS
 SINGLE SOURCE SHORTEST PATH: DIJKSTRA
-SINGLE SOURCE SHORTEST PATH IN MATRIX: 2D-DIJKSTRA
 SINGLE SOURCE SHORTEST PATH/ -VE CYCLE DETECTION: BELLMAN FORD
 MULTIPLE SOURCE SHORTEST PATH: FLOYD WARSHALL
 MAZE RUNNING: LEE'S ALGORITHM
+SINGLE SOURCE SHORTEST PATH IN MATRIX: 2D-DIJKSTRA
 SNAKES AND LADDER: 1-D BFS
 TOPOLOGICAL SORT
 TOPOLOGICAL SORT: KAHN'S ALGO
@@ -81,7 +81,7 @@ inner
     static ArrayList<Integer> dfs(ArrayList<ArrayList<Integer>> g, int v){
         boolean visited[] = new boolean[N];
         ArrayList<Integer> res= new ArrayList<Integer>();
-        for(int i=0; i<N;++i){
+        for(int i=0;i<N;++i){
            if(!visited[i])
                 innerDfs(i, g, visited, res);
         }
@@ -136,6 +136,7 @@ UNDIRECTED
 
 Uses boolean visited[], boolean stack[], int parent
 outer(same). Call func with parent as -1
+
 inner:
 Everything same. The rec call cond becomes if(i!=parent && cyclicUndirected(v,i, g, visited, stack)) return true;
 
@@ -157,7 +158,6 @@ Everything same. The rec call cond becomes if(i!=parent && cyclicUndirected(v,i,
 
 ------------------------------------------------------------------------------------------------------------------------
 
-
 MINIMUM SPANNING TREE: PRIM'S ALGORITHM
 
 Problem:
@@ -178,14 +178,14 @@ for the first vertex so that it is picked first.
 For every adjacent vertex v, if weight of edge u-v is less than the previous key value of v, update the key value as
 weight of u-v
 
-better explaination in coding-> graphs.
+better explanation in coding-> graphs.
 Here the priority contains the edge weights and not their sum(like the way it happens in dijkstra)
 
 
     static int spanningTree(int v, int e, ArrayList<ArrayList<Integer>> g) {
         int parent[]= new int[v];
         boolean isSet[]= new boolean[v];
-        int priority[]= new int[v]; //contains minimum weights to reach the currently reachable vertes
+        int priority[]= new int[v]; //contains minimum weights to reach the currently reachable vertices
         Arrays.fill(priority, Integer.MAX_VALUE);
 
      	priority[0]=0;
@@ -278,48 +278,6 @@ cause incorrect answers
     		}
     	}
     	return v;
-    }
-
-------------------------------------------------------------------------------------------------------------------------
-
-SHORTEST PATH IN MATRIX: 2D DIJKSTRA
-
-Prob:
-Graph_gfg_find_min_path_up_down_left_right_movement
-https://practice.geeksforgeeks.org/problems/minimum-cost-path/0
-
-distance[l][l]; heap sorted on the distance of the coordinates
-We keep all visited nodes in the min heap(based on distance).
-Every time we choose a node to visit it is the one with the minimum path length. Now when the adj cells are being
-updated we update only the ones that are not visited and also mark them as visited.
-This is because we shall not have to visit them again since the path length is cumulative ie if we visit them again then
-the current path length will definitely be larger than the one that is already assigned to the node.
-
-    public static int dijkstra2D(int arr[][], int l){
-        int distance[][]= new int[l][l];
-        for(int i=0;i<l;++i)
-            Arrays.fill(distance[i],Integer.MAX_VALUE);
-        PriorityQueue<Coordinate> heap= new PriorityQueue<Coordinate>(
-                Comparator.comparingInt(a->a.path));
-        heap.add(new Coordinate(0,0,arr[0][0]));
-        boolean[][]visited= new boolean[l][l];
-        visited[0][0]=true;
-        while(heap.size()!=0){
-            Coordinate curr=heap.poll();
-            if(curr.i==l-1 && curr.j==l-1)
-                return curr.path;
-            int dx[]={0,0,1,-1};
-            int dy[]={1,-1,0,0};
-            for(int x=0;x<4;++x){
-                int newi=curr.i+dx[x];
-                int newj=curr.j+dy[x];
-                if(newi>=0 && newi<l && newj>=0 && newj<l && !visited[newi][newj]){
-                    visited[newi][newj]=true;
-                    heap.add(new Coordinate(newi, newj, curr.path+arr[newi][newj]));
-                }
-            }
-        }
-        return -1;
     }
 
 ------------------------------------------------------------------------------------------------------------------------
@@ -450,6 +408,48 @@ destination is visited, it is the shortest path.
                 q.add(new Coordinate(i,j-1,curr.path+1));
         }
         return destPath;
+    }
+
+------------------------------------------------------------------------------------------------------------------------
+
+SHORTEST PATH IN MATRIX: 2D DIJKSTRA (SINGLE SOURCE SINGLE DESTINATION)
+
+Prob:
+Graph_gfg_find_min_path_up_down_left_right_movement
+https://practice.geeksforgeeks.org/problems/minimum-cost-path/0
+
+distance[l][l]; heap sorted on the distance of the coordinates
+We keep all visited nodes in the min heap(based on distance).
+Every time we choose a node to visit it is the one with the minimum path length. Now when the adj cells are being
+updated we update only the ones that are not visited and also mark them as visited.
+This is because we shall not have to visit them again since the path length is cumulative ie if we visit them again then
+the current path length will definitely be larger than the one that is already assigned to the node.
+
+    public static int dijkstra2D(int arr[][], int l){
+        int distance[][]= new int[l][l];
+        for(int i=0;i<l;++i)
+            Arrays.fill(distance[i],Integer.MAX_VALUE);
+        PriorityQueue<Coordinate> heap= new PriorityQueue<Coordinate>(
+                Comparator.comparingInt(a->a.path));
+        heap.add(new Coordinate(0,0,arr[0][0]));
+        boolean[][]visited= new boolean[l][l];
+        visited[0][0]=true;
+        while(heap.size()!=0){
+            Coordinate curr=heap.poll();
+            if(curr.i==l-1 && curr.j==l-1)
+                return curr.path;
+            int dx[]={0,0,1,-1};
+            int dy[]={1,-1,0,0};
+            for(int x=0;x<4;++x){
+                int newi=curr.i+dx[x];
+                int newj=curr.j+dy[x];
+                if(newi>=0 && newi<l && newj>=0 && newj<l && !visited[newi][newj]){
+                    visited[newi][newj]=true;
+                    heap.add(new Coordinate(newi, newj, curr.path+arr[newi][newj]));
+                }
+            }
+        }
+        return -1;
     }
 
 ------------------------------------------------------------------------------------------------------------------------
