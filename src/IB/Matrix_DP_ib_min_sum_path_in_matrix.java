@@ -1,6 +1,6 @@
 package IB;
 //https://www.interviewbit.com/problems/min-sum-path-in-matrix/
-public class DP_ib_min_sum_path_in_matrix {
+public class Matrix_DP_ib_min_sum_path_in_matrix {
     public int minPathSum(int[][] a) {
         int dp[][]=new int[a.length][a[0].length];
         return minPathSumDP(0,0,a,dp);

@@ -24,6 +24,7 @@
 *   DP_ib_palindrome_partitioning_2
     DP_ib_coins_in_a_line
 *   DP_ib_kth_manhattan_distance    //unique problem
+**  DP_ib_tiling_with_dominoes  //standard soln
 
     Map_ib_longest_consecutive_sequence
 **  Heap_ib_LRU_cache   //map implementation and function clarity
@@ -35,6 +36,7 @@
 **  Hashing_ib_equal_sums_pair   //pathetic piece of shit
     Hashing_ib_4_sum    //comparator problem
     Hashing_ib_fraction
+    Heap_ib_max_sum_combinations
 
 *   String_ib_KMP_implement_strstr
     String_ib_min_char_to_make_string_palindrome
@@ -89,6 +91,7 @@
     Graph_ib_word_ladder    //see how graphs are being used here
     Graph_ib_clone_graph    //revise method
     Graph_ib_smallest_multiple_with_0_and_1
+*   Graph_ib_min_cost_path  // GO THROUGH EDITORIAL SOLUTION
 
 *   Greedy_ib_gas_station
 

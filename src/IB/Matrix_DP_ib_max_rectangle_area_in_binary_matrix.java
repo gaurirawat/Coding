@@ -1,6 +1,6 @@
 package IB;
 //https://www.interviewbit.com/problems/max-rectangle-in-binary-matrix/
-public class DP_ib_max_rectangle_area_in_binary_matrix {
+public class Matrix_DP_ib_max_rectangle_area_in_binary_matrix {
     public int maximalRectangle(int[][] a) {
         for(int i=0;i<a.length;++i){
             for(int j=a[0].length-2;j>=0;--j){

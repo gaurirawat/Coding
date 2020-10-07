@@ -3,7 +3,7 @@ package IB;
 import java.util.*;
 
 //https://www.interviewbit.com/problems/largest-area-of-rectangle-with-permutations/
-public class DP_ib_largest_area_of_permutation_rectangle {
+public class Matrix_DP_ib_largest_area_of_permutation_rectangle {
     public int solve(ArrayList<ArrayList<Integer>> a) {
         for(int i=1;i<a.size();++i){
             for(int j=0;j<a.get(0).size();++j)
