@@ -1,4 +1,28 @@
 MATRIX CHAIN MULTIPLICATION
+0/1 KNAPSACK
+    1. REPETITION NOT ALLOWED
+    2. REPETITION ALLOWED
+LCS AND ASSOCIATED QUESTIONS
+    1. LSC
+    2. LENGTH OF SHORTEST COMMON SUPER-SEQUENCE
+    3. PRINT THE SHORTEST COMMON SUPER-SEQUENCE
+    4. LENGTH OF LIS(LONGEST INCREASING SUBSEQUENCE)
+EDIT DISTANCE
+SUBSET SUM:
+    1. PRINT ALL POSSIBLE COMBINATIONS. (Easy question)
+    2. SUBSET SUM DIVISIBLE BY K: BOOLEAN RESULT
+    3. FLIP ARRAY
+MATRIX DP:
+    1. MAX SIZE SQUARE IN A BINARY MATRIX
+    2. FIND NUMBER OF SQUARE MATRIX FORMED WITH ALL ONES
+    3. MAX SUM RECTANGLE
+    4. NO OF SUB MATRICES WITH ALL ONES
+    5. MAX AREA IN A BINARY MATRIX WITH ALL ONES
+    6. NO OF SUB MATRIX WITH SUM EQUAL TO K
+INCLUSION/EXCLUSION CONCEPT: MAX SUM WITHOUT ADJACENT ELEMENTS
+EVALUATE EXPRESSION TO TRUE
+
+MATRIX CHAIN MULTIPLICATION
 
 Prob:
 DP_gfg_matrix_chain_multiplication
@@ -29,7 +53,7 @@ Algo:
 
 0/1 KNAPSACK
 
-REPETITION NOT ALLOWED
+1. REPETITION NOT ALLOWED
 
 Prob:
 DP_gfg_01Knapsack
@@ -53,7 +77,7 @@ If we include then- current val+max value with the remaining wt and without elem
 
 --------------------------------------
 
-REPETITION ALLOWED
+2. REPETITION ALLOWED
 
 Prob:
 DP_gfg_01Knapsack_duplicate_allowed
@@ -82,7 +106,6 @@ as possible and the max of these profits shall be taken
     }
 
 ------------------------------------------------------------------------------------------------------------------------
-
 LCS AND ASSOCIATED QUESTIONS
 
 1. LSC
@@ -134,7 +157,8 @@ https://leetcode.com/problems/shortest-common-supersequence/
             int j=yrr.length;
             String s="";
             while(i>0 &&j>0){
-                if(xrr[i-1]==yrr[j-1]){
+                if(xrr[i-1]==yrr[j-1]){ //here remember to compare the elements of the array and not the diagonal cells
+                                        //since diagonal cells may have diff of 1 even when the elements are not equal.
                     s=xrr[i-1]+s;
                     --i;--j;
                 }
@@ -219,7 +243,8 @@ find min no of operations(add/delete/replace) required to change string1 to stri
 
 ------------------------------------------------------------------------------------------------------------------------
 
-SUBSET SUM: PRINT ALL POSSIBLE COMBINATIONS. (Easy question)
+SUBSET SUM
+1. PRINT ALL POSSIBLE COMBINATIONS. (Easy question)
 
 Prob:
 DP_lc_subset_sum_print_combinations
@@ -264,15 +289,16 @@ the current value otherwise if there is already a true then the second call wont
             }
 
 
-------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------
 
-SUBSET SUM DIVISIBLE BY K: BOOLEAN RESULT
+2. SUBSET SUM DIVISIBLE BY K: BOOLEAN RESULT
 
 Prob:
 DP_gfg_subset_sum_divisible_by_k
 https://leetcode.com/problems/combination-sum-ii/submissions/
 
 any problem which has anything to do with "divisible by k", try going for the use of modulus.
+
 Algo:
 use pigeonhole principle. So if m<n.length then sum divisible by k is possible. otherwise we try to keep track of all
 the sum%m values that are possible.
@@ -295,31 +321,43 @@ the sum%m values that are possible.
         return dp[0];
     }
 
-------------------------------------------------------------------------------------------------------------------------
-MAX SUM WITHOUT ADJACENT ELEMENTS
+------------------------------------------------
+3. FLIP ARRAY
 
-Prob:(a tiny modified version of the actual problem: here the array has two rows.)
-DP_ib_max_sum_without_adjacent_elements
-https://www.interviewbit.com/problems/max-sum-without-adjacent-elements/
+Problem:
+DP_ib_min_sign_flips_for_sum_closest_to_zero
+https://www.interviewbit.com/problems/flip-array/
 
-Ref:
-https://www.youtube.com/watch?v=UtGtF6nc35g
+Approach:
+-Find the sum=totalSum/2 value.
+-use subset sum technique to find what is the max sum possible out of sum.
+-ALso instead of using boolean dp array we use int array where every cell stores the value of min elements required to
+get j sum using initial i elements.
 
-Simple include exclude maintained for each element.
-We say that include contains the max sum possible till that element including that element itself while exclude is the
-max sum possible without including that element.
-
-    public int adjacent(int[][] arr) {
-        int inc=0;
-        int exc=0;
-        for(int i=0;i<arr[0].length;++i){
-            int nexc=Math.max(inc,exc);
-            int ninc=Math.max(exc+Math.max(arr[0][i],arr[1][i]),inc);
-
-            inc=ninc;
-            exc=nexc;
+    public int solve(final int[] a) {
+        int sum=0;
+        for(int x:a)
+            sum+=x;
+        sum/=2;
+        int dp[][]=new int[a.length+1][sum+1];
+        for(int i=0;i<a.length;++i){
+            Arrays.fill(dp[i],Integer.MAX_VALUE);
+            dp[i][0]=0;
         }
-        return Math.max(inc,exc);
+
+        for(int i=1;i<=a.length;++i){
+            for(int j=1;j<=sum;++j){
+               dp[i][j]=dp[i-1][j];
+               if(a[i-1]<=j && dp[i-1][j-a[i-1]]!=Integer.MAX_VALUE)
+                    dp[i][j]=Math.min(dp[i][j],1+dp[i-1][j-a[i-1]]);
+            }
+        }
+
+        for(int j=sum;j>=0;--j){
+            if(dp[dp.length-1][j]!=Integer.MAX_VALUE)
+                return dp[dp.length-1][j];
+        }
+        return 0;
     }
 
 ------------------------------------------------------------------------------------------------------------------------
@@ -365,6 +403,7 @@ https://leetcode.com/problems/count-square-submatrices-with-all-ones/submissions
 use the method of the previous question. Add the value we get at each cell to get the final result.
 
 ----------------------------------
+
 3.MAX SUM RECTANGLE
 
 Prob:
@@ -380,42 +419,43 @@ and apply kadane's algo vertically taking each row sum(within range) as one elem
 each set of column pairs. Keep track of the overall max.
 
     public static int maxSumRectangle(int arr[][], int r, int c){
-            // int psum[][]= new int[r][c];
-            for(int i=0;i<r;++i){
-                for(int j=0;j<c-1;++j){
-                    arr[i][j+1]=arr[i][j]+arr[i][j+1];
-                }
+        // int psum[][]= new int[r][c];
+        for(int i=0;i<r;++i){
+            for(int j=0;j<c-1;++j){
+                arr[i][j+1]=arr[i][j]+arr[i][j+1];
             }
-            int mxSum=0;
-            int sRow=0,eRow=0,sCol=0,eCol=0;
-            for(int st=0;st<c;++st){
-                for(int end=st;end<c;++end){
-                    //since the start and the end row are fixed we need to
-                    // apply kadanes vertically taking the valid row area of every
-                    //row as one cell
-                    int kCurrSum=0, kMaxSoFar=0, kSt=0;
-                    for(int i=0;i<r; ++i){
-                        int cell= st==0? arr[i][end]: arr[i][end]-arr[i][st-1];
-                        kCurrSum+=cell;
-                        if(kCurrSum>kMaxSoFar){
-                            kMaxSoFar=kCurrSum;
-                            sRow=st;
-                            eRow=end;
-                            sCol=kSt;
-                            eCol=i;
-                        }
-                        if(kCurrSum<0){
-                            kCurrSum=0;
-                            kSt=i+1;
-                        }
-                    }
-                    mxSum=Math.max(mxSum,kMaxSoFar);
-                }
-            }
-            return mxSum;
         }
+        int mxSum=0;
+        int sRow=0,eRow=0,sCol=0,eCol=0;
+        for(int st=0;st<c;++st){
+            for(int end=st;end<c;++end){
+                //since the start and the end row are fixed we need to
+                // apply kadanes vertically taking the valid row area of every
+                //row as one cell
+                int kCurrSum=0, kMaxSoFar=0, kSt=0;
+                for(int i=0;i<r; ++i){
+                    int cell= st==0? arr[i][end]: arr[i][end]-arr[i][st-1];
+                    kCurrSum+=cell;
+                    if(kCurrSum>kMaxSoFar){
+                        kMaxSoFar=kCurrSum;
+                        sRow=st;
+                        eRow=end;
+                        sCol=kSt;
+                        eCol=i;
+                    }
+                    if(kCurrSum<0){
+                        kCurrSum=0;
+                        kSt=i+1;
+                    }
+                }
+                mxSum=Math.max(mxSum,kMaxSoFar);
+            }
+        }
+        return mxSum;
+    }
 
 ----------------------------------
+
 4. NO OF SUB MATRICES WITH ALL ONES
 
 Prob:
@@ -474,6 +514,7 @@ keep adding the no of continuous ones.
     }
 
 ----------------------------------
+
 5. MAX AREA IN A BINARY MATRIX WITH ALL ONES
 
 Prob:
@@ -524,7 +565,7 @@ Algo:
         return max;
     }
 
-------------------------------------------------------------------------------------------------------------------------
+-------------------------------------
 
 6. NO OF SUB MATRIX WITH SUM EQUAL TO K
 (In the given example we take sum equal to zero)
@@ -572,3 +613,97 @@ Now use the algo: no of sub array with sum equal to k for this 1D array.
             }
         return tcount;
     }
+
+------------------------------------------------------------------------------------------------------------------------
+
+INCLUSION/EXCLUSION CONCEPT: MAX SUM WITHOUT ADJACENT ELEMENTS
+
+
+Prob:(a tiny modified version of the actual problem: here the array has two rows.)
+DP_ib_max_sum_without_adjacent_elements
+https://www.interviewbit.com/problems/max-sum-without-adjacent-elements/
+
+Ref:
+https://www.youtube.com/watch?v=UtGtF6nc35g
+
+Approach:
+Loop for all elements in arr[] and maintain two sums incl and excl where
+incl = Max sum including the previous element and
+excl = Max sum excluding the previous element.
+int nexc=Math.max(inc,exc);
+int ninc=Math.max(exc+arr[i],inc);
+
+    public int adjacent(int[][] arr) {
+        int inc=0;
+        int exc=0;
+        for(int i=0;i<arr[0].length;++i){
+            int nexc=Math.max(inc,exc);
+            int ninc=Math.max(exc+arr[i],inc);
+
+            inc=ninc;
+            exc=nexc;
+        }
+        return Math.max(inc,exc);
+    }
+------------------------------------------------------------------------------------------------------------------------
+
+EVALUATE EXPRESSION TO TRUE
+
+Problem
+DP_ib_ways_to_evaluate_expression_to_true
+https://www.interviewbit.com/problems/evaluate-expression-to-true/
+https://www.geeksforgeeks.org/boolean-parenthesization-problem-dp-37/
+
+
+Approach:
+-Let T(i, j) represents the number of ways to parenthesize the symbols between i and j (both inclusive) such that the
+subexpression between i and j evaluates to true.
+-Let F(i, j) represents the number of ways to parenthesize the symbols between i and j (both inclusive) such that the
+subexpression between i and j evaluates to false.
+-lt,rt,lf,rf be the no of ways possible to find right-true,left-true etc.
+-now for a string of given length loop over every operator and cal t, f possible through that operator using below
+equations.
+    |   t=lt*rf+lf*rt+lt*rt;
+        f=lf*rf;
+    &   f=lt*rf+lf*rt+lf*rf;
+        t=lt*rt;
+    ^   t=lt*rf+lf*rt;
+        f=lf*rf+lt*rt;
+-evaluate value for both true and false. This will help us save time.
+
+
+    public int cnttrue(String a) {
+        char ch[]=a.toCharArray();
+        int t[][]=new int[a.length()][a.length()];
+        int f[][]=new int[a.length()][a.length()];
+        return cntTrueDP(0,a.length()-1,t,f,ch,true);
+    }
+
+    public int cntTrueDP(int l, int r, int t[][], int f[][], char ch[], boolean result){
+        if(l==r)  return result?(ch[l]=='T'?1:0):(ch[l]=='T'?0:1);
+        if(result && t[l][r]!=0) return t[l][r];
+        else if(!result && f[l][r]!=0) return f[l][r];
+        int tc=0;int fc=0;
+        for(int i=l+1;i<r;i+=2){
+            int lt=cntTrueDP(l,i-1,t,f,ch,true);
+            int lf=cntTrueDP(l,i-1,t,f,ch,false);
+            int rt=cntTrueDP(i+1,r,t,f,ch,true);
+            int rf=cntTrueDP(i+1,r,t,f,ch,false);
+            if(ch[i]=='|'){
+                tc+=lt*rf+lf*rt+lt*rt;
+                fc+=lf*rf;
+            }
+            else if(ch[i]=='&'){
+                fc+=lt*rf+lf*rt+lf*rf;
+                tc+=lt*rt;
+            }
+            else{
+                tc+=lt*rf+lf*rt;
+                fc+=lf*rf+lt*rt;
+            }
+        }
+        t[l][r]=tc%mod;
+        f[l][r]=fc%mod;
+        return result?t[l][r]:f[l][r];
+    }
+------------------------------------------------------------------------------------------------------------------------

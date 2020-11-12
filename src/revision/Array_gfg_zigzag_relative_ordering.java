@@ -2,6 +2,22 @@ package revision;
 
 import java.util.*;
 //https://practice.geeksforgeeks.org/problems/convert-array-into-zig-zag-fashion/0
+/*
+    void zigZag(int arr[], int n) {
+        boolean lessThan=true;
+        for(int i=0;i<arr.length-1;++i){
+            if(lessThan && arr[i]>arr[i+1]) swap(arr,i);
+            if(!lessThan && arr[i]<arr[i+1]) swap(arr,i);
+            lessThan=!lessThan;
+        }
+    }
+
+    void swap(int arr[], int i){
+        int t=arr[i];
+        arr[i]=arr[i+1];
+        arr[i+1]=t;
+    }
+ */
 public class Array_gfg_zigzag_relative_ordering {
     public static void main (String[] args) {
         Scanner sc = new Scanner(System.in);

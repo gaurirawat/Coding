@@ -42,7 +42,7 @@ Matrix_Stack_lc_max_sum_rectangle_given_binary_matrix
 Matrix_DP_ib_no_of_submatrix_with_sum_zero
 
 DP_ib_ways_to_evaluate_expression_to_true
-DP_gfg_optimal_binary_search_tree
+DP_gfg_optimal_binary_search_tree   //unique
 DP_lc_longest_palindromic_subsequence
 DP_gfg_max_cut_segments
 DP_gfg_wildcard_pattern_matching
@@ -55,7 +55,7 @@ DP_lc_jump_game_isPossible              //prefer array approach
 DP_lc_min_cost_path
 DP_lc_palindrome_partitioning           //different approach
 
-DP_lc_stone_game
+DP_lc_stone_gamek
 DP_lc_predict_winner                    //definitely revise
 
 DP_ib_tushars_birthday_bombs

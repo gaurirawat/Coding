@@ -4,6 +4,7 @@
 **  Array_ib_merge_intervals    //10thousand edge cases. REVISE
     Arrays_ib_next_permutations
 **  Arrays_ib_flip
+*   Array_ib_maximum_sum_triplet    //tree set implementation
 
     DP_ib_tushars_birthday_bombs
     DP_ib_longest_AP
@@ -91,7 +92,7 @@
     Graph_ib_word_ladder    //see how graphs are being used here
     Graph_ib_clone_graph    //revise method
     Graph_ib_smallest_multiple_with_0_and_1
-*   Graph_ib_min_cost_path  // GO THROUGH EDITORIAL SOLUTION
+*   Graph_ib_min_cost_path  // 0/1 BFS solution
 
 *   Greedy_ib_gas_station
 

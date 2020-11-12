@@ -1,7 +1,7 @@
 package revision;
 
 import java.util.Scanner;
-
+//https://practice.geeksforgeeks.org/problems/number-is-sparse-or-not/0
 public class BM_gfg_sparse_number {
     public static void main (String[] args) {
         Scanner sc= new Scanner(System.in);

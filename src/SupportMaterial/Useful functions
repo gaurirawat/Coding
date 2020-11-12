@@ -47,17 +47,19 @@ Arrays.stream(arr).forEach(a -> Arrays.fill(a, 0));
 
 When ever we need to use mod do: int mod = (int)Math.pow(10, 9) + 7;
 
-To convert char array to string, use
+To convert char array ch to string, use
 String str = new String(ch);
 String str2 = String.valueOf(ch);
 
 Whenever comparing two integers from an arraylist do this a.get(i).equals(a.get(j)) otherwise it will compare object
 addresses
 
-
-
-
-
-
-click on project structure. then Ctrl+F
-
+Custom comparators:
+Collections.sort(a, new CustomComp());
+class CustomComp implements Comparator<Integer> {
+    public int compare(Integer a, Integer b){
+        String x=a+""+b;
+        String y=b+""+a;
+        return -x.compareTo(y);
+    }
+}

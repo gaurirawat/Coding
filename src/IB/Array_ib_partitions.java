@@ -1,7 +1,7 @@
 package IB;
 //https://www.interviewbit.com/problems/partitions/
 //ref: https://www.geeksforgeeks.org/count-the-number-of-ways-to-divide-an-array-into-three-contiguous-parts-having-equal-sum/
-public class DP_ib_partitions {
+public class Array_ib_partitions {
     public int solve(int a, int[] arr) {
         int sum=0;
         for(int x:arr)

@@ -11,34 +11,31 @@ public class DP_ib_ways_to_evaluate_expression_to_true {
         return cntTrueDP(0,a.length()-1,t,f,ch,true);
     }
 
-    public int cntTrueDP(int l, int r, int trr[][], int frr[][], char ch[], boolean result){
-        if(l==r) return ch[l]=='T'?(result?1:0):(result?0:1);
-        if(result && trr[l][r]!=0) return trr[l][r];
-        if(!result && frr[l][r]!=0) return frr[l][r];
-        int t=0,f=0;
+    public int cntTrueDP(int l, int r, int t[][], int f[][], char ch[], boolean result){
+        if(l==r)  return result?(ch[l]=='T'?1:0):(ch[l]=='T'?0:1);
+        if(result && t[l][r]!=0) return t[l][r];
+        else if(!result && f[l][r]!=0) return f[l][r];
+        int tc=0;int fc=0;
         for(int i=l+1;i<r;i+=2){
-            int lt=cntTrueDP(l,i-1,trr,frr,ch,true);
-            int rt=cntTrueDP(i+1,r,trr,frr,ch,true);
-            int lf=cntTrueDP(l,i-1,trr,frr,ch,false);
-            int rf=cntTrueDP(i+1,r,trr,frr,ch,false);
-            if(ch[i]=='&'){
-                t+=lt*rt;
-                f+=((lt+lf)*(rt+rf))-rt*lt;
+            int lt=cntTrueDP(l,i-1,t,f,ch,true);
+            int lf=cntTrueDP(l,i-1,t,f,ch,false);
+            int rt=cntTrueDP(i+1,r,t,f,ch,true);
+            int rf=cntTrueDP(i+1,r,t,f,ch,false);
+            if(ch[i]=='|'){
+                tc+=lt*rf+lf*rt+lt*rt;
+                fc+=lf*rf;
             }
-            else if(ch[i]=='|'){
-                t+=((lt+lf)*(rt+rf))-lf*rf;
-                f+=lf*rf;
+            else if(ch[i]=='&'){
+                fc+=lt*rf+lf*rt+lf*rf;
+                tc+=lt*rt;
             }
-            else if(ch[i]=='^'){
-                t+= lf*rt+lt*rf;
-                f+= lt*rt+lf*rf;
+            else{
+                tc+=lt*rf+lf*rt;
+                fc+=lf*rf+lt*rt;
             }
-            t%=mod;
-            f%=mod;
         }
-        trr[l][r]=t;
-        frr[l][r]=f;
-        if(result) return trr[l][r];
-        return frr[l][r];
+        t[l][r]=tc%mod;
+        f[l][r]=fc%mod;
+        return result?t[l][r]:f[l][r];
     }
 }

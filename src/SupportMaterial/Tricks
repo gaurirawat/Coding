@@ -30,3 +30,8 @@ Where ever we need subset sum or subarray try to go with sliding window concept.
 StringBuilder:
     When ever there are multiple modification being done on any string, go for string builder. Using a string might end
     up giving TLE
+
+Lists and dp.
+    At any point of time when we are adding and removing elements from an arrayList during recursion/dp it is better to
+    remove element on the last index rather than using remove(element) because that element may be present twice in that
+    list which will mess up the lexicographic order.

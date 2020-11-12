@@ -19,3 +19,29 @@ public class BSearch_ib_sorted_insert_position {
         return l;
     }
 }
+
+/*
+    while(l<=r){
+        int mid=l+(r-l)/2;
+        if(a.get(mid)>=b){
+            index=mid;
+            r=mid-1;
+        }
+        else
+            l=mid+1;
+    }
+    return index;
+
+    OR
+
+    while(l<r){
+        int mid=l+(r-l)/2;
+        if(a.get(mid)>=b){
+            r=mid;
+        }
+        else
+            l=mid+1;
+    }
+    if(a.get(l)<b) return l+1;
+    return l;
+ */

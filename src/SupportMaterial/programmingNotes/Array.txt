@@ -1,3 +1,21 @@
+ARRAYS
+PEAK VALLEY APPROACH:MAX PROFIT BY INFINITE STOCK BUY SELL
+CONSECUTIVE DIFFERENCE: MIN NO OF INC. ON SUBARRAY TO FORM TARGET ARRAY
+MIN JUMPS TO REACH END
+SLIDING WINDOW: MAXIMUM POINTS YOU CAN OBTAIN FROM CARDS
+USING MAX ELEMENT ON LEFT/RIGHT TECHNIQUE: RAINWATER TRAPPING
+USING MAX ELEMENT ON LEFT/RIGHT TECHNIQUE: MAXIMUM DISTANCE: MAX j-i WHERE arr[j]>arr[i]
+FIRST POSITIVE MISSING NUMBER
+DIVIDE AND CONQUER: INVERSION PAIR:EASY
+SWAP: ZIG-ZAG MAINTAIN RELATIVE ORDERING
+PIGEONHOLE PRINCIPLE WITH BUCKETING: MAXIMUM CONSECUTIVE GAP:
+CUSTOM SORT: LARGEST NUMBER
+HASHING: NO OF SUB-ARRAYS WITH SUM EQUAL TO K
+KADANE'S ALGO: MAX CONTINUOUS SUBARRAY
+MERGE INTERVAL: ADD NEW INTERVAL AND MERGE
+PnC:
+    NEXT PERMUTATION
+------------------------------------------------------------------------------------------------------------------------
 
 PEAK VALLEY APPROACH:MAX PROFIT BY INFINITE STOCK BUY SELL
 
@@ -37,9 +55,37 @@ obtained by including them, since C will always be lesser than A+B.
         return sum;
 
     }
-
 ------------------------------------------------------------------------------------------------------------------------
 
+CONSECUTIVE DIFFERENCE: BUY SELL STOCK INFINITE TIMES
+whenever next element is > current element we simply consider that as a profit. 1,5,8. because (5-1)+(8-5)==(8-1).
+
+CONSECUTIVE DIFFERENCE: MIN NO OF INC. ON SUBARRAY TO FORM TARGET ARRAY
+
+Problem:
+Array_lc_minimum_inc_on_subarray_to_form_target_array
+https://leetcode.com/problems/minimum-number-of-increments-on-subarrays-to-form-a-target-array/
+
+Input: target = [3,1,5,4,2]
+Output: 7
+Explanation: (initial)[0,0,0,0,0] -> [1,1,1,1,1] -> [2,1,1,1,1] -> [3,1,1,1,1]
+                                  -> [3,1,2,2,2] -> [3,1,3,3,2] -> [3,1,4,4,2] -> [3,1,5,4,2] (target).
+This appears to be an O(n2) soln but the soln is very simple.
+The idea is to keep tracking the num of up steps. So every time we go up we increase the counter
+by the different between the current steps and the previous step. And once we go down we don't do anything.
+
+public class Array_lc_minimum_inc_on_subarray_to_form_target_array {
+    public int minNumberOperations(int[] t) {
+        if(t==null||t.length==0) return 0;
+        int cnt=t[0];
+        for(int i=1;i<t.length;++i){
+            if(t[i]>t[i-1])
+                cnt+=(t[i]-t[i-1]);
+        }
+        return cnt;
+    }
+
+------------------------------------------------------------------------------------------------------------------------
 MIN JUMPS TO REACH END
 
 Ref:
@@ -47,6 +93,7 @@ https://www.geeksforgeeks.org/minimum-number-jumps-reach-endset-2on-solution/
 Problem:
 Array_lc_jump_game_min_jumps
 https://leetcode.com/problems/jump-game-ii/
+https://www.interviewbit.com/problems/min-jumps-array/
 
 tc= O(n) sc=O(1)
 
@@ -99,6 +146,29 @@ if (step == 0) {
         }
         return -1;
     }
+
+
+    OR
+
+     public int jump(int[] nums) {
+        if(nums.length<=1) return 0;
+        if(nums[0]==0) return -1;
+
+        int jumps=1;
+        int maxReach=nums[0];
+        int curr=nums[0];
+
+        for(int i=1;i<nums.length-1;++i){   //note the condition
+            maxReach=Math.max(maxReach, nums[i]+i);
+            if(maxReach==i) return -1;
+            if(i==curr){
+                jumps++;
+                curr=maxReach;
+            }
+        }
+        if(maxReach<nums.length-1) return -1;
+        return jumps;
+     }
 ------------------------------------------------------------------------------------------------------------------------
 
 SLIDING WINDOW: MAXIMUM POINTS YOU CAN OBTAIN FROM CARDS
@@ -132,9 +202,11 @@ track of max sum. repeat this until the entire of window shifts from left to rig
         return max;
     }
 
+//similar concept problem:
+https://leetcode.com/problems/minimum-difference-between-largest-and-smallest-value-in-three-moves/
 ------------------------------------------------------------------------------------------------------------------------
 
-RAINWATER TRAPPING: USING MAX ELEMENT ON LEFT/RIGHT TECHNIQUE
+USING MAX ELEMENT ON LEFT/RIGHT TECHNIQUE: RAINWATER TRAPPING
 
 ref:
 https://www.youtube.com/watch?v=FbGG2qpNp4U
@@ -171,6 +243,54 @@ max) minus the occupied area ie. ht of the bar.
     }
 ------------------------------------------------------------------------------------------------------------------------
 
+USING MAX ELEMENT ON LEFT/RIGHT TECHNIQUE: MAXIMUM DISTANCE: MAX j-i WHERE arr[j]>=arr[i]
+
+Ref:
+https://www.geeksforgeeks.org/given-an-array-arr-find-the-maximum-j-i-such-that-arrj-arri/
+
+Prob:
+Array_ib_maximum_distance
+https://www.interviewbit.com/problems/max-distance/
+
+Algo:
+1. For all cells pre compute min left element and max right element including the current cell value.
+2. now traverse both simultaneously from the beginning.
+While traversing LMin[] and RMa[] if we see that LMin[i] is greater than RMax[j], then we must move ahead in LMin[] (or
+do i++) because all elements on left of LMin[i] are greater than or equal to LMin[i]. Otherwise we must move ahead in
+RMax[j] to look for a greater j – i value.
+
+In general for questions involving i<j, arr[j]>arr[i] type requirements try using the Lmin/Rmin/Lmax/Rmax in some form.
+Always helps.
+
+    public int maximumGap(final int[] a) {
+        if(a.length==0) return 0;
+        int sml[]=new int[a.length];
+        int bgr[]=new int[a.length];
+        sml[0]=a[0];
+        bgr[a.length-1]=a[a.length-1];
+
+        for(int i=1;i<a.length;++i)
+            sml[i]=Math.min(sml[i-1],a[i]);
+        for(int i=a.length-2;i>=0;--i)
+            bgr[i]=Math.max(bgr[i+1],a[i]);
+
+        int mx=0;
+        int ss=0,bb=0;
+        while(ss<a.length && bb<a.length){
+            if(sml[ss]>bgr[bb]){
+                ss++;
+            }
+            else{
+                mx=Math.max(mx, bb-ss);
+                bb++;
+            }
+
+        }
+        return mx;
+    }
+
+------------------------------------------------------------------------------------------------------------------------
+
 FIRST POSITIVE MISSING NUMBER
 
 Prob:
@@ -184,7 +304,7 @@ index+1.
 
 ------------------------------------------------------------------------------------------------------------------------
 
-INVERSION PAIR:EASY
+DIVIDE AND CONQUER: INVERSION PAIR:EASY
 
 Find count of inversion pairs where a[i] and a[j] form an inversion if a[i] > a[j] and i < j.
 
@@ -234,8 +354,17 @@ no of elements in the left array that are smaller than the right element. And th
 
 ------------------------------------------------------------------------------------------------------------------------
 
-ZIG-ZAG MAINTAIN RELATIVE ORDERING
+SWAP: ZIG-ZAG MAINTAIN RELATIVE ORDERING
 
+Problem:
+Array_gfg_zigzag_relative_ordering
+https://practice.geeksforgeeks.org/problems/convert-array-into-zig-zag-fashion/0
+
+Question:
+Rearrange the elements of array in zig-zag fashion. The converted array should be in form a < b > c < d > e < f. The
+relative order of elements is same in the output
+
+Approach:
 In a general case zig zag ordering sort the array and swap adjacent pairs.
 
 For an ordering where we need to maintain relative ordering, simply check element with the next one to see if zigzag
@@ -243,7 +372,7 @@ order is being maintained otherwise swap.
 
 ------------------------------------------------------------------------------------------------------------------------
 
-MAXIMUM CONSECUTIVE GAP: PIGEONHOLE PRINCIPLE WITH BUCKETING
+PIGEONHOLE PRINCIPLE WITH BUCKETING: MAXIMUM CONSECUTIVE GAP
 
 Ref:
 https://leetcode.com/articles/maximum-gap/#
@@ -254,11 +383,12 @@ https://leetcode.com/problems/maximum-gap/submissions/
 
 1. The Pigeonhole Principle states that if n items are put into m containers, with n>m , then at least one container
 must contain more than one item.
-2. So here we can say that for n elements we should take n-1 buckets.
+2. So here we can say that for n elements we should take n-1 buckets for there to be at least one bucket that has 2
+elements.
 3. Now coming to the capacity, for n-1 buckets and range of (max-min) the cap should be t=(max−min)/(n−1). ie. each
 bucket will hold a max of t range of numbers. ie the diff btw the numbers would be a max of t. To stay on the safer side
-we take a smaller gap tobe on the safer side so that by any chance the diff within a bucket doesn't become exceed t.
-4. Since the cap changed we'll calculate the no of buckets again. now buckets= (max−min)/capacity +1. (why +1? LATER)
+we take a smaller gap to be on the safer side so that by any chance the diff within a bucket doesn't become t.
+4. Since the cap changed we'll calculate the no of buckets again. now buckets= (max−min)/capacity  +1. (why +1? LATER)
 5. place elements in their correct buckets. index of bucket will be calculated as is (element-min)/cap.
 6. at the time of placing elements keep track of min and max for each bucket.
 7. now considering only the buckets which have an item find the diff btw curr bucket min and prev bucket max.
@@ -307,54 +437,6 @@ so we go out of array index. Hence we take one more bucket.
 
 ------------------------------------------------------------------------------------------------------------------------
 
-MAXIMUM DISTANCE: MAX j-i WHERE arr[j]>arr[i]
-
-Ref:
-https://www.geeksforgeeks.org/given-an-array-arr-find-the-maximum-j-i-such-that-arrj-arri/
-
-Prob:
-Array_ib_maximum_distance
-https://www.interviewbit.com/problems/max-distance/
-
-Algo:
-1. For all cells pre compute min left element and max right element including the current cell value.
-2. now traverse both simultaneously from the beginning.
-While traversing LMin[] and RMa[] if we see that LMin[i] is greater than RMax[j], then we must move ahead in LMin[] (or
-do i++) because all elements on left of LMin[i] are greater than or equal to LMin[i]. Otherwise we must move ahead in
-RMax[j] to look for a greater j – i value.
-
-In general for questions involving i<j, arr[j]>arr[i] type requirements try using the Lmin/Rmin/Lmax/Rmax in some form.
-Always helps.
-
-    public int maximumGap(final int[] a) {
-        if(a.length==0) return 0;
-        int sml[]=new int[a.length];
-        int bgr[]=new int[a.length];
-        sml[0]=a[0];
-        bgr[a.length-1]=a[a.length-1];
-
-        for(int i=1;i<a.length;++i)
-            sml[i]=Math.min(sml[i-1],a[i]);
-        for(int i=a.length-2;i>=0;--i)
-            bgr[i]=Math.max(bgr[i+1],a[i]);
-
-        int mx=0;
-        int ss=0,bb=0;
-        while(ss<a.length && bb<a.length){
-            if(sml[ss]>bgr[bb]){
-                ss++;
-            }
-            else{
-                mx=Math.max(mx, bb-ss);
-                bb++;
-            }
-
-        }
-        return mx;
-    }
-
-------------------------------------------------------------------------------------------------------------------------
-
 LARGEST NUMBER: REMEMBER EDGE CASES
 
 Prob:
@@ -383,15 +465,15 @@ to be handled by removing the extra zeros.
     }
 ------------------------------------------------------------------------------------------------------------------------
 
-NO OF SUB-ARRAYS WITH SUM EQUAL TO K
+HASHING: NO OF SUB-ARRAYS WITH SUM EQUAL TO K
 
 Prob:
 Array_lc_no_of_subarray_with_sum_equal_to_k
 /https://leetcode.com/problems/subarray-sum-equals-k/submissions/
 
 Algo:
-Iterate over the array and keep cumulating the sum(ie form the very first element).
-Now if we aim to find subarray with sum=k,(eg k=10) then there can be two possibilities
+Iterate over the array and keep cumulating the sum (ie form the very first element).
+Now if we aim to find subarray with sum=k,(eg k=10) then there can be two possibilities.
 1. the cumulative sum can be =k;
 2. the cumulative sum is greater than k with difference, diff=sum-k. but we may have encountered that as a sum before.
 eg at index 3(initial 0->3 ie 4 elements) sum=5, at some greater index 8(sum of initial 0->8 ie 9 elements) we get
@@ -417,5 +499,141 @@ keep adding every time the sum=k or (sum-k) was present before.
             return cnt;
         }
     }
+
+------------------------------------------------------------------------------------------------------------------------
+
+KADANE'S ALGO: MAX CONTINUOUS SUBARRAY
+
+Array_ib_max_sum_contiguous_subarray
+
+Ref: https://www.geeksforgeeks.org/largest-sum-contiguous-subarray/
+Code: https://practice.geeksforgeeks.org/problems/kadanes-algorithm/0
+
+ 1-D Used to find the largest Sum in a Contiguous Subarray
+ tc= O(n) sc=O(1)
+Initialize:
+    max_so_far = 0
+    max_ending_here = 0
+
+Loop for each element of the array
+  (a) max_ending_here = max_ending_here + a[i]
+  (b) if(max_so_far < max_ending_here)
+            max_so_far = max_ending_here
+  (c) if(max_ending_here < 0)
+            max_ending_here = 0
+return max_so_far
+
+2-D
+Ref: https://www.geeksforgeeks.org/maximum-sum-rectangle-in-a-2d-matrix-dp-27/
+
+maximum-sum-rectangle-in-a-2d-matrix
+Kadane’s algorithm for 1D array can be used to reduce the time complexity to O(n^3).
+The idea is to fix the left and right columns one by one and find the maximum sum contiguous rows for every left and
+right column pair. We basically find top and bottom row numbers (which have maximum sum) for every fixed left and
+right column pair. To find the top and bottom row numbers, calculate sun of elements in every row from left to right
+and store these sums in an array say temp[]. So temp[i] indicates sum of elements from left to right in row i. If we
+apply Kadane’s 1D algorithm on temp[], and get the maximum sum subarray of temp, this maximum sum would be the maximum
+possible sum with left and right as boundary columns. To get the overall maximum sum, we compare this sum with the
+maximum sum so far.
+
+modified kadanes algo:
+https://www.interviewbit.com/problems/flip/
+------------------------------------------------------------------------------------------------------------------------
+
+COUNTING SORT
+
+Ref: https://www.geeksforgeeks.org/counting-sort/
+In a case where there are only positive numbers we can simply create an array and keep inc the index=number.
+Works just for +ve numbers.
+
+PIGEONHOLE SORT:
+
+Ref: https://www.geeksforgeeks.org/pigeonhole-sort/
+In case when negatives are also present in the array, we find the min and inc the (number-min) index.
+ie if no are {-5, -5, 0, -3, 4, 5, -1, 3}, then min is -10 range would be 5-(-5)+1=11. resulting array would be
+{2,0,1,0,1,1,0,0,1,1,1 }. -5 appears twice therefore count at -5-(-5)=0th index has been incremented twice.
+
+------------------------------------------------------------------------------------------------------------------------
+
+MERGE INTERVAL: ADD NEW INTERVAL AND MERGE
+
+Problem:
+Array_ib_merge_intervals
+https://www.interviewbit.com/problems/merge-intervals/
+
+Approach:
+we need to add interval a to list of intervals l
+case 1: list is empty.
+    simply add element and return
+we traverse on the list till the time l(i).end < a.start.
+case 2: the interval does not overlap and has to be added in the end.
+    we check that we have traversed the complete list and the (l(i).end < a.start) cond. did not fail. now directly add.
+case 3: the interval does not overlap and has to be added in the front.
+case 4: the interval does not overlap and has to be added at the pos where our cond failed.
+    Both case 3 and 4 will be solved by directly checking for a.end<l(i).start. add the interval a at i position and
+    return the list.
+case 5: intervals overlap.
+    for the ith interval put its start and end as the min and max of l(i)'s and a's start and end respectively.
+    follow the merge method. keep removing the next intervals till the time they overlap and updating the end
+    accordingly.
+
+
+    public ArrayList<Interval> insert(ArrayList<Interval> l, Interval a) {
+
+        if(a==null)return l;
+
+        //case 1: list is empty.
+        if(l==null || l.size()==0){
+            ArrayList<Interval> t=new ArrayList<Interval>();
+            t.add(a);
+            return t;
+        }
+
+        int i=0;
+        while(i!=l.size() && a.start>l.get(i).end)i++;
+
+        //case 2: the interval does not overlap and has to be added in the end.
+        if(i==l.size()){
+            l.add(a);
+            return l;
+        }
+
+        //case 3: the interval does not overlap and has to be added in the front.
+        //case 4: the interval does not overlap and has to be added at the pos where our cond failed.
+        if(a.end<l.get(i).start){
+            l.add(i,a);
+            return l;
+        }
+
+        //case 5: intervals overlap.
+
+        l.get(i).start=Math.min(l.get(i).start, a.start);
+        l.get(i).end=Math.max(l.get(i).end, a.end);
+
+        while(i<l.size()-1){
+            if(l.get(i).end>=l.get(i+1).start){
+                l.get(i).end=Math.max(l.get(i).end, l.get(i+1).end);
+                l.remove(i+1);
+            }
+            else
+                break;
+        }
+        return l;
+    }
+
+
+------------------------------------------------------------------------------------------------------------------------
+
+PNC: NEXT PERMUTATION
+
+Problem:
+Array_ib_next_permutations
+https://www.interviewbit.com/problems/next-permutation/
+
+Approach:
+1. start traversing from the end and look for the first element e which is smaller than the one that is after it.
+2. If there is no such element then sort the array and return the result
+3. Otherwise traverse again from the end to find the smallest element that is greater than e.\
+4. swap e with this element. Sort all elements after the old pos of e.
 
 ------------------------------------------------------------------------------------------------------------------------

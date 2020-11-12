@@ -1,0 +1,279 @@
+Sorting algo:
+https://www.geeksforgeeks.org/sorting-algorithms/
+
+ALGORITHM	TIME COMPLEXITY
+ 	            BEST	    AVERAGE	    WORST
+Selection Sort	Ω(n^2)	    θ(n^2)	    O(n^2)
+Bubble Sort 	Ω(n)	    θ(n^2)	    O(n^2)
+Insertion Sort	Ω(n)	    θ(n^2)  	O(n^2)
+Heap Sort	    Ω(nlogn)	θ(nlogn)	O(nlogn)
+Quick Sort	    Ω(nlogn)	θ(nlogn)	O(n^2)
+Merge Sort	    Ω(nlogn)	θ(nlogn)	O(nlogn)
+Bucket Sort	    Ω(n+k)	    θ(n+k)	    O(n^2)
+Radix Sort	    Ω(nk)	    θ(nk)	    O(nk)
+
+Bubble sort:
+Bubble Sort is the simplest sorting algorithm that works by repeatedly swapping the adjacent elements if they are in
+wrong order. In first iteration, the max element goes to the end. In the second iteration second most max goes to the
+second last pos.
+
+Worst and Average Case Time Complexity: O(n*n). Worst case occurs when array is reverse sorted.
+Best Case Time Complexity: O(n). Best case occurs when array is already sorted.
+Auxiliary Space: O(1)
+Boundary Cases: Bubble sort takes minimum time (Order of n) when elements are already sorted.
+
+for (i = 0; i < n - 1; i++)
+    for (j = 0; j < n - i - 1; j++)
+        //if ith element < jth element: swap
+    // if no swaps happen in ith iteration then break outer loop since array is already sorted.
+
+
+------------------------------------------------------------------------------------------------------------------------
+
+Selection Sort
+The selection sort algorithm sorts an array by repeatedly finding the minimum element (considering ascending order) from
+unsorted part and putting it at the beginning.
+In every iteration of selection sort, the minimum element (considering ascending order) from the unsorted subarray is
+picked and moved to the sorted subarray.
+
+Time Complexity: O(n2) as there are two nested loops.
+Auxiliary Space: O(1)
+The good thing about selection sort is it never makes more than O(n) swaps and can be useful when memory write is a
+costly operation.
+
+for (int i = 0; i < n-1; i++)
+    for (int j = i; j < n; j++)
+        // Find the minimum element
+    // Swap the minimum element with ith element
+
+------------------------------------------------------------------------------------------------------------------------
+
+Insertion sort
+The array is virtually split into a sorted and an unsorted part. Values from the unsorted part are picked and placed at
+the correct position in the sorted part.
+
+Time Complexity: O(n*2)
+Auxiliary Space: O(1)
+Boundary Cases: Insertion sort takes maximum time to sort if elements are sorted in reverse order. And it takes minimum
+time (Order of n) when elements are already sorted.
+Sorting In Place: Yes
+Stable: Yes
+Uses: Insertion sort is used when number of elements is small. It can also be useful when input array is almost sorted,
+only few elements are misplaced in complete big array.
+
+for (int i = 1; i < n; ++i) {
+    int key = arr[i];
+    int j = i - 1;
+
+    while (j >= 0 && arr[j] > key) {
+        arr[j + 1] = arr[j];
+        j = j - 1;
+    }
+    arr[j + 1] = key;
+}
+**go through insertion sort in the LL section also.
+------------------------------------------------------------------------------------------------------------------------
+
+Merge Sort:
+Merge Sort is a Divide and Conquer algorithm. It divides the input array into two halves, calls itself for the two
+halves, and then merges the two sorted halves.
+
+T(n) = 2T(n/2) + θ(n)
+Time complexity of Merge Sort is  θ(nLogn) in all 3 cases (worst, average and best) as merge sort always divides the
+array into two halves and takes linear time to merge two halves.
+Auxiliary Space: O(n)
+Algorithmic Paradigm: Divide and Conquer
+Sorting In Place: No in a typical implementation
+Stable: Yes
+Merge Sort is useful for sorting linked lists in O(nLogn) time. merge sort in arrays requires extra space but for linked
+lists it doesn't.
+
+public void SortArray(int arr[],int l, int r){
+    if(l<r){
+        int m= (l+r)/2;
+        innerSortArray(arr, l, m);
+        innerSortArray(arr, m+1, r);
+        merge(arr, l, r, m);
+    }
+}
+public void merge(int arr[], int l, int r, int m){
+    //create 2 arrays for element from l-> mid, mid+1->r;
+    //merge these arrays and keep saving result back in the original array.
+}
+------------------------------------------------------------------------------------------------------------------------
+
+Quick Sort:
+refer: Array_lc_Kth_largest_element
+https://leetcode.com/problems/kth-largest-element-in-an-array/submissions/
+
+QuickSort is a Divide and Conquer algorithm. It picks an element as pivot and partitions the given array around the
+picked pivot.
+partitioning is O(n) algo where we take an element x of array as pivot, put x at its correct position in sorted array
+and put all smaller elements (smaller than x) before x, and put all greater elements (greater than x) after x.
+
+T(n) = T(k) + T(n-k-1) + \theta(n)
+Worst Case: O(n2). The worst case occurs when the partition process always picks greatest or smallest element as pivot.
+If we consider above partition strategy where last element is always picked as pivot, the worst case would occur when
+the array is already sorted in increasing or decreasing order.
+Best case and Average Case: O(nlogn)
+Although the worst case time complexity of QuickSort is O(n2) which is more than many other sorting algorithms like
+Merge Sort and Heap Sort, QuickSort is faster in practice, because its inner loop can be efficiently implemented on most
+architectures, and in most real-world data. QuickSort can be implemented in different ways by changing the choice of
+pivot, so that the worst case rarely occurs for a given type of data. However, merge sort is generally considered
+better when data is huge and stored in external storage.
+
+Is QuickSort stable?
+The default implementation is not stable. However any sorting algorithm can be made stable by considering indexes as
+comparison parameter.
+
+Is QuickSort In-place?
+As per the broad definition of in-place algorithm it qualifies as an in-place sorting algorithm as it uses extra space
+only for storing recursive function calls but not for manipulating the input.
+
+Why Quick Sort is preferred over MergeSort for sorting Arrays?
+Quick Sort in its general form is an in-place sort (i.e. it doesn’t require any extra storage) whereas merge sort
+requires O(N) extra storage, N denoting the array size which may be quite expensive. Allocating and de-allocating the
+extra space used for merge sort increases the running time of the algorithm. Comparing average complexity we find that
+both type of sorts have O(NlogN) average complexity but the constants differ. For arrays, merge sort loses due to the
+use of extra O(N) storage space.
+Most practical implementations of Quick Sort use randomized version. The randomized version has expected time complexity
+of O(nLogn). The worst case is possible in randomized version also, but worst case doesn’t occur for a particular
+pattern (like sorted array) and randomized Quick Sort works well in practice.
+
+Why MergeSort is preferred over QuickSort for Linked Lists?
+In case of linked lists the case is different mainly due to difference in memory allocation of arrays and linked lists.
+Unlike arrays, linked list nodes may not be adjacent in memory. Unlike array, in linked list, we can insert items in the
+middle in O(1) extra space and O(1) time. Therefore merge operation of merge sort can be implemented without extra space
+for linked lists.
+
+quickSort(arr[], low, high)
+{
+    if (low < high)
+    {
+        pi = partition(arr, low, high);
+        quickSort(arr, low, pi - 1);  // Before pi
+        quickSort(arr, pi + 1, high); // After pi
+    }
+}
+public int partition(int arr[], int l, int r){
+    int p= arr[l];
+    int a=l;
+    l=l+1;
+    if(l==r & p>arr[l]) {
+        swap(arr,a,l);
+        return l;
+    }
+    while(l<r){
+        while(l<=r && arr[l]<=p )++l;
+        while(l<r && arr[r]>p )--r;
+        if(l<r)
+            swap(arr, l, r);
+    }
+    swap(arr,a,l-1);
+    return l-1;
+}
+------------------------------------------------------------------------------------------------------------------------
+
+Heap sort:
+
+Overall time complexity of Heap Sort is O(nLogn).
+In place:
+Since the heap can be kept and organised entirely in an array, then heapsort can run in-place by moving elements around
+inside the input array. Indeed, the heap is built and manipulated using the original input array.
+
+approach:
+build heap //o(n)
+fo each element
+    keep removing max element //o(logn) for n elements ie nlogn
+------------------------------------------------------------------------------------------------------------------------
+
+Counting sort:
+
+TC: o(n+k)
+
+Points to be noted:
+1. Counting sort is efficient if the range of input data is not significantly greater than the number of objects to be
+sorted. Consider the situation where the input sequence is between range 1 to 10K and the data is 10, 5, 10K, 5K.
+2. It is not a comparison based sorting. It running time complexity is O(n) with space proportional to the range of data.
+3. It is often used as a sub-routine to another sorting algorithm like radix sort.
+4. Counting sort uses a partial hashing to count the occurrence of the data object in O(1).
+5. Counting sort can be extended to work for negative inputs also.
+
+approach:
+create array of size=range of no.(max-min no.)
+iterate on array and inc indexes of new array. eg. index 1 for element 1, 2 for element 2.
+iterate on new array and out back as many values in the actual array as the no stored at every index.
+
+------------------------------------------------------------------------------------------------------------------------
+
+Bucket Sort:
+
+Complexity
+Worst Case Complexity: O(n2)
+When there are elements of close range in the array, they are likely to be placed in the same bucket. This may result in
+some buckets having more number of elements than others.
+It makes the complexity depend on the sorting algorithm used to sort the elements of the bucket.
+The complexity becomes even worse when the elements are in reverse order. If insertion sort is used to sort elements of
+the bucket, then the time complexity becomes O(n2).
+
+Best Case Complexity: O(n+k)
+It occurs when the elements are uniformly distributed in the buckets with a nearly equal number of elements in each
+bucket.
+The complexity becomes even better if the elements inside the buckets are already sorted.
+If insertion sort is used to sort elements of a bucket then the overall complexity in the best case will be linear ie.
+O(n+k). O(n) is the complexity for making the buckets and O(k) is the complexity for sorting the elements of the bucket
+using algorithms having linear time complexity at the best case.
+
+Average Case Complexity: O(n)
+It occurs when the elements are distributed randomly in the array. Even if the elements are not distributed uniformly,
+bucket sort runs in linear time. It holds true until the sum of the squares of the bucket sizes is linear in the total
+number of elements.
+
+Bucket sort is used when:
+input is uniformly distributed over a range.
+there are floating point values
+
+bucketSort(arr[], n)
+1) Create n empty buckets (Or lists).
+2) Do following for every array element arr[i].
+.......a) Insert arr[i] into bucket[n*array[i]]
+3) Sort individual buckets using insertion sort.
+4) Concatenate all sorted buckets
+
+------------------------------------------------------------------------------------------------------------------------
+
+Pigeonhole sort:
+
+TC: O(n + Range)
+Pigeonhole sorting is a sorting algorithm that is suitable for sorting lists of elements where the number of elements
+(n) and the length of the range of possible key values (N) are approximately the same. It requires O(n + k) time.
+It is similar to counting sort, but differs in that it "moves items twice: once to the bucket array and again to the
+final destination [whereas] counting sort builds an auxiliary array then uses the array to compute each item's final
+destination and move the item there.
+
+The pigeonhole algorithm works as follows:
+Given an array of values to be sorted, set up an auxiliary array of initially empty "pigeonholes", one pigeonhole for
+each key in the range of the keys in the original array. Going over the original array, put each value into the
+pigeonhole corresponding to its key, such that each pigeonhole eventually contains a list of all values with that key.
+Iterate over the pigeonhole array in increasing order of keys, and for each pigeonhole, put its elements into the
+original array in increasing order.
+
+------------------------------------------------------------------------------------------------------------------------
+Radix Sort:
+Counting sort is a linear time sorting algorithm that sort in O(n+k) time when elements are in the range from 1 to k.
+
+What if the elements are in the range from 1 to n2?
+We cant use counting sort because counting sort will take O(n2) which is worse than comparison-based sorting algorithms.
+The idea of Radix Sort is to do digit by digit sort starting from least significant digit to most significant digit.
+Radix sort uses counting sort as a subroutine to sort.
+
+Radix Sort takes O(d*(n+b)) time where b is the base for representing numbers, for example, for the decimal system, b is
+10. So overall time complexity is O((n+b) * logb(k)).
+
+Is Radix Sort preferable to Comparison based sorting algorithms like Quick-Sort?
+If we have log2n bits for every digit, the running time of Radix appears to be better than Quick Sort for a wide range
+of input numbers. The constant factors hidden in asymptotic notation are higher for Radix Sort and Quick-Sort uses
+hardware caches more effectively. Also, Radix sort uses counting sort as a subroutine and counting sort takes extra
+space to sort numbers.
+
+------------------------------------------------------------------------------------------------------------------------

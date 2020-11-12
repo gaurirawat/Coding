@@ -2,9 +2,7 @@ package revision;
 //https://leetcode.com/problems/maximum-profit-in-job-scheduling/submissions/
 //reference: https://leetcode.com/problems/maximum-profit-in-job-scheduling/discuss/409009/JavaC%2B%2BPython-DP-Solution
 
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.TreeMap;
+import java.util.*;
 
 public class DP_lc_job_scheduling_start_end_time {
     public int jobScheduling(int[] startTime, int[] endTime, int[] profit) {

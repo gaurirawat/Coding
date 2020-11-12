@@ -3,28 +3,35 @@ package IB;
 public class LL_ib_sorting_insertion_sort {
     public ListNode insertionSortList(ListNode head) {
         if(head==null||head.next==null) return head;
-        ListNode curr=head, next=curr.next;
-        while(next!=null){
-            if(head.val>=next.val){
-                curr.next=curr.next.next;
-                next.next=head;
-                head=next;
+
+        // add first element to sorted list
+        ListNode sHead=head;
+        head=head.next;
+        sHead.next=null;
+
+        //repeat until list is empty
+        while(head!=null){
+
+            //case where element has to be inserted at the start of the sorted list.
+            if(sHead.val>=head.val){
+                ListNode temp=head;
+                head=head.next; //element removed from actual list
+                temp.next=sHead;
+                sHead=temp;
             }
             else{
-                ListNode nodei=head;
-                while(nodei.next.val<next.val){
-                    nodei=nodei.next;
-                }
-                if(nodei.next==next)
+                //insert element in the sorted list.
+                ListNode curr=sHead,prev=sHead;
+                while(curr!=null && curr.val<head.val){
+                    prev=curr;
                     curr=curr.next;
-                else{
-                    curr.next=curr.next.next;
-                    next.next=nodei.next;
-                    nodei.next=next;
                 }
+                ListNode temp=head;
+                head=head.next; //element removed from actual list
+                temp.next=prev.next;
+                prev.next=temp;
             }
-            next=curr.next;
         }
-        return head;
+        return sHead;
     }
 }
