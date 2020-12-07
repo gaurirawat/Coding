@@ -1,4 +1,4 @@
-STACK
+STACK/QUEUE/POINTERS/HEAP
 
 Nearest smallest left/right element (NSL/NSR)
 
@@ -37,3 +37,148 @@ ie, we first calc NSR, NSL and then-
 For each i we calculate: area[i]=(nsr[i]-nsl[i]-1)*h[i]; and then return the maximum.
 
 -------------------------------------------------------------------------------------------------
+
+SLIDING WINDOW MAXIMUM
+
+Problem:
+Array_lc_sliding_window_max_no
+https://www.interviewbit.com/problems/sliding-window-maximum/
+
+In the first glance it appears to be more like a regular sliding window question but no.
+This involves the use of queue for storing the index of the max and all values to the right of the max value within the
+window at any time.
+Every time we shift the window, we remove the indexes from the end of queue where element value is<=current element.
+Also if the front of queue has index which doesnt fall in the window then remove that too.
+
+-------------------------------------------------------------------------------------------------
+
+2 POINTER
+
+MAXIMUM ONES AFTER MODIFICATION
+
+Prob:
+Pointer_ib_max_ones_after_modification
+https://www.interviewbit.com/problems/maximum-ones-after-modification/
+
+Standard soln:
+1. Find the max length possible till k>=0. Reduce k every time we encounter a zero ans stop when we find a zero and k is
+already 0.
+2. now max len is r-l. (r excluding)
+3. till the time r!=a.length keep iterating. Do the following each time.
+4. take right pointer one step ahead to include the new zero. Now traverse ahead until we encounter another zero.
+5. since we have included one zero we need to remove one from the initial end. So traverse from left until we find first
+zero. Now take left pointer one step ahead to remove it from current window.
+
+    public int solve(int[] a, int k) {
+        int l=0;
+        int r=a.length;
+        int max=0;
+        for(int i=0;i<a.length;++i) {
+            if(a[i]==0) {
+                if(k==0) {
+                    r = i;
+                    break;
+                }
+                --k;
+            }
+        }
+        max=r-l;
+        while(r!=a.length) {
+            ++r;
+            while(r!=a.length && a[r]!=0) {
+                r++;
+            }
+            while (l!=r && a[l]!=0) {
+                ++l;
+            }
+            ++l;
+            max=Math.max(max,r-l);
+        }
+        return max;
+    }
+------------------------------------------------------------------------------------------------------------------------
+
+2D RAINWATER TRAPPING
+
+Prob:
+Heap_lc_rainwater_trapping_2D
+https://leetcode.com/problems/trapping-rain-water-ii/submissions/
+ref:https://leetcode.com/problems/trapping-rain-water-ii/discuss/89495/How-to-get-the-solution-to-2-D-%22Trapping-Rain-Water%22-problem-from-1-D-case
+
+Insert all border elements into pq. Mark them as visited. Now Keep polling elements with lowest ht. enqueue the
+neighbouring cell if not visited. At the time of adding a new cell to pq REMEMBER TO PUT HEIGHT AS MAX(NEW CELL HT, CURR
+CELL HT). This will help retain the max boundary.
+
+    public int trapRainWater(int[][] ht) {
+        PriorityQueue<int[]> pq=new PriorityQueue<>(Comparator.comparingInt(a->a[2]));
+        int m = ht.length;
+        int n = (m == 0 ? 0 : ht[0].length);
+        boolean[][] visited=new boolean[m][n];
+        int sum=0;
+        for(int i=0;i<m;++i) {
+            pq.add(new int[]{i,0,ht[i][0]});
+            pq.add(new int[]{i,n-1,ht[i][n-1]});
+            visited[i][0]=true;
+            visited[i][n-1]=true;
+        }
+
+        for(int j=0;j<n;++j) {
+            pq.add(new int[]{0,j,ht[0][j]});
+            pq.add(new int[]{m-1,j,ht[m-1][j]});
+            visited[0][j]=true;
+            visited[m-1][j]=true;
+        }
+
+        while(!pq.isEmpty()){
+            int[] curr=pq.poll();
+            int[][] dxy=new int[][] {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
+            for(int i=0; i<4; ++i) {
+                int x=curr[0]+dxy[i][0];
+                int y=curr[1]+dxy[i][1];
+                if(x>=0 && y>=0 && x<m&& y<n && !visited[x][y]){
+                    visited[x][y]=true;
+                    pq.add(new int[]{x,y,Math.max(ht[x][y],curr[2])});
+                    if(curr[2]>ht[x][y]) {
+                        sum+=curr[2]-ht[x][y];
+                    }
+                }
+            }
+        }
+        return sum;
+    }
+
+------------------------------------------------------------------------------------------------------------------------
+
+ODD EVEN JUMP: FIND SMALLEST ELEMENT>=CURRENT AND LARGEST ELEMENT<=CURRENT.
+
+Prob:
+Array_lc_odd_even_jump
+https://leetcode.com/problems/odd-even-jump/submissions/
+
+    public class Array_lc_odd_even_jump {
+         public int oddEvenJumps(int[] a) {
+             boolean[] odd=new boolean[a.length];
+             boolean[] even=new boolean[a.length];
+             TreeMap<Integer, Integer> map=new TreeMap<Integer, Integer>();
+             odd[a.length-1]=true;
+             even[a.length-1]=true;
+             int c=1;
+             map.put(a[a.length-1],a.length-1);
+             for(int i=a.length-2;i>=0;--i){
+                 Map.Entry<Integer, Integer> greaterEntry=map.ceilingEntry(a[i]);
+                 Map.Entry<Integer, Integer> smallerEntry=map.floorEntry(a[i]);
+                 if(greaterEntry!=null) {
+                     odd[i]=even[greaterEntry.getValue()];
+                 }
+
+                 if(smallerEntry!=null) {
+                     even[i]=odd[smallerEntry.getValue()];
+                 }
+                 if(odd[i]) {
+                     c++;
+                 }
+                 map.put(a[i],i);
+             }
+             return c;
+         }
+    }

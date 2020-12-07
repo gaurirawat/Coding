@@ -47,17 +47,37 @@ Arrays.stream(arr).forEach(a -> Arrays.fill(a, 0));
 
 When ever we need to use mod do: int mod = (int)Math.pow(10, 9) + 7;
 
-To convert char array to string, use
+To convert char array ch to string, use
 String str = new String(ch);
 String str2 = String.valueOf(ch);
 
 Whenever comparing two integers from an arraylist do this a.get(i).equals(a.get(j)) otherwise it will compare object
 addresses
 
+Custom comparators:
+Collections.sort(a, new CustomComp());
+class CustomComp implements Comparator<Integer> {
+    public int compare(Integer a, Integer b){
+        String x=a+""+b;
+        String y=b+""+a;
+        return -x.compareTo(y);
+    }
+}
 
+for-each and collections:
+At the time of looping through collections using for each, we cannot remove any entry from it. In order to do so either
+traverse through for(int i...) or in case of a map, create a new map for modified value and delete the previous one.
 
+Java LinkedHashMap get first or last entry, The quickest way to get the "first" entry is still entrySet().iterator().next()
 
+displaying through Iterator:
+Iterator value = queue.iterator();
+System.out.println("The iterator values are: ");
+while (value.hasNext()) {
+    System.out.println(value.next());
+}
 
-
-click anywhere on project structure and start typing
-
+Generating random elements:
+Random random=new Random();
+int rint = random.nextInt(5); //generates random no from 0-5;
+double rdouble = nextDouble();  //generates from 0.0-1.0

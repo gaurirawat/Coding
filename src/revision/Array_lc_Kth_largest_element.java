@@ -64,44 +64,28 @@ public class Array_lc_Kth_largest_element {
 	arr[b]= t;
 	}
 }
-
-//    public int findKthLargest(int[] nums, int k) {
-//         if(nums.length==1)
-//             return nums[0];
-//         else
-//             return findRank(nums, 0,nums.length-1,nums.length-k);  
-//     }
-
-// 	public int findRank(int arr[], int l,int r, int rnk){
-//         if(l==r)
-//             return arr[l];
-// 		int rp= (new Random()).nextInt(r-l+1);
-//         // System.out.println(l+" "+r+" "+arr[rp+l]);
-// 		swap(rp+l,l, arr);
-// 		int p= partition(arr, l, r);
-//         // System.out.println("rank "+p+ " "+ rnk);
-// 		if(p==rnk)
-// 			return arr[p];
-// 		else if(p<rnk)
-// 			return findRank(arr, p+1, r, rnk);
-// 		else 
-// 			return findRank(arr, l, p-1, rnk);
-// 	}
-
-// 	public void swap(int a, int b, int arr[]){
-// 		int t= arr[a];
-// 		arr[a]= arr[b];
-// 		arr[b]=t;
-// 	} 
-
-// 	public int partition(int arr[], int l, int r){
-//         // System.out.println(l+" "+r+" "+arr[rp]);
-		
-//         int a=l;
-// 		for(int i=l+1; i<=r; ++i){
-// 			if(arr[i]<arr[l])
-// 				swap(++a, i, arr);
-// 		}
-// 		swap(a, l, arr);
-// 		return a;
-// 	}
+/*
+binary search
+public int findKthLargest(int[] nums, int k) {
+        int l = Arrays.stream(nums).min().getAsInt();
+        int r = Arrays.stream(nums).max().getAsInt();
+        int ans=0;
+        while(l<=r) {
+            int mid=l+(r-l)/2;
+            int c=0;
+            for(int i=0;i<nums.length;++i) {
+                if(nums[i]>mid){
+                    ++c;
+                }
+            }
+            if(c<k){
+                ans=mid;
+                r=mid-1;
+            }
+            else {
+                l=mid+1;
+            }
+        }
+        return ans;
+    }
+ */

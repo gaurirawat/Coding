@@ -1,0 +1,123 @@
+**  Array_ib_maximum_consecutive_gap    //bucketing + pigeonhole
+**  Array_ib_maximum_distance   //max j-i where arr[j]>arr[i]
+    Array_ib_largest_number     //comparator usage and implementation
+**  Array_ib_merge_intervals    //10thousand edge cases. REVISE
+    Arrays_ib_next_permutations
+**  Arrays_ib_flip
+*   Array_ib_maximum_sum_triplet    //tree set implementation
+*** Array_ib_partitions    //weird concept
+
+    DP_ib_tushars_birthday_bombs
+    DP_ib_longest_AP
+    DP_ib_jump_game_array   // very easy but even easier to mess up
+    Matrix_DP_ib_no_of_submatrix_with_sum_zero
+****DP_ib_coin_change_infinite_2
+    DP_ib_max_sum_without_adjacent_elements
+    DP_ib_ways_to_evaluate_expression_to_true   //something new
+    DP_ib_min_jumps_in_array
+    DP_ib_min_sign_flips_for_sum_closest_to_zero
+**  DP_ib_buy_sell_stock_k  //complex soln
+    DP_ib_buy_sell_stock_2
+    DP_ib_n_digit_numbers_with_digit_sum    //see how extra conditions can be added to bring down the time complexity
+    DP_ib_arrange_horses    //different
+    DP_ib_longest_valid_parenthesis
+    DP_ib_tushars_birthday_party_knapsack   //we are still not 100% clear with knapsack
+*   DP_ib_palindrome_partitioning_2
+    DP_ib_coins_in_a_line
+*   DP_ib_kth_manhattan_distance    //unique problem
+**  DP_ib_tiling_with_dominoes  //standard soln
+
+    Map_ib_longest_consecutive_sequence
+**  Heap_ib_LRU_cache   //map implementation and function clarity
+    Arrays_ib_max_n_pair_combination    //minH and maxH implementation. Important
+
+    Hashing_ib_colorful_number
+*   Hashing_ib_anagram  //important. Still don't remember the correct map functions
+*   Hashing_ib_points_on_a_line //thousand corner cases
+*   Hashing_ib_equal_sums_pair   //pathetic piece of shit
+*   Hashing_ib_4_sum    //comparator problem
+    Hashing_ib_fraction
+    Heap_ib_max_sum_combinations
+
+*   String_ib_KMP_implement_strstr
+    String_ib_min_char_to_make_string_palindrome
+    String_ib_string_to_integer
+    String_ib_zigzag_string
+    String_ib_shortest_unique_prefix
+    String_ib_compare_versions
+    String_ib_power_of_two
+    String_ib_justified_text
+
+    Tree_ib_next_right_pointer_tree
+    Tree_ib_iterative_inorder   //standard approach
+*   Tree_ib_generate_unique_BST
+    Tree_ib_recover_binary_tree
+    Tree_ib_binary_iterator
+    Tree_ib_least_common_ancestor   //uptil now we were using incorrect approach
+    Tree_ib_iterative_postorder //revise all iterative traversals
+    Tree_ib_cousins_in_a_binary_tree
+    Tree_ib_sum_root_to_leaf_numbers    //bigInteger
+
+    Pointer_ib_remove_duplicate_form_sorted_array   //important to clear concept of item comparison
+*   Pointer_ib_3_array_pointer  //weird breaking cases
+*   Pointer_ib_3_sum_target_k
+    Pointer_ib_3_sum_zero
+    Pointer_ib_water_container  //rainwater trapping variation, very easy method. Have a look
+    Pointer_ib_max_continuous_series_of_one     //practice
+    Pointer_ib_sort_by_color    //how <O(n) works
+
+    Stack_ib_simplify_directory_path    //see how the use of stringBuilder can reduce time complexity by manifolds
+
+**  BSearch_ib_matrix_median
+    BSearch_ib_power_function   //important for overflow handling
+*** BSearch_ib_painters_partition_problem
+
+    LL_ib_reverse_part_of_list
+    LL_ib_insertion_sort    //fuck-all question
+
+*   Maths_ib_gcd
+*   Math_ib_largest_coprime_divisor //intuitive concept.
+    Math_ib_excel_to_column     //interesting corner case
+    Math_ib_sorted_permutation_rank
+
+*   BM_ib_sum_of_pairwise_hamming_distance  //extreme issue with int and long limits
+    BM_ib_total_set_bits_from_1_to_n    //vertical counting of bits using concept of inversion of bits after intervals
+
+    Graph_ib_valid_path
+    Graph_ib_largest_distance_between_nodes //standard problem
+**  Graph_ib_capture_regions_on_board
+    Graph_ib_word_ladder    //see how graphs are being used here
+    Graph_ib_clone_graph    //revise method
+    Graph_ib_smallest_multiple_with_0_and_1
+*   Graph_ib_min_cost_path  // 0/1 BFS solution
+
+*   Greedy_ib_gas_station
+
+    Backtracking_ib_kth_permutation_sequence
+    Backtracking_ib_subsets_2
+
+------------------------------------------------------------------------------------------------------------------------
+
+    DP_gfg_matrix_chain_multiplication.java
+    DP_lc_coin_change_find_no_of_combinations.java
+    DP_lc_LIS
+    DP_gfg_subset_sum_divisible_by_k
+    DP_lc_LCS_print_shortest_common_supersequence
+*   DP_lc_subset_sum_print_combinations
+    DP_gfg_optimal_binary_search_tree
+
+*   Matrix_DP_gfg_max_sum_rectangle
+*   Matrix_Stack_lc_max_sum_rectangle_given_binary_matrix
+
+    Graph_gfg_find_min_path_up_down_left_right_movement
+    Graph_lc_course_scheduling_topo_sort_kahn_algo      //kahn algo
+
+    LL_gfg_reverse_LL
+    LL_lc_flatten_a_multilevel_DLL
+
+*   Tree_gfg_bottom_view_of_tree
+
+**  BSearch_lc_first_and_last_occurrence_of_element
+
+    String_lc_rearrange_spaces
+

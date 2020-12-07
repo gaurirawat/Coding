@@ -4,4 +4,196 @@ Trie Data Structure
 // https://www.youtube.com/watch?v=AXjmTQ8LEoI&ab_channel=TusharRoy-CodingMadeSimple
 // https://www.youtube.com/watch?v=jCu-Pd0IjIA&ab_channel=CodingNinjasIndia
 
+BST:
+expected not of compares for search/insert is 2logn when keys are inserted in random order since bst has direct
+correspondence to quicksort where everything smaller than the pivot is on the right
 
+For qroblems involving rank count, we can add a count field to node to store no of elements in that subtree.
+
+BASIC QUESTIONS:
+
+SYMMETRIC BINARY TREE
+Tree_ib_symmetric_trees
+remember to use the same tree twice and manipulate pointers on both together instead of generating a mirror tree.
+
+
+
+MERGE BINARY TREE
+Tree_ib_merge_two_binary_trees
+In any case where we have to merge trees or linked list always remember that whenever the first one gets exhausted then
+we need to return the second node/root instead of calculating sum and taking other values as zero.
+PS- Always go for the recursive approach here.
+
+
+
+2-SUM BINARY TREE
+Tree_ib_2_sum_binary_tree
+Given a binary search tree T, where each node contains a positive integer, and an integer K, you have to find whether or
+not there exist two different nodes A and B such that A.value + B.value = K.
+Soln:
+we don't usually think of this.
+stupid soln.
+convert tree to list using inorder and then do 2sum using 2pointer or hashing.
+
+
+
+REMOVE HALF NODES
+Tree_ib_remove_half_nodes
+Given a binary tree A with N nodes, you have to remove all the half nodes and return the final binary tree.
+    Half nodes are nodes which have only one child.
+    Leaves should not be touched as they have both children as NULL
+here first solve for the child nodes and then the current node otherwise initially a child may exist which when later
+removed will give incorrect answer
+
+
+
+RECOVER BST O(1)SC, O(n)TC
+Tree_ib_recover_binary_tree
+Do inorder traversal. Whenever curr.val>prev.val, we save both values as a(prev) and b(curr). when curr.val>prev.val
+again then we store curr as c. soln becomes a and c. Otherwise if we did not come across c then soln. is a and b.
+
+------------------------------------------------------------------------------------------------------------------------
+
+TRAVERSALS:
+
+VERTICAL TRAVERSAL
+Tree_ib_traversal_vertical_order_with_same_level_pre_order.java
+https://www.interviewbit.com/problems/vertical-order-traversal-of-binary-tree/
+DS-Hashmap
+Point to be kept in mind is that do not go for the recursive approach because the preorder criteria for same level does
+not get fulfilled. Go for the iterative approach only
+Here we use level order traversal using a queue iteratively. Object inside queue should know the no of current vertical
+line on the left or right(-ve and +ve) of the center. keep track of the max and min.
+
+
+
+DIAGONAL TRAVERSAL
+Tree_ib_traversal_diagonal
+https://www.interviewbit.com/problems/vertical-order-traversal-of-binary-tree/
+DS-Hashmap
+Again use hashmap like previous one. do ++level every time we go to the left child. Do preorder traversal if the
+question demands such ordering.
+
+
+
+INORDER TRAVERSAL ITERATIVE
+Tree_ib_traversal_inorder
+https://www.interviewbit.com/problems/inorder-traversal/
+we use the same approach as of find next smaller and greater.
+DS-Stack
+1. take a stack DS.
+2. Initially add root and keep on adding nodes until there is no left child possible.
+3. Pop node from top of stack. Add it to the ans list. Push its right child and all left child of its right child.
+4. continue above step till no nodes remain to be visited.
+
+
+
+PREORDER TRAVERSAL ITERATIVE
+Tree_ib_traversal_preorder
+https://www.interviewbit.com/problems/postorder-traversal/
+DS-Stack
+1. Initially add the root.
+2. Pop element from stack and add it to the ans list.
+3. first push the right child then push the left child so the time of popping we'll be able to pop the left child before
+the right child
+4. continue above step till no nodes remain to be visited.
+PS-the child that has to be visited next is pushed into the stack as the second child.
+
+
+
+POST-ORDER TRAVERSAL ITERATIVE
+Tree_ib_traverse_postorder
+https://www.interviewbit.com/problems/postorder-traversal/
+DS-Stack
+L,R,root. is the reverse of (root,R,L).
+hence we calculate (root,R,L) similar to preorder and then reverse the solution.
+
+------------------------------------------------------------------------------------------------------------------------
+
+MEDIUM LEVEL QUESTIONS:
+
+FIND ALL COUSINS OF A NODE(EXCLUDING SIBLINGS)
+Tree_ib_cousins_in_a_binary_tree
+https://www.interviewbit.com/problems/cousins-in-binary-tree/
+DS-Queue
+1. Level order traversal required.
+2. Maintain two queues curr and next. when curr becomes empty assign next to curr and use fresh one for next.
+3. Whenever parent has been found then complete the currQueue traversal and stop.
+4. Remove both child of parent if they exist from the nextQueue. This removes both the actual node and its sibling.
+5. nextQueue is our answer.
+
+
+
+BST ITERATOR*********
+Tree_ib_binary_iterator
+DS-Stack
+To get the next smallest or the next largest number by ie in order to implement iterators with hasNext() and next()
+function use stack which can contain elements upto o(h);
+At any point of time stack contains the next smallest/largest non-visited element at the top.
+
+
+
+POPULATE NEXT RIGHT POINTERS
+Tree_ib_next_right_pointer_tree_2
+NO DS
+we work on levels one by one.
+Key is to make use of the next pointers set on the previous level. Every time we are just making the previous pointer
+point to the curr node.
+1. for any iteration keep setting correct pointers for it's children.
+2. whenever left child is not null make prev point to it. do the same for right.
+3. to ease out this operation take an extra previous node to avoid extra overhead for the first encountered child.
+4. once iterator becomes null set new head as the dummy prev.next
+
+
+
+TREE CONSTRUCTION
+Tree_ib_construct_using_postorder_and_inorder
+Tree_ib_construction_from_inorder_and_preorder
+https://www.interviewbit.com/problems/construct-binary-tree-from-inorder-and-preorder/
+
+In such questions, taking preorder&inorder, regular approach is to start traversing from start of preorder and looking
+for the index of that value in inorder. Now we see if index lies in our current valid range of index and then work
+recursively for its children by updating the range accordingly. So here the search of the pre order value in the inorder
+array takes O(n) since the array is not sorted.
+Overall TC=O(n2) SC=O(1) (excluding the tree which is being constructed)
+
+Better approach is the use of hashmaps.
+1. create mapping of value->index. begin with valid index 0, len-1.
+2. Take first value in preorder.
+3. Find its index using map. Return if index is invalid for given range. create node if valid.
+4. remove value from preorder.
+5. update valid l and r indexes for inorder. recurse for left and right child nodes.
+Overall TC=O(n) SC=O(n) (excluding the tree which is being constructed)
+
+
+
+LEAST COMMON ANCESTOR
+Tree_lc_least_common_ancestor
+https://www.interviewbit.com/problems/least-common-ancestor/
+
+imp:
+Until some time back we were having the concept of using global booleans(ans, afound, bfound) WHICH IS WRONG.
+If a is already found, then the moment we find b, both "found" will become true and if we are storing ans based on their
+true values then we'll use current node as ans which is incorrect.
+
+1. return true/false from every node if subtree contains a/b.
+2. use one global ans and three local boolean
+    boolean l=lcaInner(root.left,a,b);
+    boolean r=lcaInner(root.right,a,b);
+    boolean found=root.val==a||root.val==b;
+3. if a==b and found=t then set global ans otherwise check for correct combination of l/r/found and set ans if it is not
+already set.
+4. return l||r||found
+
+------------------------------------------------------------------------------------------------------------------------
+
+TIP:
+whenever the tree involves some sort of identification of values that is associated with ranges and we are unable to
+solve that then simply create an array of its inorder traversal elements and do the range operation on the array. This
+will be O(n) generally.
+
+When working with pointers and using prev or next pinter which have to be set/unset, create an extra prev/next pointer
+at start/end of list/tree/level to avoid handling of edge case.
+eg POPULATE NEXT RIGHT POINTERS
+
+------------------------------------------------------------------------------------------------------------------------

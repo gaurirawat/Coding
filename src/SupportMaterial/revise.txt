@@ -1,21 +1,14 @@
-    DP_gfg_matrix_chain_multiplication.java
-    DP_lc_coin_change_find_no_of_combinations.java
-    DP_lc_LIS
-    DP_gfg_subset_sum_divisible_by_k
-    DP_lc_LCS_print_shortest_common_supersequence
-*   DP_lc_subset_sum_print_combinations
+    Backtracking_ib_maximal_string
 
-*   Matrix_DP_gfg_max_sum_rectangle
-*   Matrix_Stack_lc_max_sum_rectangle_given_binary_matrix
+*   Hashing_ib_equal_sums_pair   //pathetic piece of shit
+    Hashing_ib_copy_list
 
-    Graph_gfg_find_min_path_up_down_left_right_movement
-    Graph_lc_course_scheduling_topo_sort_kahn_algo      //kahn algo
+@@  String_ib_shortest_unique_prefix    //map implementation imp.
+@@  Tree_ib_sum_root_to_leaf_numbers    //bigInteger implementation
 
-    LL_gfg_reverse_LL
-    LL_lc_flatten_a_multilevel_DLL
+    Array_lc_odd_even_jump
+    Array_ib_order_of_people_heights
+    Tree_ib_least_common_ancestor   //uptil now we were using incorrect approach
 
-*   Tree_gfg_bottom_view_of_tree
-
-**  BSearch_lc_first_and_last_occurrence_of_element
-
-    String_lc_rearrange_spaces
+    Heap_lc_skyline_problem
+    String_lc_justified_string

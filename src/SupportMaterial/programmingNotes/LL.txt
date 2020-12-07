@@ -1,10 +1,22 @@
 LL
 
 INTERSECTION POINT OF TWO LL
+K-REVERSE: RECURSIVE SOLUTION
+CYCLE DETECTION: FLOYD'S CYCLE DETECTION
+FIND STARTING POINT OF LOOP AND LOOP REMOVAL
+FLATTEN A MULTILEVEL LL WITH O(1) SPACE COMPLEXITY
+FLATTEN A MULTILEVEL DLL: O(1) SPACE COMPLEXITY
+RECURSIVE APPROACH
+REVERSE PART OF LIST: RECURSIVE
+INSERTION SORT FOR LL
+
+------------------------------------------------------------------------------------------------------------------------
+
+INTERSECTION POINT OF TWO LL
 
 Prob:
 LL_lc_find_intersection_point
-//https://www.interviewbit.com/problems/intersection-of-linked-lists/
+https://www.interviewbit.com/problems/intersection-of-linked-lists/
 
 Algo:
 1. find length of both. O(m+n)
@@ -283,7 +295,7 @@ If the head is itself the starting point then the returned head becomes head her
 where the reverse is starting. The next pointer of this node will point to the head of the modified list which gets
 modified by the reverse function.
 
- public ListNode reverseBetween(ListNode head, int m, int n) {
+    public ListNode reverseBetween(ListNode head, int m, int n) {
         if(head==null||head.next==null)return head;
         ListNode temp=head;
         int size=n-m+1;

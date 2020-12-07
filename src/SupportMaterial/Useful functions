@@ -63,3 +63,21 @@ class CustomComp implements Comparator<Integer> {
         return -x.compareTo(y);
     }
 }
+
+for-each and collections:
+At the time of looping through collections using for each, we cannot remove any entry from it. In order to do so either
+traverse through for(int i...) or in case of a map, create a new map for modified value and delete the previous one.
+
+Java LinkedHashMap get first or last entry, The quickest way to get the "first" entry is still entrySet().iterator().next()
+
+displaying through Iterator:
+Iterator value = queue.iterator();
+System.out.println("The iterator values are: ");
+while (value.hasNext()) {
+    System.out.println(value.next());
+}
+
+Generating random elements:
+Random random=new Random();
+int rint = random.nextInt(5); //generates random no from 0-5;
+double rdouble = nextDouble();  //generates from 0.0-1.0

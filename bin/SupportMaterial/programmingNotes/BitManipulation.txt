@@ -73,3 +73,5 @@ x | ~(x + 1) : extracts the lowest cleared bit of x (all others are set).
 x | (x - (1 << n)) : x, with the run of cleared bits (possibly length 0) starting at bit n set.
 x | ~(x - (1 << n)) = the lowest run of cleared bits (possibly length 0) in x, starting at bit n are the only clear bits.
 
+x^1= ~x so whenever we need to toggle any bit we use this technique.
+for eg if we need to toggle elements from 5 to 8th bit, we xor it with a number that has all ones from 5 to 8th bit.

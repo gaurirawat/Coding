@@ -1,10 +1,22 @@
 LL
 
 INTERSECTION POINT OF TWO LL
+K-REVERSE: RECURSIVE SOLUTION
+CYCLE DETECTION: FLOYD'S CYCLE DETECTION
+FIND STARTING POINT OF LOOP AND LOOP REMOVAL
+FLATTEN A MULTILEVEL LL WITH O(1) SPACE COMPLEXITY
+FLATTEN A MULTILEVEL DLL: O(1) SPACE COMPLEXITY
+RECURSIVE APPROACH
+REVERSE PART OF LIST: RECURSIVE
+INSERTION SORT FOR LL
+
+------------------------------------------------------------------------------------------------------------------------
+
+INTERSECTION POINT OF TWO LL
 
 Prob:
 LL_lc_find_intersection_point
-//https://www.interviewbit.com/problems/intersection-of-linked-lists/
+https://www.interviewbit.com/problems/intersection-of-linked-lists/
 
 Algo:
 1. find length of both. O(m+n)
@@ -283,7 +295,7 @@ If the head is itself the starting point then the returned head becomes head her
 where the reverse is starting. The next pointer of this node will point to the head of the modified list which gets
 modified by the reverse function.
 
- public ListNode reverseBetween(ListNode head, int m, int n) {
+    public ListNode reverseBetween(ListNode head, int m, int n) {
         if(head==null||head.next==null)return head;
         ListNode temp=head;
         int size=n-m+1;
@@ -312,4 +324,51 @@ modified by the reverse function.
         return prev;
     }
 
+------------------------------------------------------------------------------------------------------------------------
+
+INSERTION SORT FOR LL:
+
+Problem:
+LL_ib_sorting_insertion_sort
+https://www.interviewbit.com/problems/insertion-sort-list/
+
+Approach:
+1) Create a new head for sorted list containing just the first element and remove it from actual list.
+2) Take first element of actual list. Insert it in the sorted list and remove it from actual list.
+    keep repeating step 1 until no elements are left in actual list.
+3) return sorted list.
+
+public ListNode insertionSortList(ListNode head) {
+    if(head==null||head.next==null) return head;
+
+    // add first element to sorted list
+    ListNode sHead=head;
+    head=head.next;
+    sHead.next=null;
+
+    //repeat until list is empty
+    while(head!=null){
+
+        //case where element has to be inserted at the start of the sorted list.
+        if(sHead.val>=head.val){
+            ListNode temp=head;
+            head=head.next; //element removed from actual list
+            temp.next=sHead;
+            sHead=temp;
+        }
+        else{
+            //insert element in the sorted list.
+            ListNode curr=sHead,prev=sHead;
+            while(curr!=null && curr.val<head.val){
+                prev=curr;
+                curr=curr.next;
+            }
+            ListNode temp=head;
+            head=head.next; //element removed from actual list
+            temp.next=prev.next;
+            prev.next=temp;
+        }
+    }
+    return sHead;
+}
 ------------------------------------------------------------------------------------------------------------------------

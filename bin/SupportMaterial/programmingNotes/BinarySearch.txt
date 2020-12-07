@@ -1,11 +1,31 @@
 BINARY SEARCH
+FIRST AND LAST OCCURRENCE OF AN ELEMENT: IMPORTANT
+FIND COUNT OF ELEMENT IN A SORTED ARRAY O(logn)
+SEARCHING IN AN INFINITE ARRAY
+SEARCH ELEMENT IN SORTED ARRAY ELSE RETURN INSERT POSITION
+FIND MINIMUM IN A ROTATED ARRAY
+SEARCH IN A ROTATED ARRAY
+MATRIX:
+    SEARCH ELEMENT IN A SORTED MATRIX WHERE FIRST ELEMENT OF EVERY ROW >= THAN LAST ELEMENT OF PREVIOUS ROW
+    MATRIX MEDIAN
+PAINTERS PARTITION PROBLEM
+
+------------------------------------
+
+A general thing. If we are making changes to both l and r then upper condition will most likely be l<=r.
+Else the cond is l<r only when we are making changes to only pointer out of l and r. Also whenever we take (l<r)
+condition always update l as mid+1(most likely) because otherwise in an example of [1,2] the mid will continue to come
+as 0 and we will end up going in an infinite loop.
+
+
+BINARY SEARCH
+
+Approach:
 
 Prob:
 BSearch_lc_BS
 https://leetcode.com/problems/binary-search/submissions/
 
-A general thing. If we are making changes to both l and r then upper condition will most likely be l<=r.
-Else the cond is l<r only when we are making changes to only pointer out of l and r.
 
 A basic code for searching t in arr[].
     public int search(int[] arr, int t) {
@@ -73,12 +93,93 @@ https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-
         }
         return res;
     }
+
+
+
+    OR
+
+
+
+    int l=0,r=nums.length-1;
+
+    while(l<r){
+        int mid=l+(r-l)/2;
+        if(nums[mid]>=target)
+            r=mid;
+        else
+            l=mid+1;
+    }
+    return r;
+
+    l=0;r=nums.length-1;
+    while(l<=r){
+        int mid=l+(r-l)/2;
+        if(nums[mid]<=target)
+            l=mid+1;
+        else
+            r=mid-1;
+    }
+    return l-1;
+    //the reason why the second case is not written like the first one is because if we write it as below, then this
+    code looks correct but with an example of arr=[1,1], mid will be 0 and then it will go on an infinite loop.
+    while(l<r){
+        mid=...
+        if(nums[mid]<=target)
+            l=mid;
+        else
+            r=mid-1;
+    }
+
 --------------------------------------
 
 FIND COUNT OF ELEMENT IN A SORTED ARRAY O(logn)
 
 Algo:
 find first and last occurrence of the element. now count= lastIndex-firstIndex +1
+------------------------------------------------------------------------------------------------------------------------
+SEARCHING IN AN INFINITE ARRAY
+
+Take initial elements in list of size 1, last elem<target, elems=1
+Take next elements in list of size 2, last elem<target, elems=1+2=3
+Take next elements in list of size 4, last elem<target, elems=3+4=7
+So basically keep inc size of list until size<10^9
+After that fix the size and keep on inc elem count. When ever lastElem>target do Bsearch on the list.
+------------------------------------------------------------------------------------------------------------------------
+
+SEARCH ELEMENT IN SORTED ARRAY ELSE RETURN INSERT POSITION
+
+Problem:
+BSearch_ib_sorted_insert_position
+https://www.interviewbit.com/problems/sorted-insert-position/
+
+Approach:
+the insert position has to be the leftmost position where the element is greater than the one being searched.
+    while(l<=r){
+        int mid=l+(r-l)/2;
+        if(a.get(mid)>=b){
+            index=mid;
+            r=mid-1;
+        }
+        else
+            l=mid+1;
+    }
+    return index;
+
+
+    OR
+
+
+    while(l<r){
+        int mid=l+(r-l)/2;
+        if(a.get(mid)>=b){
+            r=mid;
+        }
+        else
+            l=mid+1;
+    }
+    if(a.get(l)<b) return l+1;
+    return l;
+
 ------------------------------------------------------------------------------------------------------------------------
 
 FIND MINIMUM IN A ROTATED ARRAY
@@ -121,14 +222,22 @@ array otherwise left array.
     else
         return binarySearch(0,r-1,k,a);
 ------------------------------------------------------------------------------------------------------------------------
-SEARCHING IN AN INFINITE ARRAY
 
-Take initial elements in list of size 1, last elem<target, elems=1
-Take next elements in list of size 2, last elem<target, elems=1+2=3
-Take next elements in list of size 4, last elem<target, elems=3+4=7
-So basically keep ins size of list until size<10^9
-After that fix th size an keep on inc clem count. When ever elem>target do Bsearch on the list.
-------------------------------------------------------------------------------------------------------------------------
+
+MATRIX:
+
+SEARCH ELEMENT IN A SORTED MATRIX WHERE FIRST ELEMENT OF EVERY ROW >= THAN LAST ELEMENT OF PREVIOUS ROW
+
+Prob:
+BSearch_ib_matrix_search
+https://www.interviewbit.com/problems/matrix-search/
+
+Approach:
+First identify the row which will can contain the element.
+if(no>last element of current row) goto next row else consider this row.
+Now do binary search on the chosen row.
+
+---------------------------------------
 
 MATRIX MEDIAN
 
@@ -172,5 +281,26 @@ elements. Hence that case has to be handled.
             return min;
         }
     }
+
+------------------------------------------------------------------------------------------------------------------------
+
+
+PAINTERS PARTITION PROBLEM
+
+Problem:
+BSearch_ib_painters_partition_problem
+https://www.interviewbit.com/problems/painters-partition-problem/
+
+Consider it as the problem of dividing the array into k partitions such that the max sum of each partition is minimized.
+n painters take k unit time to paint one block. list l contains no of blocks in each fence.
+
+case 1: n=1.            return sum(list)*k
+case 2: n>=list.size()  return max(list)*k
+case 3: n<list.sizes() use binary search over no of blocks. l=max(list), r=sum(list).
+    1. calculate mid. call getMaxBlocks(mid)
+    2. getMaxTime(mid): if mid is insufficient. ie no-of-blocks-in-1-fence>mid or if n painters are all exhausted then
+        return -1 else return the maxBlocks for the painter.
+    3. now if we get return value as -1 then l=mid+1;
+        otherwise save maxBlocks as ans and r=maxBlocks-1
 
 ------------------------------------------------------------------------------------------------------------------------

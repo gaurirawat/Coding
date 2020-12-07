@@ -14,7 +14,8 @@ TOPOLOGICAL SORT: KAHN'S ALGO
 DISJOINT SET: UNION FIND
 STRONGLY CONNECTED COMPONENT: KOSARAJU'S ALGO
 STRONGLY CONNECTED COMPONENT: TARJAN'S ALGO
-
+BIPARTITE GRAPH: BFS
+EULERIAN CYCLE, PATH
 ------------------------------------------------------------------------------------------------------------------------
 
 BFS:
@@ -30,7 +31,7 @@ inner
 1. mark node as visited, push it into queue
 2. pop elements from queue till it is empty
 3. for each element get its adjacency list
-3. if these adjacent elements are not visited then add them to the queue and MARK THEM AS VISITED otherise they will be
+3. if these adjacent elements are not visited then add them to the queue and MARK THEM AS VISITED otherwise they will be
 inserted into the stack again
 
 
@@ -169,16 +170,16 @@ int priority[v]//contains the edge weight to reachable vertices
 
 Algorithm
 1) Create a set mstSet that keeps track of vertices already included in MST.
-2) Assign a key value to all vertices in the input graph. Initialize all key values as INFINITE. Assign key value as 0
-for the first vertex so that it is picked first.
+2) Assign a distance value to all vertices in the input graph. Initialize all distance values as INFINITE. Assign
+distance value as 0 for the source vertex so that it is picked first.
 3) While mstSet doesn't include all vertices
-�.a) Pick a vertex u which is not there in mstSet and has minimum key value.
+�.a) Pick a vertex u which is not there in mstSet and has minimum distance value.
 �.b) Include u to mstSet.
-�.c) Update key value of all adjacent vertices of u. To update the key values, iterate through all adjacent vertices.
-For every adjacent vertex v, if weight of edge u-v is less than the previous key value of v, update the key value as
+�.c) Update distance value of all adjacent vertices of u. To update the distance values, iterate through all adjacent
+vertices. For every adjacent vertex v, if weight of edge u-v is less than the previous distance value of v, update the distance value as
 weight of u-v
 
-better explanation in coding-> graphs.
+min heap implementations in Graph_gfg_MST_prims.
 Here the priority contains the edge weights and not their sum(like the way it happens in dijkstra)
 
 
@@ -317,7 +318,7 @@ cycle.
 		for(int i=0; i<v-1;++i){
 			for(Edge e:edges){
 				if(distance[e.u]!=Integer.MAX_VALUE && distance[e.v]>distance[e.u]+e.w)
-					distance[e.v]= distance[e.u]==Integer.MAX_VALUE?0:distance[e.u]+e.w;
+					distance[e.v]= distance[e.u]+e.w;
 			}
 		}
         // System.out.println(distance.toString());
@@ -594,7 +595,7 @@ for the set that the i-th element belongs to.
 For eg here initially we take every element belonging to its own set. Ie no of sets is equal to the no of elements.
 Given a set of edges(in this problem) we go to each of them one by one and see if both nodes(u,v) belong to the same
 connected component. This is done by find(). In case they belong to different sets and there exists an edge then we
-put  both of these into the same set using union().
+put both of these into the same set using union().
 
     int set[]=new int[a];
 
@@ -628,6 +629,13 @@ here trees wil be
      1             5
    2   4         6
   3 8          7
+
+
+The above approaches are useful for graphs if union and find are happening simultaneously. In a case where there are
+just finds or if the union can be performed before the finds, then we go for simple dfs. We maintain an extra array to
+store the root of the connected component each vertex belongs to. Do one dfs and keep updating the root value of the
+component for every connected vertex we visit. Initial construction will be o(n) and subsequent finds will be o(1).
+
 ------------------------------------------------------------------------------------------------------------------------
 
 STRONGLY CONNECTED COMPONENTS: KOSARAJU'S ALGORITHM
@@ -663,4 +671,98 @@ low-link value.
 3. After visiting all neighbours, if the current node started a connected component then pop nodes off the stack until
 current node is visited
 
- 
+------------------------------------------------------------------------------------------------------------------------
+
+BIPARTITE GRAPH: BFS
+
+Prob:
+Graph_lc_is_graph_bipartite
+https://leetcode.com/problems/is-graph-bipartite/
+
+bipartite graph is a graph that can be divided into two sets where every element from one set are connected(if at all)
+to elements of another set and not their own
+Approach:
+Do dfs, keep alternating between colours. Go to unvisited/uncoloured vertex, assign it colour and for every neighbour
+visit it if colour is not already assigned otherwise if colour is same then return false.
+
+    public boolean isBipartite(int[][] graph) {
+        int[] colour= new int[graph.length];
+        for(int i=0;i<graph.length;++i) {
+            if(colour[i]==0 && !dfsColouringValid(i, true,graph,colour)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean dfsColouringValid(int u, boolean colour1, int[][] g, int[] colour) {
+        colour[u]=colour1?1:2;
+        for(int v:g[u]) {
+            if(colour[v]==(colour1?1:2)) {
+                return false;
+            }
+            if(colour[v]==0 && !dfsColouringValid(v,!colour1, g, colour)) {
+                return false;
+            }
+        }
+        return true;
+    }
+------------------------------------------------------------------------------------------------------------------------
+
+EULERIAN PATH, CYCLE
+
+Prob:
+Graph_eulerian_cycle_path_undirected
+
+Ref:
+https://www.geeksforgeeks.org/eulerian-path-and-circuit/
+
+Eularian path is a cycle which visits every EDGE exactly once.
+If the path starts and ends on the same vertex then we say that it is a eulerian cycle.
+
+An undirected graph has Eulerian cycle if following two conditions are true.
+a) All vertices with non-zero degree are connected. We don’t care about vertices with zero degree because they don’t
+belong to Eulerian Cycle or Path (we only consider all edges).
+b) All vertices have even degree.
+
+An undirected graph has Eulerian Path if following two conditions are true.
+a) Same as condition (a) for Eulerian Cycle
+b) If zero or two vertices have odd degree and all other vertices have even degree. Note that only one vertex with odd
+degree is not possible in an undirected graph (sum of all degrees is always even in an undirected graph)
+
+    public void isEulerian(ArrayList<ArrayList<Integer>> g) {
+        //find first non connected vertex and perform dfs. no other component should be present
+        boolean[] visited = new boolean[g.size()];
+        boolean flag=true;
+        int oddDegreeVertexCount=0;
+        boolean notEuler=false;
+        for(int i=0;i<g.size();++i) {
+            if(!visited[i] && g.get(i).size()!=0){
+                if(flag) {
+                    dfs(i, visited,g);
+                } else{
+                    notEuler=true;
+                }
+            }
+
+            if(g.get(i).size()%2!=0) {
+                oddDegreeVertexCount++;
+            }
+        }
+
+        if(notEuler || oddDegreeVertexCount>2) {
+            System.out.println("Not euler");
+        } else if(oddDegreeVertexCount==2) {
+            System.out.println("Euler path");
+        } else {
+            System.out.println("Euler cycle");
+        }
+    }
+
+------------------------------------------------------------------------------------------------------------------------
+
+-HAMILTONIAN CYCLE: np hard problem
+-GRAPH ISOMORPHISM: given two graphs we need to identify if they are same or not. It not known to be solvable in
+polynomial time nor to be NP-complete, and therefore may be in the computational complexity class NP-intermediate.
+-Web crawler: prefer BFS over DFS because DFS takes us very far from the starting vertex while BFS takes us away slowly
+and generally we may want to discover just the close vertices.

@@ -16,16 +16,22 @@ public class Pointer_ib_remove_duplicate_form_sorted_array {
         return a.size();
     }
     /*
-    Below gives TLE
     public int removeDuplicates(ArrayList<Integer> a) {
-        int i=0;
-        while(i<a.size()){
-            while(i<a.size()-1 && a.get(i).intValue()==a.get(i+1).intValue())
-                a.remove(i);
-            i++;
+        int l = 0;
+        int r = 0;
+        while (r<a.size()) {
+            while(r+1<a.size() && a.get(r).compareTo(a.get(r+1))==0) {
+                r++;
+            }
+            a.set(l++,a.get(r));
+            r++;
         }
+        while (a.size() > l )
+          a.remove(a.size() - 1);
+
         return a.size();
     }
+
 */
 
 }

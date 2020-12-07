@@ -4,6 +4,7 @@ package IB;
 This problem can be taken as the problem of dividing the array into k partitions such that the max sum of each partition
 is minimized.
  */
+//https://www.interviewbit.com/problems/painters-partition-problem/
 public class BSearch_ib_painters_partition_problem {
     public int paint(int k, int t, int[] a) {
         int mod=(int)Math.pow(10,7)+3;

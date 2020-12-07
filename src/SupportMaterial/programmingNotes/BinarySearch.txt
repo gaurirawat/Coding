@@ -8,7 +8,7 @@ SEARCH IN A ROTATED ARRAY
 MATRIX:
     SEARCH ELEMENT IN A SORTED MATRIX WHERE FIRST ELEMENT OF EVERY ROW >= THAN LAST ELEMENT OF PREVIOUS ROW
     MATRIX MEDIAN
-
+PAINTERS PARTITION PROBLEM
 
 ------------------------------------
 
@@ -281,5 +281,26 @@ elements. Hence that case has to be handled.
             return min;
         }
     }
+
+------------------------------------------------------------------------------------------------------------------------
+
+
+PAINTERS PARTITION PROBLEM
+
+Problem:
+BSearch_ib_painters_partition_problem
+https://www.interviewbit.com/problems/painters-partition-problem/
+
+Consider it as the problem of dividing the array into k partitions such that the max sum of each partition is minimized.
+n painters take k unit time to paint one block. list l contains no of blocks in each fence.
+
+case 1: n=1.            return sum(list)*k
+case 2: n>=list.size()  return max(list)*k
+case 3: n<list.sizes() use binary search over no of blocks. l=max(list), r=sum(list).
+    1. calculate mid. call getMaxBlocks(mid)
+    2. getMaxTime(mid): if mid is insufficient. ie no-of-blocks-in-1-fence>mid or if n painters are all exhausted then
+        return -1 else return the maxBlocks for the painter.
+    3. now if we get return value as -1 then l=mid+1;
+        otherwise save maxBlocks as ans and r=maxBlocks-1
 
 ------------------------------------------------------------------------------------------------------------------------

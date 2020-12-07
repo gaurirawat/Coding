@@ -2,15 +2,35 @@ Sorting algo:
 https://www.geeksforgeeks.org/sorting-algorithms/
 
 ALGORITHM	TIME COMPLEXITY
- 	            BEST	    AVERAGE	    WORST
-Selection Sort	Ω(n^2)	    θ(n^2)	    O(n^2)
+ 	            BEST	    AVERAGE	    WORST       INPLACE     STABLE      REMARK
+Selection Sort	Ω(n^2)  	θ(n^2)	    O(n^2)         YES         NO       max n exchanges
+Insertion Sort	Ω(n)	    θ(n^2)  	O(n^2)         YES         YES      preferred for partially sorted data
+Shell sort      Ω(n)           -           -           YES         NO
+Merge Sort	    Ω(nlogn)	θ(nlogn)	O(nlogn)       NO          YES      nlogn guaranteed
+Quick Sort	    Ω(nlogn)	θ(nlogn)	O(n^2)         YES         NO       nlogn theoretically, practically even faster
+3 way QS        Ω(nlogn)	θ(nlogn)	O(n^2)         YES         NO
 Bubble Sort 	Ω(n)	    θ(n^2)	    O(n^2)
-Insertion Sort	Ω(n)	    θ(n^2)  	O(n^2)
-Heap Sort	    Ω(nlogn)	θ(nlogn)	O(nlogn)
-Quick Sort	    Ω(nlogn)	θ(nlogn)	O(n^2)
-Merge Sort	    Ω(nlogn)	θ(nlogn)	O(nlogn)
+Heap Sort	    Ω(nlogn)	θ(nlogn)	O(nlogn)       YES         NO       nlogn guaranteed, inplace
 Bucket Sort	    Ω(n+k)	    θ(n+k)	    O(n^2)
 Radix Sort	    Ω(nk)	    θ(nk)	    O(nk)
+
+
+stability: the natural ordering should be preserved.
+stable: insertion, merge.
+not stable: quick, shell sort.
+
+best algo for given situations:
+for unique keys min no of compares: lower bound is nlogn, hence most optimal will be merge sort.
+for almost sorted keys: insertion sort
+for digital/fractional numbers: radix sort
+for duplicate keys: 3-way quick sort
+
+heap sort is the only nlogn algo that in inplace and with the worst case of nlogn compares/exchanges. QS can use
+shuffling and be made to perform better than HS but in theory HS in the best inplace nlogn sort available.
+
+Arrays.sort uses tuned quick sort for primitive type and merge sort for objects. Since with objects we believe that
+memory won't be an issue.
+------------------------------------------------------------------------------------------------------------------------
 
 Bubble sort:
 Bubble Sort is the simplest sorting algorithm that works by repeatedly swapping the adjacent elements if they are in
@@ -60,7 +80,7 @@ Sorting In Place: Yes
 Stable: Yes
 Uses: Insertion sort is used when number of elements is small. It can also be useful when input array is almost sorted,
 only few elements are misplaced in complete big array.
-
+Insertion Sort in practice works in linear time for partially sorted arrays. No of exchanges=no of comparison.
 for (int i = 1; i < n; ++i) {
     int key = arr[i];
     int j = i - 1;
@@ -72,6 +92,18 @@ for (int i = 1; i < n; ++i) {
     arr[j + 1] = key;
 }
 **go through insertion sort in the LL section also.
+------------------------------------------------------------------------------------------------------------------------
+
+Shell Sort
+https://www.coursera.org/learn/algorithms-part1/lecture/zPYhF/shellsort
+
+Multiple h-way insertion sorts.
+H-way insertion sort. For sorting any element we consider only the elements at h distances to the element.
+Based on the concept that a partially sorted array gets sorted using insertion sort in practically linear time.
+We h-sort the array for multiple values of h. The elements get closer and closer to their actual sorting position. This
+can perform even better than insertion sort depending on what 'h' values we are taking.
+one example is calculating h using h=3x+1.
+
 ------------------------------------------------------------------------------------------------------------------------
 
 Merge Sort:
@@ -100,6 +132,12 @@ public void merge(int arr[], int l, int r, int m){
     //create 2 arrays for element from l-> mid, mid+1->r;
     //merge these arrays and keep saving result back in the original array.
 }
+
+Improvements:
+1. Use insertion sort for very small sized arrays.
+2. if (last element of first subarray) < (first element of second subarray) then don't perform merge since they are
+already merged.
+
 ------------------------------------------------------------------------------------------------------------------------
 
 Quick Sort:
@@ -146,6 +184,14 @@ Unlike arrays, linked list nodes may not be adjacent in memory. Unlike array, in
 middle in O(1) extra space and O(1) time. Therefore merge operation of merge sort can be implemented without extra space
 for linked lists.
 
+improvements:
+1. Shuffle the elements o(n) before sorting . Guaranties (1.39)NlogN complexity.
+    0.39 times more compares than MS but no cost of aux array element movement or any space requirement. Overall better
+    performance.
+2. use central element as pivot.
+3. use insertion sort for small sized arrays.
+
+
 quickSort(arr[], low, high)
 {
     if (low < high)
@@ -185,6 +231,15 @@ approach:
 build heap //o(n)
 fo each element
     keep removing max element //o(logn) for n elements ie nlogn
+
+build heap uses <=2N compares and exchanges
+heapsort uses <=nlogn compares and exchanges.
+
+heap sort is the only nlogn algo that in inplace and with the worst case of nlogn compares/exchanges. QS can use
+shuffling and be made to perform better than HS but in theory HS in the best inplace nlogn sort available.
+In practise however it is not much used since references are scattered all across the memory and it makes poor use of
+cache. QS makes better use of cache as it is mostly referring to elements it has just recently seen.
+Also HS is not stable.
 ------------------------------------------------------------------------------------------------------------------------
 
 Counting sort:

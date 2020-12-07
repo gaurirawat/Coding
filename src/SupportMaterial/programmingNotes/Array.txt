@@ -3,7 +3,8 @@ PEAK VALLEY APPROACH:MAX PROFIT BY INFINITE STOCK BUY SELL
 CONSECUTIVE DIFFERENCE: MIN NO OF INC. ON SUBARRAY TO FORM TARGET ARRAY
 MIN JUMPS TO REACH END
 SLIDING WINDOW: MAXIMUM POINTS YOU CAN OBTAIN FROM CARDS
-USING MAX ELEMENT ON LEFT/RIGHT TECHNIQUE: RAINWATER TRAPPING
+2 POINTER APPROACH: MAX WATER CONTAINER
+USING MAX ELEMENT ON LEFT/RIGHT TECHNIQUE: TOTAL RAINWATER TRAPPING
 USING MAX ELEMENT ON LEFT/RIGHT TECHNIQUE: MAXIMUM DISTANCE: MAX j-i WHERE arr[j]>arr[i]
 FIRST POSITIVE MISSING NUMBER
 DIVIDE AND CONQUER: INVERSION PAIR:EASY
@@ -15,6 +16,7 @@ KADANE'S ALGO: MAX CONTINUOUS SUBARRAY
 MERGE INTERVAL: ADD NEW INTERVAL AND MERGE
 PnC:
     NEXT PERMUTATION
+3 SUM TECHNIQUE
 ------------------------------------------------------------------------------------------------------------------------
 
 PEAK VALLEY APPROACH:MAX PROFIT BY INFINITE STOCK BUY SELL
@@ -204,6 +206,35 @@ track of max sum. repeat this until the entire of window shifts from left to rig
 
 //similar concept problem:
 https://leetcode.com/problems/minimum-difference-between-largest-and-smallest-value-in-three-moves/
+
+------------------------------------------------------------------------------------------------------------------------
+
+2 POINTER APPROACH: MAX RAINWATER TRAPPING
+
+prob:
+Pointer_ib_water_container
+https://www.interviewbit.com/problems/container-with-most-water/
+
+Here we do now need to cal the total water trapped but the max water that can be trapped.
+1. begin by l/r pointers set at extreme ends.
+2. ht of water is the min ht of the two. Therefore max water= minvalue*(r-l+1);
+3. ht is determined by the min value so if we move the min ht pointer then total water will only dec. therefore we move
+the pointer!=ht. calc maxwater again and continue the process till l<r.
+
+    public int maxArea(ArrayList<Integer> A) {
+        int l=0,r=a.size()-1;
+        int sum=0;
+        while(l<r){
+            int minHt=Math.min(a.get(l),a.get(r));
+            sum=Math.max(sum, minHt*(r-l));
+            if(minHt==a.get(l))
+                l++;
+            else
+                r--;
+        }
+        return sum;
+    }
+
 ------------------------------------------------------------------------------------------------------------------------
 
 USING MAX ELEMENT ON LEFT/RIGHT TECHNIQUE: RAINWATER TRAPPING
@@ -635,5 +666,17 @@ Approach:
 2. If there is no such element then sort the array and return the result
 3. Otherwise traverse again from the end to find the smallest element that is greater than e.\
 4. swap e with this element. Sort all elements after the old pos of e.
+
+------------------------------------------------------------------------------------------------------------------------
+
+3 SUM TECHNIQUE
+
+Whenever we need to find a triplet where a+b+c=t or a quad of a+b+c+d=t, we fix the initial variables and recalculate
+the sum to be considered for the remaining two.
+Now for finding the two variables we have two approaches:
+    -2 pointer approach where we take two pointers from the beginning and move l,r depending on whether the curr sum is
+    less or more. We prefer this one where the order has to be lexicographic in nature.
+    -Hashing approach. This does not generate lexicographic result.
+    eg arr 1 4 2 6 5 4 8 -6 0 -2 since (6,-6) will be encountered first while our ans has to be (2 -2).
 
 ------------------------------------------------------------------------------------------------------------------------

@@ -1,7 +1,7 @@
 package IB;
 
 import java.util.*;
-
+//https://leetcode.com/problems/lru-cache/submissions/
 public class Map_ib_LRU_cache {
     int cap;
     LinkedHashMap<Integer, Integer> map;
