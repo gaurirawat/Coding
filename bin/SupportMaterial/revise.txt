@@ -6,6 +6,7 @@
 @@  String_ib_shortest_unique_prefix    //map implementation imp.
 @@  Tree_ib_sum_root_to_leaf_numbers    //bigInteger implementation
 
+    Array_lc_odd_even_jump
     Array_ib_order_of_people_heights
     Tree_ib_least_common_ancestor   //uptil now we were using incorrect approach
 
