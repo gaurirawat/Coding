@@ -1,6 +1,34 @@
 package revision;
 //Ref: https://www.geeksforgeeks.org/kth-ancestor-of-a-node-in-an-n-ary-tree-using-binary-lifting-technique/
 //https://leetcode.com/problems/kth-ancestor-of-a-tree-node/submissions/
+
+/*
+Ref:
+https://www.geeksforgeeks.org/kth-ancestor-of-a-node-in-an-n-ary-tree-using-binary-lifting-technique/
+https://www.youtube.com/watch?v=ctZ7fjMbPWE&ab_channel=GauravSen
+
+Approach:
+This is a technique where we pre-compute parent of every node which are at a distance of 1, 2, 4, 8, 16 ..upto log(n);
+Now if n=5, maxPow=log(5)=2 and the tree is skewed, we need parent at distance 1, 2, 4.
+Therefore size becomes dp[maxPow+1][n];
+
+DP:
+State of dp is dp[i][j]= parent of jth node at a distance of 2^i. ie i= ith-power in 2^i, j= jth node.
+Recursive equation:
+    parent of jth node at height h= parent of (parent of ith node at height h/2)th node at height h/2
+    in terms of height: dp[height h][j]= dp[ height h/2 ][ dp[height h/2][j]]
+    final recursive eqn in terms of ith power:
+        dp[i][j]= dp[i-1][ dp[i-1][j] ]
+
+Once we pre-compute this matrix dp, the kth ancestor can be found in O(logN).
+1. For each query of k and node we find the max i where 2^i<=k. ie we go to the pre computed parent at max distance
+possible.
+    node=dp[maxPow][node];
+    k-=(1<<maxPow);
+Update k=k-2^i. ie to the remaining distance.
+2. Now repeat step 1 for the new value of k until k=0 or if the node=-1.
+
+ */
 public class DP_Tree_lc_binary_lifting_find_kth_ancestor {
     class TreeAncestor {
         int dp[][];
