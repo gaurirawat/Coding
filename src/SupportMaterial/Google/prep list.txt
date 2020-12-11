@@ -1,30 +1,32 @@
 most asked: leetcode
-topcoder: div one two
-google personal most asked
-flood fill
 hashtable implementation using arrays
-n-ary trees, tries, avl implementation
+Operating Systems, Systems Programming and Concurrency:
+○ Know about processes, threads, and . Know about locks, mutexes, semaphores and , and how
+they work. Know about
+○ Know what resources a processes needs, a thread needs,
+○ Know a little about scheduling. The world is rapidly moving towards  so know the
+
+
+google meet, you tube, gmail,
+google search
+google student blog
+comparator/comparable
+collections internal implementation
+collections individual functions.
+DS: internal implementation
+KMP
+String func complexities.
+OS: virtual memory, concurrency issues, locks, monitors, deadlock and livelock and how to avoid them, how context
+    switching works, and how it's initiated by the operating system and underlying hardware, multi-core, fundamentals of
+    "modern" concurrency constructs.
+flood fill
+tries, avl implementation
 famous classes of NP-complete problems, traveling salesman and knapsack problem,
 ways to represent graph(objects and pointers, matrix, and adjacency list) pros and cons
-graph: Dijkstra and A* (for graphs).
-DS: internal implementation
 
-Operating Systems, Systems Programming and Concurrency:
-○ Know about processes, threads, and concurrency issues. Know about locks, mutexes, semaphores and monitors, and how
-they work. Know about deadlock and livelock and how to avoid them.
-○ Know what resources a processes needs, a thread needs, how context switching works, and how it's initiated by the
-operating system and underlying hardware.
-○ Know a little about scheduling. The world is rapidly moving towards multi-core, so know the fundamentals of "modern"
-concurrency constructs.
 
 system design:
 map reduce
 big table
 file system
 distributed systems and parallel computing
-
-google products
-what do they do at google
-project euler
-google student blog
-lot of more links. refer prep pdf
