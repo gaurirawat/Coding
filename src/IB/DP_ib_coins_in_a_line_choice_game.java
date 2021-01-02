@@ -3,7 +3,7 @@ package IB;
 import java.util.ArrayList;
 
 //https://www.interviewbit.com/problems/coins-in-a-line/
-public class DP_ib_coins_in_a_line {
+public class DP_ib_coins_in_a_line_choice_game {
     public int maxcoin(ArrayList<Integer> a) {
         int sum=0;
         for(int x:a)

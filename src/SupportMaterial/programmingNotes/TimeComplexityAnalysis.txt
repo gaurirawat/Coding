@@ -1,0 +1,117 @@
+NP PROBLEMS
+
+In computational complexity theory, a problem is NP-complete when:
+1. A nondeterministic Turing machine can solve it in polynomial-time.
+2. A deterministic Turing machine can solve it in large time complexity classes(e.g., EXPTIME and can verify its
+solutions in polynomial time. It can be used to simulate any other problem with similar solvability.
+
+A problem is called NP (nondeterministic polynomial) if its solution can be guessed and verified in polynomial time;
+More precisely, each input to the problem should be associated with a set of solutions of polynomial length, whose
+validity can be tested quickly (in polynomial time),such that the output for any input is "yes" if the solution set is
+non-empty and "no" if it is empty. The complexity class of problems of this form is called NP, an abbreviation for
+"nondeterministic polynomial time".
+
+A problem is said to be NP-hard if everything in NP can be transformed in polynomial time into it even though it may not
+be in NP.
+Conversely, a problem is NP-complete if it is both in NP and NP-hard. The NP-complete problems represent the hardest
+problems in NP. If any NP-complete problem has a polynomial time algorithm, all problems in NP do. The set of
+NP-complete problems is often denoted by NP-C or NPC.Thus, finding an efficient algorithm for any NP-complete problem
+implies that an efficient algorithm can be found for all such problems, since any problem belonging to this class can be
+recast into any other member of the class.
+
+NP-complete problem are a class of computational problems for which no efficient solution algorithm has been found. Many
+significant computer-science problems belong to this class—e.g., the traveling salesman problem, satisfiability problems,
+and graph-covering problems.
+
+Travelling salesman problem:, NP-hard
+for n nodes, find a hamiltonian cycle with minimum weight. O(n^n);
+
+0/1 Knapsack: NP-Complete
+Here the complexity is O(n*w) where w=total weight and n is the no of element.
+This looks like a polynomial time, but it is not, it is pseudo-polynomial.
+Time complexity measures the time that an algorithm takes as a function of the length in bits of its input. The dynamic
+programming solution is indeed linear in the value of W, but exponential in the length of W. The value of W grows
+exponentially with x, thus the algorithm is not really polynomial, it's exponential (but it looks like it is polynomial,
+hence the name: "pseudo-polynomial").
+
+Min Vertex Cover
+In a given undirected graph, what is the (size of the) smallest subset of the vertices covering all of the edges?
+
+NP complete problems:
+SAT: Does a given boolean forumla, in CNF, have a satisfying assignment?
+3-SAT: Does a given boolean forumla, in CNF with exactly three literals per clause, have a satisfying assignment?
+Min Vertex Cover: In a given undirected graph, what is the (size of the) smallest subset of the vertices covering all of
+ the edges?
+Max Independent Set: In a given undirected graph, what is the (size of the) larges subset of the vertices having no
+ edges in common?
+Max Clique: What is the (size of the) largest complete subgraph of a given undirected graph?
+Min Set Cover: Given a set S and a collection of subsets of S, what is smallest set of these subsets whose union is S?
+Min Hitting Set: Given a set S and a collection of subsets of S, what is smallest subset of S containing at least one
+ element from every subset?
+Hamilton Path, Hamilton Cycle
+Longest Path: What is the longest path between two given nodes in a weighted, undirected, graph?
+Subset Sum: Does a given set of positive integers have a subset with sum k?
+Partition: Can a given set of positive integers be partitioned into two subsets each with the same sum?
+3-Partition: Can a given set of 3n positive integers be partitioned into n 3-element subsets each with the same sum?
+Minesweeper: In a given Minesweeper configuration, is it safe to click on a particular square?
+Sodoku: Does a given Sodoku puzzle have a solution?
+
+-HAMILTONIAN CYCLE: np hard problem
+-GRAPH ISOMORPHISM: given two graphs we need to identify if they are same or not. It not known to be solvable in
+polynomial time nor to be NP-complete, and therefore may be in the computational complexity class NP-intermediate.
+-Web crawler: prefer BFS over DFS because DFS takes us very far from the starting vertex while BFS takes us away slowly
+and generally we may want to discover just the close vertices.
+
+------------------------------------------------------------------------------------------------------------------------
+Trie_lc_word_search_2
+https://leetcode.com/problems/word-search-ii/submissions/
+
+m rows, n columns, l=no of words, wl= max length of each words (here it is given as 10)
+TC=O(m * n * 4^wl). m*n for "for-loop" and 4 for each adjacent cell. since wl=max length of each word TC of
+isWordPossible function becomes 4^wl.
+SC=O(l*wl).  Other than this stack space will also be used which is equal to the max depth of our trie and here that
+will be 10 since our max length of each word is given as 10
+
+------------------------------------------------------------------------------------------------------------------------
+Graph_lc_word_search
+https://leetcode.com/problems/word-search/submissions/
+
+space is O(L) and time is O(M * N * 4^L)
+N = row length
+M = col length
+L = word length
+
+------------------------------------------------------------------------------------------------------------------------
+Graph_lc_word_ladder
+//https://leetcode.com/problems/word-ladder/
+
+TC=O(n^2*l) where n=no of words in wordList. length of the words.
+SC=O(n^2)
+
+------------------------------------------------------------------------------------------------------------------------
+LL_lc_sortList
+https://leetcode.com/problems/sort-list/solution/
+
+TC=O(nlogn) since we are implementing merge sort.
+sc=O(1). but stack space is O(n) since we are recursively using merge function which will be o(n).
+
+------------------------------------------------------------------------------------------------------------------------
+Heap_lc_top_k_frequent_items
+https://leetcode.com/problems/top-k-frequent-elements/
+
+TC= O(xlogx) where x=no of unique elements. It will never be = nlogn even if all elements are unique since then we will
+return the actual array using our if condition. hence xlogx<nlogn.
+SC=O(x+k(for the pq)+k(for the ans) )= O(x)
+
+------------------------------------------------------------------------------------------------------------------------
+Array_lc_count_of_range_sum_merge_sort
+https://leetcode.com/problems/count-of-range-sum/submissions/
+
+TC= O(nlogn). CountFunc is calling merge function logn times and itself 2*logn times.
+    The complexity of merge function is O(n) since we iterate from l->mid. For every element the inner while loops also
+    run but they run a total of mid->n ie o(n). This means that if we consider every outer loop and add the no of times
+    the inner loop runs then that would be a total of just n/2 ie O(n).
+    so complexity for merge function becomes. O(n+n)=O(n).
+SC= O(n) create dummy array at the time of merging.
+
+------------------------------------------------------------------------------------------------------------------------

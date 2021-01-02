@@ -2,21 +2,34 @@ package IB;
 //https://www.interviewbit.com/problems/ways-to-decode/
 public class DP_ib_ways_to_decode {
     public int numDecodings(String s) {
-        char ch[]=s.toCharArray();
-        int dp[]=new int[s.length()+1];
-        return decodingInner(0,ch,dp);
-    }
-    public int decodingInner(int i, char[]ch, int dp[]){
-        if(i==ch.length) return 1;
-        if(ch[i]=='0') return 0;
-        if(dp[i]!=0) return dp[i];
+        if(s.length()==0) {
+            return 0;
+        }
 
-        int mod=(int)Math.pow(10,9)+7;
-        long c=decodingInner(i+1,ch,dp);
-        if(i!=ch.length-1 && Integer.parseInt(ch[i]+""+ch[i+1])<=26)
-            c+=decodingInner(i+2,ch,dp);
-        c=c%mod;
-        dp[i]=(int)c;
+        int dp[]= new int[s.length()];
+        int mod= (int)Math.pow(10,9) +7;
+        return numInner(0, s, dp, mod);
+    }
+
+    public int numInner(int i, String s, int[]dp, int mod) {
+        if (i == s.length()) {
+            return 1;
+        }
+        if (i > s.length() || s.charAt(i) == '0') {
+            return 0;
+        }
+        if (dp[i] != 0) {
+            return dp[i];
+        }
+
+        dp[i] = numInner(i + 1, s, dp, mod);
+        if ((s.charAt(i) == '1' || s.charAt(i) == '2') && i + 1 < s.length()) {
+            int num = Integer.parseInt(s.substring(i, i + 2));
+            if (num <= 26) {
+                dp[i] += numInner(i + 2, s, dp, mod);
+            }
+        }
+        dp[i] %= mod;
         return dp[i];
     }
 }

@@ -4,7 +4,8 @@ import java.util.*;
 
 public class Array_ib_largest_number {
     public String largestNumber(final List<Integer> a) {
-        Collections.sort(a, new CustomComp());
+//        Collections.sort(a, new CustomComp());
+        Collections.sort(a, (x,y)->(-(x+""+y).compareTo(y+""+x)));
         StringBuffer s = new StringBuffer();// take string buffer otherwise TLE
         for(int x:a)
             s.append(x);

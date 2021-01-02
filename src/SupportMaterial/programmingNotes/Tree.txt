@@ -20,7 +20,7 @@ remember to use the same tree twice and manipulate pointers on both together ins
 
 MERGE BINARY TREE
 Tree_ib_merge_two_binary_trees
-In any case where we have to merge trees or linked list always remember that whenever the first one gets exhausted then
+In any case where we have to merge trees(merge the sum) or LL remember that whenever the first one gets exhausted then
 we need to return the second node/root instead of calculating sum and taking other values as zero.
 PS- Always go for the recursive approach here.
 

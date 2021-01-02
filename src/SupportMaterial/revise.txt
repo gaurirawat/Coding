@@ -8,7 +8,14 @@
 
     Array_lc_odd_even_jump
     Array_ib_order_of_people_heights
+    Matrix_Array_lc_spiral_order
     Tree_ib_least_common_ancestor   //uptil now we were using incorrect approach
 
     Heap_lc_skyline_problem
+
     String_lc_justified_string
+
+    DP_ib_tushars_birthday_party_knapsack
+    DP_ib_tushars_birthday_bombs
+    DP_ib_palindrome_partitioning_2
+    BM_lc_sum_of_two_numbers

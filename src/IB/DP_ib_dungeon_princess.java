@@ -4,25 +4,29 @@ import java.util.ArrayList;
 //https://www.interviewbit.com/problems/dungeon-princess/
 
 public class DP_ib_dungeon_princess {
-    public int calculateMinimumHP(ArrayList<ArrayList<Integer>> a) {
-        int r=a.size();
-        int c=a.get(0).size();
-        for(int i=r-1;i>=0;--i){
-            for(int j=c-1;j>=0;--j){
-                if(i==r-1 && j==c-1) {
-                    if(a.get(i).get(j)>=0)
-                        a.get(i).set(j,1);
-                    else
-                        a.get(i).set(j,Math.abs(a.get(i).get(j))+1);
-                    continue;
+    public int calculateMinimumHP(int[][] a) {
+        int m = a.length;
+        int n = a[0].length;
+        if (m == 0) {
+            return 0;
+        }
+        if (a[m - 1][n - 1] > 0) {
+            a[m - 1][n - 1] = 0;
+        }
+        for (int i = m - 1; i >= 0; --i) {
+            for (int j = n - 1; j >= 0; --j) {
+
+                if (!(i + 1 == m && j + 1 == n)) {
+                    int right = j + 1 == n ? Integer.MIN_VALUE : a[i][j + 1];
+                    int bottom = i + 1 == m ? Integer.MIN_VALUE : a[i + 1][j];
+                    int max = Math.max(right, bottom);
+                    a[i][j] += max;
+                    if (a[i][j] > 0) {
+                        a[i][j] = 0;
+                    }
                 }
-                int bottom= i==r-1? Integer.MAX_VALUE :a.get(i+1).get(j);
-                int right= j==c-1? Integer.MAX_VALUE :a.get(i).get(j+1);
-                int min= Math.min(bottom,right);
-                int val= a.get(i).get(j)>=min? 1: min-a.get(i).get(j);
-                a.get(i).set(j,val);
             }
         }
-        return a.get(0).get(0);
+        return Math.abs(a[0][0]) + 1;
     }
 }

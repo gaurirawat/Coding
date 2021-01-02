@@ -1,6 +1,7 @@
 package SupportMaterial.DataStructureImplementation;
 
 /*
+
 l,r will be the range being covered by the iTree node of segment tree.
 Consider that we always begin at root of segment tree with index 0. Its corresponding range is 0-> n-1. Now go downward
 in the tree and perform operations if the next range is valid.
@@ -12,9 +13,10 @@ Also since child are being calculated this way our total size becomes:
     int size = 2 * (int) Math.pow(2, x) - 1;
 if we go by regular formula of 2n-1 then that will work only if n is in powers of 2. otherwise we'll get
 ArrayIndexOutOfBounds error.
-
 **remember to always run operations for range 0->"n-1".
+
  */
+
 public class SegmentTree_array_impl {
     int[] nums;
     int[] tree;

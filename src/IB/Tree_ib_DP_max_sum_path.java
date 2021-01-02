@@ -3,17 +3,20 @@ package IB;
 public class Tree_ib_DP_max_sum_path {
     int max;
     public int maxPathSum(TreeNode root) {
-        max=Integer.MIN_VALUE;
-        maxPathSumInner(root);
+        max = Integer.MIN_VALUE;
+        maxPathInner(root);
         return max;
     }
 
-    public int maxPathSumInner(TreeNode root){
-        if(root==null) return 0;
-        int l=maxPathSumInner(root.left);
-        int r=maxPathSumInner(root.right);
-        int tmax=Math.max(0,Math.max(l+r,Math.max(l,r)))+root.val;
-        max=Math.max(tmax,max);
-        return Math.max(0, Math.max(l,r))+root.val;
+    public int maxPathInner(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+        int left = maxPathInner(root.left);
+        int right = maxPathInner(root.right);
+        int currPath = root.val + Math.max(0, ( left>0 ? left : 0) + (right>0 ? right : 0) );
+        max = Math.max(max, currPath);
+
+        return Math.max(root.val, root.val + Math.max(left, right));
     }
 }

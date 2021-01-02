@@ -44,7 +44,7 @@ Boundary Cases: Bubble sort takes minimum time (Order of n) when elements are al
 
 for (i = 0; i < n - 1; i++)
     for (j = 0; j < n - i - 1; j++)
-        //if ith element < jth element: swap
+        //if jth element < (j+1)th element: swap
     // if no swaps happen in ith iteration then break outer loop since array is already sorted.
 
 
@@ -191,6 +191,9 @@ improvements:
 2. use central element as pivot.
 3. use insertion sort for small sized arrays.
 
+implementation detail:
+Remember to recurse for the array(l, pivot-1) & array(pivot+1, r);
+Do not recurse for l->pivot. That will give TLE.
 
 quickSort(arr[], low, high)
 {
@@ -201,23 +204,19 @@ quickSort(arr[], low, high)
         quickSort(arr, pi + 1, high); // After pi
     }
 }
-public int partition(int arr[], int l, int r){
-    int p= arr[l];
-    int a=l;
-    l=l+1;
-    if(l==r & p>arr[l]) {
-        swap(arr,a,l);
-        return l;
+
+public int partition(int l, int r, int[] nums) {
+    int pivot=nums[l];
+    int i=l+1;
+    for(int j=l+1; j<=r; ++j) {
+        if(nums[j]<pivot) {
+            swap(nums, i++, j);
+        }
     }
-    while(l<r){
-        while(l<=r && arr[l]<=p )++l;
-        while(l<r && arr[r]>p )--r;
-        if(l<r)
-            swap(arr, l, r);
-    }
-    swap(arr,a,l-1);
-    return l-1;
+    swap(nums, l, i-1);
+    return i-1;
 }
+
 ------------------------------------------------------------------------------------------------------------------------
 
 Heap sort:
@@ -317,8 +316,8 @@ original array in increasing order.
 Radix Sort:
 Counting sort is a linear time sorting algorithm that sort in O(n+k) time when elements are in the range from 1 to k.
 
-What if the elements are in the range from 1 to n2?
-We cant use counting sort because counting sort will take O(n2) which is worse than comparison-based sorting algorithms.
+What if the elements are in the range from 1 to n^2?
+We cant use counting sort because counting sort will take O(n^2) which is worse than comparison-based sorting algorithms
 The idea of Radix Sort is to do digit by digit sort starting from least significant digit to most significant digit.
 Radix sort uses counting sort as a subroutine to sort.
 
@@ -330,5 +329,12 @@ If we have log2n bits for every digit, the running time of Radix appears to be b
 of input numbers. The constant factors hidden in asymptotic notation are higher for Radix Sort and Quick-Sort uses
 hardware caches more effectively. Also, Radix sort uses counting sort as a subroutine and counting sort takes extra
 space to sort numbers.
+
+Algorithm:
+Find digits in max input =dig
+iterate "dig" no of times beginning from the end. ie One, Tens then hundreds.
+make buckets where n(buckets)= base of number ie for decimal our n(buckets)=10
+now keep allocating elements to the buckets according to their ones digit in first iteration, tens in second, hundred's
+in third and so on.
 
 ------------------------------------------------------------------------------------------------------------------------

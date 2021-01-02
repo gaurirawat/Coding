@@ -2,36 +2,40 @@ package IB;
 //https://www.interviewbit.com/problems/sort-list/
 public class LL_ib_sorting_merge_sort {
     public ListNode sortList(ListNode head) {
-        if(head==null|| head.next==null) return head;
-        int len=0;
-        ListNode node=head;
-        while(node!=null){
-            ++len;
-            node=node.next;
+        if (head == null || head.next == null) {
+            return head;
         }
-        len/=2;
 
-        node=head;
-        while(--len!=0)
-            node=node.next;
+        ListNode slow = head;
+        ListNode fast = head;
+        while (fast.next != null && fast.next.next != null) {
+            slow = slow.next;
+            fast = fast.next != null ? fast.next.next : fast.next;
+        }
 
-        ListNode l1=head;
-        ListNode l2=node.next;
-        node.next=null;
-        l1=sortList(l1);
-        l2=sortList(l2);
-        head=merge(l1,l2);
-        return head;
+        ListNode head2 = slow.next;
+        slow.next = null;
+
+        head = sortList(head);
+        head2 = sortList(head2);
+        return merge(head, head2);
     }
 
-    public ListNode merge(ListNode a, ListNode b){
-        if(a==null) return b;
-        if(b==null) return a;
-        if(a.val<b.val){
-            a.next=merge(a.next,b);
-            return a;
+    public ListNode merge(ListNode head1, ListNode head2) {
+        if (head1 == null) {
+            return head2;
         }
-        b.next=merge(a,b.next);
-        return b;
+        if (head2 == null) {
+            return head1;
+        }
+
+        if (head1.val < head2.val) {
+            head1.next = merge(head1.next, head2);
+            return head1;
+        }
+        else {
+            head2.next = merge(head1, head2.next);
+            return head2;
+        }
     }
 }

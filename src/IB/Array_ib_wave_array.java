@@ -1,5 +1,6 @@
 package IB;
 
+import java.math.BigInteger;
 import java.util.*;
 
 //https://www.interviewbit.com/problems/wave-array/
@@ -13,4 +14,5 @@ public class Array_ib_wave_array {
         }
         return a;
     }
+
 }

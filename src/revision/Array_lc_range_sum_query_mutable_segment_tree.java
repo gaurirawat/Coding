@@ -4,10 +4,10 @@ import java.util.Arrays;
 
 //https://leetcode.com/problems/range-sum-query-mutable/
 
-public class Array_lc_range_sum_query_mutable {
+public class Array_lc_range_sum_query_mutable_segment_tree {
     int[] nums;
     int[] tree;
-    public Array_lc_range_sum_query_mutable(int[] a) {
+    public Array_lc_range_sum_query_mutable_segment_tree(int[] a) {
         if(a.length==0) {
             nums=new int[0];
             tree= new int[3];

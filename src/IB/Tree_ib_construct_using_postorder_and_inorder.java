@@ -26,3 +26,34 @@ public class Tree_ib_construct_using_postorder_and_inorder {
         return root;
     }
 }
+/*
+int c;
+    public TreeNode buildTree(int[] in, int[] post) {
+        if(in.length==0) {
+            return null;
+        }
+        c=in.length-1;
+        return buildTreeInner(0, in.length-1, in, post);
+    }
+
+    public TreeNode buildTreeInner(int l, int r, int[] in, int[] post) {
+        if(l>r) {
+            return null;
+        }
+        TreeNode curr=new TreeNode(post[c--]);
+        int index = findIndex(in, l, r, curr.val);
+        curr.right = buildTreeInner(index+1, r, in, post);
+        curr.left = buildTreeInner(l, index-1, in, post);
+        return curr;
+    }
+
+    public int findIndex(int[] nums, int l, int r, int val) {
+        while(l<=r) {
+            if(nums[l]==val) {
+                return l;
+            }
+            l++;
+        }
+        return 1;
+    }
+ */

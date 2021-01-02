@@ -52,6 +52,16 @@ Algo:
         }
         return dp[i][j];
     }
+
+    public int matrix(int dp[][], int arr[], int i, int j) {
+        if(i>=j){
+            return 0;
+        }
+        if(dp[i][j]!=0) {
+        return dp i j
+        }
+        for(int itr=i; itr<=j)
+    }
 ------------------------------------------------------------------------------------------------------------------------
 
 0/1 KNAPSACK
@@ -759,7 +769,7 @@ Update k=k-2^i. ie to the remaining distance.
         }
     }
 
-    public int getKthAncestor(int node, int k) {
+    public int getKthAncestor(intbal node, int k) {
         int maxPow=this.maxPow;
         while(k>0 && node!=-1){
             if(k>= (1<<maxPow)){

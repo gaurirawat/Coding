@@ -3,52 +3,68 @@ package IB;
 import java.util.*;
 
 public class DP_ib_Rod_cutting {
-    public ArrayList<Integer> rodCut(int n, ArrayList<Integer> ls) {
-        if(ls.size()==0) return new ArrayList<Integer>();
-        Collections.sort(ls);
-        ls.add(0,0);
-        ls.add(n);
+    public int[] rodCut(int A, int[] B) {
+        ArrayList<Integer> cuts = new ArrayList<Integer>();
+        for (int x : B) {
+            cuts.add(x);
+        }
+        Collections.sort(cuts);
+        cuts.add(0, 0);
+        cuts.add(A);
 
-        SumI dp[][]=new SumI[ls.size()][ls.size()];
-        rodCutDP(0,ls.size()-1,ls,dp);
-        ArrayList<Integer> ans=new ArrayList<Integer>();
-        getResult(0,ls.size()-1,ans,dp,ls);
-        return ans;
+        CostIndex dp[][] = new CostIndex[cuts.size()][cuts.size()];
+        minCostToCutRod(0, cuts.size() - 1, cuts, dp);
+
+        ArrayList<Integer> answer = new ArrayList<Integer>();
+        getResult(answer, cuts, dp, 0, cuts.size() - 1);
+
+        int[] answerArray = new int[answer.size()];
+        for (int i = 0; i < answer.size(); ++i) {
+            answerArray[i] = answer.get(i);
+        }
+
+        return answerArray;
     }
 
-    public int rodCutDP(int li, int ri, ArrayList<Integer> ls, SumI dp[][]){
-        if(li+1==ri) return ls.get(ri)-ls.get(li);
-        if(dp[li][ri]!=null) return dp[li][ri].sum;
+    public void getResult(ArrayList<Integer> answer, ArrayList<Integer> cuts, CostIndex[][] dp, int l, int r) {
+        if (l + 1 == r) {
+            return;
+        }
+        answer.add(cuts.get(dp[l][r].index));
+        getResult(answer, cuts, dp, l, dp[l][r].index);
+        getResult(answer, cuts, dp, dp[l][r].index, r);
+    }
 
-        int sum=Integer.MAX_VALUE;
-        int index=0;
-        for(int i=li+1;i<ri;++i){
-            int t=rodCutDP(li,i,ls,dp)+rodCutDP(i,ri,ls,dp);
-            if(t<sum){
-                index=i;
-                sum=t;
+    public int minCostToCutRod(int l, int r, ArrayList<Integer> cuts, CostIndex[][] dp) {
+        if (r == l + 1) {
+            return 0;
+        }
+
+        if (dp[l][r] != null) {
+            return dp[l][r].cost;
+        }
+
+        int min = Integer.MAX_VALUE;
+        int cut = 0;
+        for (int i = l + 1; i < r; ++i) {
+            int cost = minCostToCutRod(l, i, cuts, dp) + minCostToCutRod(i, r, cuts, dp);
+            if (cost < min) {
+                min = cost;
+                cut = i;
             }
         }
 
-        sum+=ls.get(ri)-ls.get(li);
-        dp[li][ri]=new SumI(index,sum);
-        return dp[li][ri].sum;
+        min += cuts.get(r) - cuts.get(l);
+        dp[l][r] = new CostIndex(cut, min);
+
+        return min;
     }
-
-    public void getResult( int li, int ri,ArrayList<Integer> ans, SumI dp[][],ArrayList<Integer> ls){
-        if(li+1==ri) return;
-        ans.add(ls.get(dp[li][ri].index));
-        getResult(li,dp[li][ri].index,ans,dp,ls);
-        getResult(dp[li][ri].index,ri,ans,dp,ls);
-    }
-
-}
-
-class SumI{
-    int index;
-    int sum;
-    public SumI(int x, int y){
-        index=x;
-        sum=y;
+    class CostIndex{
+        int index;
+        int cost;
+        public CostIndex(int x, int y){
+            index=x;
+            cost=y;
+        }
     }
 }

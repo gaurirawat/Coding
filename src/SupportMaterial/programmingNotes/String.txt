@@ -1,6 +1,6 @@
 KMP ALGO:
 
-Here we say that the needle has to be searched in the haysach. This is used for pattern matching. Makes use of longest
+Here we say that the needle has to be searched in the haysack. This is used for pattern matching. Makes use of longest
 prefix that is also a suffix concept.
 
 Ref:

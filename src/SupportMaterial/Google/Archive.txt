@@ -43,3 +43,32 @@ Array_lc_min_domino_rotations_for_equal_rows
 Map_lc_snapshot_array
 Math_ib_next_smallest_palindrome
 Graph_ib_water_flow
+
+IB:
+Array_ib_add_1_to_number
+Array_ib_n3_repeat_number
+Array_ib_matrix_rotation_90_degrees
+Array_ib_kth_row_of_pascals_triangle
+Array_ib_merge_overlapping_intervals
+Array_ib_merge_intervals
+Array_ib_maximum_distance                   **
+Array_ib_max_non_negative_sum
+Array_ib_wave_array
+Math_ib_grid_unique_path
+Math_ib_next_smallest_palindrome            **
+BM_ib_sum_of_pairwise_hamming_distance
+Math_ib_gcd
+BSearch_ib_first_and_last_occurrence
+BSearch_ib_power_function                   **
+BSearch_ib_search_element_in_rotated_array  **
+BSearch_ib_painters_partition_problem
+BSearch_ib_allocate_books
+String_ib_longest_common_prefix
+String_ib_multiply_two_strings
+String_ib_minimum_parenthesis
+BM_ib_single_number_2
+Pointer_ib_remove_duplicate_form_sorted_array
+Pointer_ib_water_container                  **
+Pointer_ib_3_sum_zero
+LL_ib_sorting_merge_sort
+LL_ib_sorting_insertion_sort                **

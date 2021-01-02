@@ -7,7 +7,7 @@ SLIDING WINDOW: MAXIMUM POINTS YOU CAN OBTAIN FROM CARDS
 USING MAX ELEMENT ON LEFT/RIGHT TECHNIQUE: TOTAL RAINWATER TRAPPING
 USING MAX ELEMENT ON LEFT/RIGHT TECHNIQUE: MAXIMUM DISTANCE: MAX j-i WHERE arr[j]>arr[i]
 FIRST POSITIVE MISSING NUMBER
-DIVIDE AND CONQUER: INVERSION PAIR:EASY
+MERGE SORT: INVERSION PAIR:EASY
 SWAP: ZIG-ZAG MAINTAIN RELATIVE ORDERING
 PIGEONHOLE PRINCIPLE WITH BUCKETING: MAXIMUM CONSECUTIVE GAP:
 CUSTOM SORT: LARGEST NUMBER
@@ -335,7 +335,9 @@ index+1.
 
 ------------------------------------------------------------------------------------------------------------------------
 
-DIVIDE AND CONQUER: INVERSION PAIR:EASY
+MERGE SORT: INVERSION PAIR:EASY
+
+checkout: Array_lc_count_of_range_sum_merge_sort(similar concept)
 
 Find count of inversion pairs where a[i] and a[j] form an inversion if a[i] > a[j] and i < j.
 
@@ -678,5 +680,17 @@ Now for finding the two variables we have two approaches:
     less or more. We prefer this one where the order has to be lexicographic in nature.
     -Hashing approach. This does not generate lexicographic result.
     eg arr 1 4 2 6 5 4 8 -6 0 -2 since (6,-6) will be encountered first while our ans has to be (2 -2).
+
+------------------------------------------------------------------------------------------------------------------------
+
+ROTATE ARRAY
+
+Array_lc_rotate_array
+TC: O(n), SC: O(n):
+create new array and copy the elements accordingly.
+
+TC: O(n), SC: O(1):
+reverse array. now the last elements have come to the front and vice versa.
+individually reverse the initial k elements and then the remaining elements.
 
 ------------------------------------------------------------------------------------------------------------------------

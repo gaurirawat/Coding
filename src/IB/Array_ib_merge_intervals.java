@@ -26,42 +26,41 @@ case 5: intervals overlap.
 public class Array_ib_merge_intervals {
     public ArrayList<Interval> insert(ArrayList<Interval> l, Interval a) {
 
-        if(a==null)return l;
+        if (a == null) return l;
 
         //case 1: list is empty.
-        if(l==null || l.size()==0){
-            ArrayList<Interval> t=new ArrayList<Interval>();
+        if (l == null || l.size() == 0) {
+            ArrayList<Interval> t = new ArrayList<Interval>();
             t.add(a);
             return t;
         }
 
-        int i=0;
-        while(i!=l.size() && a.start>l.get(i).end)i++;
+        int i = 0;
+        while (i != l.size() && a.start > l.get(i).end) i++;
 
         //case 2: the interval does not overlap and has to be added in the end.
-        if(i==l.size()){
+        if (i == l.size()) {
             l.add(a);
             return l;
         }
 
         //case 3: the interval does not overlap and has to be added in the front.
         //case 4: the interval does not overlap and has to be added at the pos where our cond failed.
-        if(a.end<l.get(i).start){
-            l.add(i,a);
+        if (a.end < l.get(i).start) {
+            l.add(i, a);
             return l;
         }
 
         //case 5: intervals overlap.
 
-        l.get(i).start=Math.min(l.get(i).start, a.start);
-        l.get(i).end=Math.max(l.get(i).end, a.end);
+        l.get(i).start = Math.min(l.get(i).start, a.start);
+        l.get(i).end = Math.max(l.get(i).end, a.end);
 
-        while(i<l.size()-1){
-            if(l.get(i).end>=l.get(i+1).start){
-                l.get(i).end=Math.max(l.get(i).end, l.get(i+1).end);
-                l.remove(i+1);
-            }
-            else
+        while (i < l.size() - 1) {
+            if (l.get(i).end >= l.get(i + 1).start) {
+                l.get(i).end = Math.max(l.get(i).end, l.get(i + 1).end);
+                l.remove(i + 1);
+            } else
                 break;
         }
         return l;
@@ -71,7 +70,15 @@ public class Array_ib_merge_intervals {
     public class Interval {
         int start;
         int end;
-        Interval() { start = 0; end = 0; }
-        Interval(int s, int e) { start = s; end = e; }
+
+        Interval() {
+            start = 0;
+            end = 0;
+        }
+
+        Interval(int s, int e) {
+            start = s;
+            end = e;
+        }
     }
 }

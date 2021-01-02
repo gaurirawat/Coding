@@ -1,0 +1,152 @@
+Below are the Big O performance of common functions of different Java Collections.
+
+
+List                 | Add  | Remove | Get  | Contains | Next | Data Structure
+---------------------|------|--------|------|----------|------|---------------
+ArrayList            | O(1) |  O(n)  | O(1) |   O(n)   | O(1) | Array
+LinkedList           | O(1) |  O(1)  | O(n) |   O(n)   | O(1) | Linked List
+CopyOnWriteArrayList | O(n) |  O(n)  | O(1) |   O(n)   | O(1) | Array
+
+
+
+Set                   |    Add   |  Remove  | Contains |   Next   | Size | Data Structure
+----------------------|----------|----------|----------|----------|------|-------------------------
+HashSet               | O(1)     | O(1)     | O(1)     | O(h/n)   | O(1) | Hash Table
+LinkedHashSet         | O(1)     | O(1)     | O(1)     | O(1)     | O(1) | Hash Table + Linked List
+EnumSet               | O(1)     | O(1)     | O(1)     | O(1)     | O(1) | Bit Vector
+TreeSet               | O(log n) | O(log n) | O(log n) | O(log n) | O(1) | Red-black tree
+CopyOnWriteArraySet   | O(n)     | O(n)     | O(n)     | O(1)     | O(1) | Array
+ConcurrentSkipListSet | O(log n) | O(log n) | O(log n) | O(1)     | O(n) | Skip List
+
+
+
+Queue                   |  Offer   | Peak |   Poll   | Remove | Size | Data Structure
+------------------------|----------|------|----------|--------|------|---------------
+PriorityQueue           | O(log n) | O(1) | O(log n) |  O(n)  | O(1) | Priority Heap
+LinkedList              | O(1)     | O(1) | O(1)     |  O(1)  | O(1) | Linked List
+ArrayDequeue            | O(1)     | O(1) | O(1)     |  O(n)  | O(1) | Array
+ConcurrentLinkedQueue   | O(1)     | O(1) | O(1)     |  O(n)  | O(n) | Linked List
+ArrayBlockingQueue      | O(1)     | O(1) | O(1)     |  O(n)  | O(1) | Array
+PriorityBlockingQueue   | O(log n) | O(1) | O(log n) |  O(n)  | O(1) | Priority Heap
+SynchronousQueue        | O(1)     | O(1) | O(1)     |  O(n)  | O(1) | None!
+DelayQueue              | O(log n) | O(1) | O(log n) |  O(n)  | O(1) | Priority Heap
+LinkedBlockingQueue     | O(1)     | O(1) | O(1)     |  O(n)  | O(1) | Linked List
+
+
+
+Map                   |   Get    | ContainsKey |   Next   | Data Structure
+----------------------|----------|-------------|----------|-------------------------
+HashMap               | O(1)     |   O(1)      | O(h / n) | Hash Table
+LinkedHashMap         | O(1)     |   O(1)      | O(1)     | Hash Table + Linked List
+IdentityHashMap       | O(1)     |   O(1)      | O(h / n) | Array
+WeakHashMap           | O(1)     |   O(1)      | O(h / n) | Hash Table
+EnumMap               | O(1)     |   O(1)      | O(1)     | Array
+TreeMap               | O(log n) |   O(log n)  | O(log n) | Red-black tree
+ConcurrentHashMap     | O(1)     |   O(1)      | O(h / n) | Hash Tables
+ConcurrentSkipListMap | O(log n) |   O(log n)  | O(1)     | Skip List
+
+------------------------------------------------------------------------------------------------------------------------
+ARRAYLIST
+
+resizable array
+Increasing size by 1.5X when array gets full
+
+add() – takes O(1) time
+add(index, element) – in average runs in O(n) time
+get() – is always a constant time O(1) operation
+remove() – runs in linear O(n) time. We have to iterate the entire array to find the element qualifying for removal
+indexOf() – also runs in linear time. Iterates through array checking each element. So the time complexity for this
+    operation always requires O(n) time
+contains() – implementation is based on indexOf() (not BSearch since data is unsorted). So it will also run in O(n) time
+
+------------------------------------------------------------------------------------------------------------------------
+LINKED LIST
+
+Doubly Linked List
+Maintains insertion order
+
+Operations that index into the list will traverse the list from the beginning or the end, whichever is closer to the
+specified index. It is not synchronized. Its Iterator and ListIterator iterators are fail-fast (which means that after
+the iterator's creation, if the list is modified, a ConcurrentModificationException will be thrown). consumes more memory
+sine every element is a node, which keeps a reference to the next and previous ones.
+The insertion, addition and removal operations of an item are faster in a LinkedList because there is no need to resize
+the array or update the other indexes.
+
+add() – supports O(1) constant-time insertion at any position
+get() – searching for an element takes O(n) time
+remove() – removing an element also takes O(1) operation, as we provide the position of the element
+contains() – also has O(n) time complexity
+
+------------------------------------------------------------------------------------------------------------------------
+ARRAY DEQUE
+
+Growable array that allows us to add or remove an element from both sides.
+Initially, the array is initialized with a size of 16. It's implemented as a double-ended queue where it maintains two
+pointers namely a head and a tail.
+Most operations have amortized constant time complexity since the implementation is that of a De-Queue.
+It's not thread-safe
+Null elements are not accepted
+Works significantly faster than the synchronized Stack
+Is a faster queue than LinkedList due to the better locality of reference
+An Iterator returned by an ArrayDeque is fail-fast
+ArrayDeque automatically doubles the size of an array when head and tail pointer meets each other while adding an element
+
+Insertion from Head	    offerFirst(e)	addFirst(e)
+Removal from Head	    pollFirst()	    removeFirst()
+Retrieval from Head	    peekFirst()	    getFirst()
+Insertion from Tail	    offerLast(e)	addLast(e)
+Removal from Tail	    pollLast()	    removeLast()
+Retrieval from Tail	    peekLast()	    getLast()
+
+------------------------------------------------------------------------------------------------------------------------
+PRIORITY QUEUE
+
+In Java programming, Java Priority Queue is implemented using Heap Data Structures and Heap has O(log(n)) time
+complexity to insert and delete element.
+We can’t create PriorityQueue of Objects that are non-comparable. PriorityQueue are unbound queues.
+The head of this queue is the least element with respect to the specified ordering. If multiple elements are tied for
+least value, the head is one of those elements — ties are broken arbitrarily.
+PriorityQueue is not thread-safe.
+Java provides PriorityBlockingQueue class that implements the BlockingQueue interface for use in multithreading.
+The queue retrieval operations poll,  remove,  peek, and element access the element at the head of the queue.
+It provides O(log(n)) time for add and poll methods.
+contains functions take O(n).
+
+Elements returned bu a PQ are in sorted order. Within a queue they are not since PQ implements heap internally.
+Functions like Collections.sort/binarySearch do not work on PQ because of the same reason. Java collections does not
+support any sorted list. The available sorted implementations are TreeSet and TreeMap ie with constraints of no
+duplicates and pair insertion.
+
+------------------------------------------------------------------------------------------------------------------------
+HASH SET
+
+HashSet uses HashMap internally to store it’s objects.
+
+The contains() method calls HashMap.containsKey(object).
+Whenever you insert an element into HashSet using add() method, it actually creates an entry in the internally backing
+HashMap object with element you have specified as it’s key and constant called “PRESENT” as it’s value.
+
+------------------------------------------------------------------------------------------------------------------------
+HASHMAP
+
+Java 8 hash elements use balanced trees instead of linked lists after a certain threshold is reached. Which means
+HashMap starts with storing Entry objects in linked list but after the number of items in a hash becomes larger than a
+certain threshold, the hash will change from using a linked list to a balanced tree, which will improve the worst case
+performance from O(n) to O(log n).
+
+HashMap
+HashMap has complexity of O(1) for insertion and lookup.
+HashMap allows one null key and multiple null values.
+HashMap does not maintain any order.
+
+TreeMap
+TreeMap has complexity of O(logN) for insertion and lookup.
+TreeMap does not allow null key but allow multiple null values.
+TreeMap maintains order. It stores keys in sorted and ascending order.
+
+LinkedHashMap
+LinkedHashMap has complexity of O(1) for insertion and lookup.
+LinkedHashMap allows one null key and multiple null values.
+LinkedHashMap maintains order in which key-value pairs are inserted.
+
+------------------------------------------------------------------------------------------------------------------------

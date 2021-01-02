@@ -4,7 +4,10 @@ import java.util.ArrayList;
 
 //https://www.interviewbit.com/problems/set-matrix-zeros/
 
-//the rowSet and column set are not required though. We are using them just to reduce complexity.
+//poor method.
+// refer Array_lc_set_zeros for constant space method
+// the rowSet and column set are not required. We are using them just to reduce complexity.
+
 public class Array_ib_set_matrix_zero {
     boolean visited[][];
     boolean rowSet[];

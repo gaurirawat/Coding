@@ -81,3 +81,11 @@ Generating random elements:
 Random random=new Random();
 int rint = random.nextInt(5); //generates random no from 0-5;
 double rdouble = nextDouble();  //generates from 0.0-1.0
+
+Character functions:
+    Character.isLetterOrDigit();
+    Character.isLetter();
+    Character.isDigit();
+    Character.toLowerCase();
+    Character.toUpperCase();
+    Character.isWhitespace();

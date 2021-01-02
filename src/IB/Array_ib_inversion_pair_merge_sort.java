@@ -1,6 +1,6 @@
 package IB;
 //https://www.interviewbit.com/problems/inversions/
-public class Array_ib_inversion_pair {
+public class Array_ib_inversion_pair_merge_sort {
     public int countInversions(int[] a) {
         return inversionPair(a,0,a.length-1);
     }

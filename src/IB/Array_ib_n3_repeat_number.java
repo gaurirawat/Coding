@@ -5,53 +5,59 @@ import java.util.*;
 //https://www.interviewbit.com/problems/n3-repeat-number/
 public class Array_ib_n3_repeat_number {
     public int repeatedNumber(final List<Integer> l) {
-        if(l.size()==0) return -1;
-        ArrayList<MajElem> elems=new ArrayList<MajElem>();
-        for(int x:l){
-            boolean found=false;
-            for(MajElem e: elems){
-                if(e.e==x){
-                    e.c++;
-                    found=true;
+        if (l.size() == 0) {
+            return -1;
+        }
+
+        ArrayList<Element> maj = new ArrayList<Element>();
+        for (int i = 0; i < l.size(); ++i) {
+            boolean found = false;
+            for (int j=0; j<maj.size(); ++j) {
+                if (maj.get(j).number == l.get(i)) {
+                    maj.get(j).freq++;
+                    found = true;
                     break;
                 }
             }
-            if(!found){
-                if(elems.size()<3)
-                    elems.add(new MajElem(x,1));
-                else{
-                    for(int i=0;i<elems.size();++i){
-                        MajElem e=elems.get(i);
-                        e.c--;
-                        if(e.c==0){
-                            elems.remove(e);
-                            --i;
+
+            if (!found) {
+                if (maj.size()<3) {
+                    maj.add(new Element(l.get(i)));
+                } else {
+                    for (int j=0; j<maj.size(); ++j) {
+                        maj.get(j).freq--;
+                        if(maj.get(j).freq == 0) {
+                            maj.remove(j);
                         }
                     }
                 }
             }
         }
 
-        for(MajElem e:elems)
-            e.c=0;
-        for(int i=0;i<l.size();++i){
-            for(MajElem e:elems){
-                if(e.e==l.get(i)){
-                    e.c++;
-                    if(e.c>l.size()/3)
-                        return e.e;
+        for (int j=0; j<maj.size(); ++j) {
+            maj.get(j).freq = 0;
+        }
+
+        for (int i=0; i<l.size(); ++i) {
+            for (int j=0; j<maj.size(); ++j) {
+                if (l.get(i) == maj.get(j).number) {
+                    maj.get(j).freq++;
+                    if (maj.get(j).freq > l.size()/3) {
+                        return maj.get(j).number;
+                    }
+                    break;
                 }
             }
         }
         return -1;
     }
-}
 
-class MajElem{
-    int e;
-    int c;
-    public MajElem(int i, int j){
-        e=i;
-        c=j;
+    class Element{
+        int number;
+        int freq;
+        public Element(int num) {
+            number = num;
+            freq = 1;
+        }
     }
 }

@@ -35,25 +35,25 @@ t[i - 1][j - 1], and then buy the stock, to get our debt at ith transaction and 
 //https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iv/submissions/
 public class DP_lc_buy_sell_stock_atmost_k_times {
     public int maxProfit(int k, int[] pr) {
-        if(pr==null||pr.length==0||k==0)
+        if (pr == null || pr.length == 0 || k == 0)
             return 0;
-        if(k>=pr.length/2){
-            int sum=0;
-            for(int i=1;i<pr.length;++i)
-                if(pr[i]>pr[i-1])
-                    sum+=pr[i]-pr[i-1];
+        if (k >= pr.length / 2) {
+            int sum = 0;
+            for (int i = 1; i < pr.length; ++i)
+                if (pr[i] > pr[i - 1])
+                    sum += pr[i] - pr[i - 1];
             return sum;
         }
 
-        int dp[][]= new int[k+1][pr.length];
-        for(int i=1;i<=k;++i){
-            int currp=-pr[0];//current profit. negative since we are purchasing the first element
-            for(int j=1;j<pr.length;++j){
-                dp[i][j]=Math.max(dp[i][j-1], currp+pr[j]);
-                currp= Math.max(currp,dp[i-1][j-1]-pr[j]);
+        int dp[][] = new int[k + 1][pr.length];
+        for (int i = 1; i <= k; ++i) {
+            int currp = -pr[0];//current profit. negative since we are purchasing the first element
+            for (int j = 1; j < pr.length; ++j) {
+                dp[i][j] = Math.max(dp[i][j - 1], currp + pr[j]);
+                currp = Math.max(currp, dp[i - 1][j - 1] - pr[j]);
             }
         }
-        return dp[k][pr.length-1];
+        return dp[k][pr.length - 1];
     }
 }
 
