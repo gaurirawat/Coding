@@ -3,7 +3,7 @@
 *   Hashing_ib_equal_sums_pair   //pathetic piece of shit
     Hashing_ib_copy_list
 
-@@  String_ib_shortest_unique_prefix    //map implementation imp.
+@@  Tree_ib_shortest_unique_prefix    //map implementation imp.
 @@  Tree_ib_sum_root_to_leaf_numbers    //bigInteger implementation
 
     Array_lc_odd_even_jump
@@ -19,3 +19,15 @@
     DP_ib_tushars_birthday_bombs
     DP_ib_palindrome_partitioning_2
     BM_lc_sum_of_two_numbers
+    DP_lc_perfect_squares   //similar to coin change
+    String_lc_min_window_substring
+    Implementation_lc_insert_delete_get_random
+    Array_lc_increasing_triplet_subsequence     //constant space method
+    String_lc_fractional_to_decimal         //3000 edge cases.
+
+    BSearch_lc_median_of_2_sorted_arrays
+    Pointer_lc_longest_continuous_array_with_absolute_difference_less_than_equal_to_k //redo for  o(n)
+    String_lc_string_transform_all_occurrences_once
+    BSearch_lc_missing_element
+    String_lc_encode
+    Graph_implementation_robot_room_cleaner

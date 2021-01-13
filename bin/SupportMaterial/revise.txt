@@ -8,7 +8,23 @@
 
     Array_lc_odd_even_jump
     Array_ib_order_of_people_heights
+    Matrix_Array_lc_spiral_order
     Tree_ib_least_common_ancestor   //uptil now we were using incorrect approach
 
     Heap_lc_skyline_problem
+
     String_lc_justified_string
+
+    DP_ib_tushars_birthday_party_knapsack
+    DP_ib_tushars_birthday_bombs
+    DP_ib_palindrome_partitioning_2
+    BM_lc_sum_of_two_numbers
+    DP_lc_perfect_squares   //similar to coin change
+    String_lc_min_window_substring
+    Implementation_lc_insert_delete_get_random
+    Array_lc_increasing_triplet_subsequence     //constant space method
+    String_lc_fractional_to_decimal         //3000 edge cases.
+
+    BSearch_lc_median_of_2_sorted_arrays
+    Pointer_lc_longest_continuous_array_with_absolute_difference_less_than_equal_to_k //redo for  o(n)
+    String_lc_string_transform_all_occurrences_once

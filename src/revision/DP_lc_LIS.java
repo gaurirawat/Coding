@@ -17,6 +17,7 @@ where it can be appended using binary search. The final answer is the length of 
 https://leetcode.com/problems/longest-increasing-subsequence/discuss/74824/JavaPython-Binary-search-O(nlogn)-time-with-explanation
 */
 
+import java.lang.reflect.Array;
 import java.util.*;
 public class DP_lc_LIS {
 
@@ -32,6 +33,7 @@ public class DP_lc_LIS {
 			else
 				l.set(pos,nums[i]);
 		}
+		
 		return l.size();
 	}
 

@@ -1,25 +1,36 @@
 package IB;
+
+import java.util.Arrays;
+
 //https://www.interviewbit.com/problems/maximal-string/
 public class Backtracking_ib_maximal_string {
     int max;
-    public String solve(String a, int k) {
-        max=0;
-        char ch[]=a.toCharArray();
-        inner(ch,0,k);
-        return max+"";
-    }
-    public void inner(char[]ch, int i, int k){
-        max=Math.max(max, Integer.parseInt(String.valueOf(ch)));
-        if(k==0 || i==ch.length) return;
-        inner(ch,i+1,k);
-        for(int j=0;j<ch.length;++j){
-            char t=ch[i];
-            ch[i]=ch[j];
-            ch[j]=t;
-            inner(ch,i+1,k-1);
-            t=ch[i];
-            ch[i]=ch[j];
-            ch[j]=t;
+    public String solve(String s, int k) {
+        max = Integer.parseInt(s);
+        char[] ch = s.toCharArray();
+        if (k >= ch.length) {
+            Arrays.sort(ch);
+            return new String(ch);
         }
+        inner(0, ch, k);
+        return max + "";
+    }
+
+    public void inner(int i, char[] ch, int k) {
+        max = Math.max(max, Integer.parseInt(new String(ch)));
+        if (k == 0 || i == ch.length) {
+            return;
+        }
+        inner(i + 1, ch, k);
+        for (int j = 0; j <= i; ++j) {
+            char t = ch[j];
+            ch[j] = ch[i];
+            ch[i] = t;
+            inner(i + 1, ch, k - 1);
+            t = ch[j];
+            ch[j] = ch[i];
+            ch[i] = t;
+        }
+        return;
     }
 }

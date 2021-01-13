@@ -338,3 +338,18 @@ now keep allocating elements to the buckets according to their ones digit in fir
 in third and so on.
 
 ------------------------------------------------------------------------------------------------------------------------
+
+ROLLING HASH
+
+String hashing is the way to convert a string into an integer known as a hash of that string.
+Polynomial rolling hash function: In this hashing technique, the hash of a string is calculated as:
+hash = (s[0]*P^{0} + s[1]*P^{1} + ....s[m]*P^{m}) mod M
+Where P and M are some positive prime numbers.
+And s[0], s[1], s[2] … s[n-1] are the values assigned to each character in English alphabet (a->1, b->2, … z->26).
+P: The value of P can be any prime number roughly equal to the number of different characters used.
+For example: if the input string contains only lowercase letters of the English alphabet, then P = 31 is the appropriate
+value of P.
+If the input string contains both uppercase and lowercase letters, then P = 53 is an appropriate option.
+M: the probability of two random strings colliding is inversely proportional to m, so m should be a large prime number.
+M = 10 ^9 + 9 is a good choice.
+------------------------------------------------------------------------------------------------------------------------

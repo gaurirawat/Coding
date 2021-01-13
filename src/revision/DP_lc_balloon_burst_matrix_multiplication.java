@@ -1,6 +1,6 @@
 package revision;
 
-public class DP_lc_baloon_burst_matrix_multiplication {
+public class DP_lc_balloon_burst_matrix_multiplication {
     public int maxCoins(int[] nums) {
         int len = nums.length;
         int[] num = new int[len+2];

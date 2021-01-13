@@ -89,3 +89,32 @@ Character functions:
     Character.toLowerCase();
     Character.toUpperCase();
     Character.isWhitespace();
+
+String Functions:
+    O(1)
+    s.charAt(1);
+    s.length();
+
+    O(n)
+    s.equals(s2);
+    s.compareTo(s2);
+    s.toLowerCase();
+    s.toUpperCase();
+    s.isWhitespace();
+    s.trim()
+
+    O(b-a) ie O(n)
+    s.substring(a,b);
+
+    String.split(regex);
+    String.join(delimiter, Collection/Array);
+
+StringBuilder functions:
+    O(1)
+    sb.charAt(0);
+
+    O(n)
+    sb.append("a");
+    sb.reverse();
+    sb.delete(0,5);
+    sb.substring();

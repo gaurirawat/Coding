@@ -16,6 +16,7 @@ STRONGLY CONNECTED COMPONENT: KOSARAJU'S ALGO
 STRONGLY CONNECTED COMPONENT: TARJAN'S ALGO
 BIPARTITE GRAPH: BFS
 EULERIAN CYCLE, PATH
+NP-HARD PROBLEMS
 ------------------------------------------------------------------------------------------------------------------------
 
 BFS:
@@ -760,9 +761,3 @@ degree is not possible in an undirected graph (sum of all degrees is always even
     }
 
 ------------------------------------------------------------------------------------------------------------------------
-
--HAMILTONIAN CYCLE: np hard problem
--GRAPH ISOMORPHISM: given two graphs we need to identify if they are same or not. It not known to be solvable in
-polynomial time nor to be NP-complete, and therefore may be in the computational complexity class NP-intermediate.
--Web crawler: prefer BFS over DFS because DFS takes us very far from the starting vertex while BFS takes us away slowly
-and generally we may want to discover just the close vertices.

@@ -58,6 +58,7 @@ DP_lc_palindrome_partitioning           //different approach
 DP_lc_stone_gamek
 DP_lc_predict_winner                    //definitely revise
 
+DP_ib_tushars_birthday_party_knapsack
 DP_ib_tushars_birthday_bombs
 DP_ib_longest_AP
 DP_ib_longest_increasing_decreasing_subsequence

@@ -5,12 +5,12 @@ Ref:
 https://leetcode.com/problems/lfu-cache/discuss/94657/Java-solutions-of-three-different-ways.-PriorityQueue-%3A-O(capacity)-TreeMap-%3A-O(log(capacity))-DoubleLinkedList-%3A-O(1)
 https://leetcode.com/problems/lfu-cache/
 */
-public class Map_lc_LFU {
+public class Implementation_lc_LFU {
     HashMap<Integer, MetaData > map;
     PriorityQueue<MetaData> pq;
     int cap;
     int c;
-    public Map_lc_LFU(int capacity) {
+    public Implementation_lc_LFU(int capacity) {
         cap=capacity;
         c=0;
         map=new HashMap<Integer, MetaData>();

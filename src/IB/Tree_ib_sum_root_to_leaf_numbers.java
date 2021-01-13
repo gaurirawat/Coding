@@ -13,13 +13,14 @@ public class Tree_ib_sum_root_to_leaf_numbers {
 
     public void sumNumbersInner(TreeNode root, String s){
         if(root==null) return;
+        s = s+root.val;
         if(root.left==null && root.right==null){
-            int n=((new BigInteger(s+root.val)).mod(new BigInteger("1003"))).intValue();
+            int n=((new BigInteger(s)).mod(new BigInteger("1003"))).intValue();
             ans=ans+n;
             ans%=1003;
             return;
         }
-        sumNumbersInner(root.left,s+root.val);
-        sumNumbersInner(root.right,s+root.val);
+        sumNumbersInner(root.left,s);
+        sumNumbersInner(root.right,s);
     }
 }

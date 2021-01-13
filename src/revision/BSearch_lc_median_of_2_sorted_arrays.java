@@ -2,7 +2,7 @@ package revision;
 
 import java.util.*;
 
-public class BSearch_lc_median_sorted_array {
+public class BSearch_lc_median_of_2_sorted_arrays {
     public double findMedianSortedArrays(int[] a, int[] b) {
         if(a.length>b.length) {
             return findMedianSortedArrays(b,a);

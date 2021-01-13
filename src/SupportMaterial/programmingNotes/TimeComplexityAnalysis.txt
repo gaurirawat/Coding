@@ -115,3 +115,24 @@ TC= O(nlogn). CountFunc is calling merge function logn times and itself 2*logn t
 SC= O(n) create dummy array at the time of merging.
 
 ------------------------------------------------------------------------------------------------------------------------
+
+Graph_lc_path_with_min_effort
+https://leetcode.com/problems/path-with-minimum-effort/
+
+TC = O(m*n log(m*n))
+SC = O(m*n).
+    Coordinates get explored only when their effort id the min in all the efforts. Once a coordinate has been explored,
+    we cannot land on the same coordinate again with lesser effort since every time we explore the adjacent cells the
+    max effort either inc or remains same. Now a coordinate gets inserted in the queue every time the new effort is
+    lesser than the previous one. This can happen a max of 4 times since we iterate to a cell from max four adjacent
+    cell directions. Therefore SC = O(4 * m * n).
+
+------------------------------------------------------------------------------------------------------------------------
+
+String_lc_encode
+https://leetcode.com/problems/encode-string-with-shortest-length/
+
+TC = o(n^3) For n length string we iterate, O(n) on every substring once & No of substrings = n^2. therefore total n^3.
+SC = O(n^2) Space excluding stack space would be 2 * n^2. 2 because for every substring we are also storing its answer.
+
+------------------------------------------------------------------------------------------------------------------------
