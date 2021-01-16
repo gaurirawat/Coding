@@ -2,9 +2,30 @@ package revision;
 
 //https://practice.geeksforgeeks.org/problems/knapsack-with-duplicate-items/0/?ref=self
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class DP_gfg_01Knapsack_duplicate_allowed {
+    // better approach. Coin change approach
+    static int knapSack(int n, int w, int val[], int wt[]) {
+        int dp[] = new int[w + 1];
+        Arrays.fill(dp, Integer.MIN_VALUE);
+        dp[0] = 0;
+
+        int max = 0;
+        for (int i = 0; i < n; ++i) {
+            int currWt = wt[i];
+            for (int j = currWt; j <= w; ++j) {
+                if (dp[j - currWt] != Integer.MIN_VALUE) {
+                    dp[j] = Math.max(dp[j], dp[j - currWt] + val[i]);
+                }
+                max = Math.max(max, dp[j]);
+            }
+        }
+
+        return max;
+    }
+
     public static void main (String[] args) {
         Scanner sc =new Scanner(System.in);
         int t= Integer.parseInt(sc.nextLine());

@@ -6,45 +6,43 @@ import java.util.*;
 //ref:
 //https://leetcode.com/problems/the-skyline-problem/discuss/61193/Short-Java-solution
 public class Heap_lc_skyline_problem {
-    public List<List<Integer>> getSkyline(int[][] b) {
-        List<int[]> l= new ArrayList<int[]> ();
-        List<List<Integer>> ans= new ArrayList<List<Integer>> ();
-        for(int i=0;i<b.length;++i) {
-            l.add(new int[]{b[i][0], b[i][2]});
-            l.add(new int[]{b[i][1], -b[i][2]});
+    public List<List<Integer>> getSkyline(int[][] buildings) {
+        ArrayList<Cell> l = new ArrayList<Cell>();
+        for (int[] arr : buildings) {
+            l.add(new Cell(arr[0], arr[2]));
+            l.add(new Cell(arr[1], -arr[2]));
         }
-        Collections.sort(l, new CustomComparator());
+        Collections.sort(l, (a, b) -> (a.index != b.index ? a.index - b.index : -a.ht + b.ht));
+        List<List<Integer>> answer = new ArrayList<List<Integer>>();
+        PriorityQueue<Integer> maxHt = new PriorityQueue<Integer>(Comparator.reverseOrder());
+        maxHt.add(0);
 
-        PriorityQueue<Integer> pq=new PriorityQueue<>(Collections.reverseOrder());
-
-        int max=-1;
-        pq.add(0);
-        for(int i=0; i<l.size();++i) {
-            int[] t=l.get(i);
-            if(t[1]<0) {
-                pq.remove(-t[1]);
+        int max = 0;
+        for (Cell cell : l) {
+            if (cell.ht > 0) {
+                maxHt.add(cell.ht);
             } else {
-                pq.add(t[1]);
+                maxHt.remove(-cell.ht);
             }
-            if(max!=pq.peek()) {
-                List<Integer> point= new ArrayList<Integer>();
-                point.add(t[0]);
-                point.add(pq.peek());
-                ans.add(point);
-                max=pq.peek();
+
+            if (max != maxHt.peek()) {
+                max = maxHt.peek();
+                ArrayList<Integer> point = new ArrayList<Integer>();
+                point.add(cell.index);
+                point.add(max);
+                answer.add(point);
             }
         }
-        return ans;
+        return answer;
     }
 
+    class Cell {
+        int index;
+        int ht;
 
-}
-class CustomComparator implements Comparator<int[]>{
-    @Override
-    public int compare(int[] a, int[] b) {
-        if(a[0]!=b[0]) {
-            return a[0]-b[0];
+        public Cell(int a, int c) {
+            index = a;
+            ht = c;
         }
-        return b[1]-a[1];
     }
 }

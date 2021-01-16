@@ -8,31 +8,37 @@ large inputs.
 below soln is very easy. Only a bit different.
  */
 
+import java.util.Arrays;
+
 public class DP_lc_palindrome_partitioning {
-    public int minCut(String str) {
-        if(str==null|| str.length()<=1)return 0;
-        char s[]= str.toCharArray();
+    public int minCut(String s) {
+        char[]ch = s.toCharArray();
 
         // to store the min partitions required to make every substring palindrome for the initial i characters
-        int dp[]= new int[s.length];
-        //max partitions for string of length i can be i. hence worst case initialization.
-        for(int i=0;i<s.length;++i)
-            dp[i]=i;
+        int dp[] = new int[ch.length];
+        Arrays.fill(dp, Integer.MAX_VALUE);
 
-        //consider every element to be mid of palindrome
-        for(int m=0;m<s.length;++m){
+        for (int i = 0; i < ch.length; ++i) {
+            //max partitions for string of length i can be dp[i - 1] + 1. hence worst case initialization.
+            dp[i] = Math.min(dp[i], i == 0 ? 0 : (dp[i - 1] + 1));
+
             // CASE 1. odd len: center is at index mid, expand on both sides
-            for(int l=m,r=m;l>=0 && r<s.length && s[l]==s[r];--l,++r){
-                int part= l==0?0:dp[l-1]+1;
-                dp[r]=Math.min(dp[r], part);
-            }
+            checkForMinPalindrome(i - 1, i + 1, dp, ch);
+
             // CASE 2: even len: center is between [mid-1,mid], expand on both sides
-            for(int l=m,r=m+1;l>=0 && r<s.length && s[l]==s[r];--l,++r){
-                int part= l==0?0:dp[l-1]+1;
-                dp[r]=Math.min(dp[r], part);
-            }
+            checkForMinPalindrome(i, i + 1, dp, ch);
         }
-        return dp[s.length-1];
+        // System.out.println(Arrays.toString(dp));
+        return dp[s.length() - 1];
+    }
+
+    public void checkForMinPalindrome(int l, int r, int[] dp, char[]ch) {
+        while (l >=0 && r < ch.length && ch[l] == ch[r]) {
+            int min = l == 0 ? 0 : (dp[l - 1] + 1);
+            dp[r] = Math.min(dp[r], min);
+            --l;
+            ++r;
+        }
     }
 }
 

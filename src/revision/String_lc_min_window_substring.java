@@ -4,58 +4,54 @@ import java.util.*;
 //https://leetcode.com/problems/minimum-window-substring/submissions/
 public class String_lc_min_window_substring {
     public String minWindow(String s, String t) {
-        HashMap<Character, Integer> alphT = new HashMap<Character, Integer>();
+        HashMap<Character, Integer> alpT = new HashMap<Character, Integer>();
         for (char ch : t.toCharArray()) {
-            alphT.put(ch, alphT.getOrDefault(ch, 0) + 1);
+            alpT.put(ch, alpT.getOrDefault(ch, 0) + 1);
         }
 
-        HashMap<Character, Integer> alphS = new HashMap<Character, Integer>();
+        HashMap<Character, Integer> alpS = new HashMap<Character, Integer>();
         for (char ch : s.toCharArray()) {
-            alphS.put(ch, alphS.getOrDefault(ch, 0) + 1);
+            alpS.put(ch, alpS.getOrDefault(ch, 0) + 1);
         }
 
-        int uniqueT = 0;
-        int uniqueS = 0;
-        for (Map.Entry<Character, Integer> e : alphT.entrySet()) {
-            uniqueT++;
-            if (e.getValue() > alphS.getOrDefault(e.getKey(), 0)) {
+        for (Map.Entry<Character, Integer> e : alpT.entrySet()) {
+            if (alpS.get(e.getKey()) == null || alpS.get(e.getKey()) < e.getValue()) {
                 return "";
             }
         }
 
-        alphS.clear();
+        int uniqueT = alpT.size();
+        int uniqueS = 0;
+        alpS.clear();
+
+        char[] ch = s.toCharArray();
+        String ans = s;
+
         int l = 0;
         int r = 0;
-        String answer = s;
-        for (r = 0; r < s.length(); ++r) {
-            char ch = s.charAt(r);
-            alphS.put(ch, alphS.getOrDefault(ch, 0) + 1);
-            if ((alphS.get(ch)).compareTo(alphT.getOrDefault(ch, 0)) == 0) {
+        for (; r < ch.length; ++r) {
+            alpS.put(ch[r], alpS.getOrDefault(ch[r], 0) + 1);
+
+            if (alpS.get(ch[r]).equals(alpT.get(ch[r]))) {
                 uniqueS++;
-
                 if (uniqueS == uniqueT) {
-                    while (l <= r) {
-                        char currCh = s.charAt(l);
-                        if ((alphS.get(currCh)).compareTo(alphT.getOrDefault(currCh, 0)) > 0) {
-                            alphS.put(currCh, alphS.get(currCh) - 1);
-                            l++;
-                        } else {
-                            break;
-                        }
+                    // contracting window as long as it remains valid
+                    while (alpT.get(ch[l]) == null || alpS.get(ch[l]) > alpT.get(ch[l])) {
+                        alpS.put(ch[l], alpS.get(ch[l]) - 1);
+                        ++l;
+                    }
+                    //checking if it is of a smaller length than our current answer window
+                    if (ans.length() > r - l + 1) {
+                        ans = s.substring(l, r + 1);
                     }
 
-                    if (answer.length() > r - l + 1) {
-                        answer = s.substring(l, r + 1);
-                    }
-
-                    //removing one element
-                    char currCh = s.charAt(l);
-                    alphS.put(currCh, alphS.get(currCh) - 1);
+                    //removing the first alphabet that will make the window invalid so we
+                    // can look for the next window with greater r index
+                    alpS.put(ch[l], alpS.get(ch[l++]) - 1);
                     uniqueS--;
-                    l++;
                 }
             }
         }
-        return answer;
+        return ans;
     }
 }

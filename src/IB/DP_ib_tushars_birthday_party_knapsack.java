@@ -31,4 +31,34 @@ public class DP_ib_tushars_birthday_party_knapsack {
         }
         return dp;
     }
+
+    /*
+    public int solve(final List<Integer> a, final List<Integer> b, final List<Integer> c) {
+        if (a.size() == 0) {
+            return 0;
+        }
+        int max = Collections.max(a);
+        int[] dp = new int[max + 1];
+        coinChange(dp, b, c);
+
+        int answer = 0;
+        for (int x : a) {
+            answer += dp[x];
+        }
+        return answer;
+    }
+
+    public void coinChange(int[] dp, final List<Integer> b, final List<Integer> c) {
+        Arrays.fill(dp, Integer.MAX_VALUE);
+        dp[0] = 0;
+        for (int i = 0; i < b.size(); ++i) {
+            int foodCap = b.get(i);
+            for (int j = foodCap; j < dp.length; ++j) {
+                if (dp[j - foodCap] != Integer.MAX_VALUE) {
+                    dp[j] = Math.min(dp[j], dp[j - foodCap] + c.get(i));
+                }
+            }
+        }
+    }
+     */
 }

@@ -119,5 +119,7 @@
 
 **  BSearch_lc_first_and_last_occurrence_of_element
 
+    Heap_lc_skyline_problem
+
     String_lc_rearrange_spaces
 

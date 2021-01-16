@@ -1,9 +1,10 @@
 package revision;
 
 import java.util.*;
-
+//https://leetcode.com/problems/median-of-two-sorted-arrays/
 public class BSearch_lc_median_of_2_sorted_arrays {
     public double findMedianSortedArrays(int[] a, int[] b) {
+        // why this??
         if(a.length>b.length) {
             return findMedianSortedArrays(b,a);
         }

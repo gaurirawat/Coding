@@ -56,3 +56,79 @@ public class String_lc_encode {
         }
     }
 }
+/*
+
+//KMP approach
+    HashMap<String, String> map;
+    public String encode(String s) {
+        map = new HashMap<String, String>();
+        return encodeInner(s);
+    }
+
+    public String encodeInner(String s) {
+        if (s.length() <= 4) {
+            return s;
+        }
+        if (map.get(s) != null) {
+            return map.get(s);
+        }
+
+        String answer = s;
+
+        String repetitionEncoding = getRepetitionEncoding(s);
+        if (repetitionEncoding.length() < answer.length()) {
+            answer = repetitionEncoding;
+        }
+
+        for (int i = 1; i < s.length(); ++i) {
+            String l = encodeInner(s.substring(0, i));
+            String r = encodeInner(s.substring(i));
+            if (l.length() + r.length() < answer.length()) {
+                answer = l + r;
+            }
+        }
+
+
+        map.put(s, answer);
+        return answer;
+    }
+
+    public String getRepetitionEncoding(String s) {
+        char[] ch = s.toCharArray();
+        int[] lps = new int[ch.length];
+
+        int i = 0;
+        for (int j = 1; j < ch.length; ++j) {
+            while(ch[i] != ch[j] && i!= 0) {
+                i = lps[i - 1];
+            }
+            if (ch[i] == ch[j]) {
+                lps[j] = ++i;
+            } else {
+                lps[j] = 0;
+            }
+        }
+        if (lps[ch.length - 1] == 0) {
+            return new String(s);
+        }
+
+        String repeatedString = s.substring(0, s.length() - lps[ch.length - 1]);
+        // System.out.println(repeatedString);
+        if (s.length() % repeatedString.length() == 0) {
+            int count = s.length() / repeatedString.length();
+            // System.out.println(count);
+            for (i = 0; i < count; ++i) {
+                if (s.startsWith(repeatedString)) {
+                    s = s.substring(repeatedString.length());
+
+                    // System.out.println(s);
+                } else {
+                    return new String(ch);
+                }
+            }
+            repeatedString = encodeInner(repeatedString);
+            return count + "[" + repeatedString + "]";
+        }
+        return new String(ch);
+    }
+ */
