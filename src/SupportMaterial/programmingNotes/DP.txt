@@ -754,7 +754,7 @@ https://www.youtube.com/watch?v=ctZ7fjMbPWE&ab_channel=GauravSen
 
 Approach:
 This is a technique where we pre-compute parent of every node which are at a distance of 1, 2, 4, 8, 16 ..upto log(n);
-Now if n=5, maxPow=log(5)=2 and the tree is skewed, we need parent at distance 1, 2, 4.
+Now if n=5 and the tree is skewed, maxPow=log(5)=2 we need parent at distance 1, 2, 4.
 Therefore size becomes dp[maxPow+1][n];
 
 DP:

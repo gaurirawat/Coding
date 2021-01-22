@@ -18,7 +18,7 @@ All the strings in the input will only contain lowercase letters.
 The length of S will be in the range [1, 20000].
 The length of T will be in the range [1, 100].
  */
-public class DP_lc_min_window_subsequence {
+public class DP_lc_minimum_window_subsequence {
     public String minWindow(String s, String t) {
         int[] alps = new int[26];
         int[] alpt = new int[26];

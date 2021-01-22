@@ -3,7 +3,7 @@ package revision;
 import java.util.*;
 //https://leetcode.com/problems/course-schedule-ii/
 //https://www.youtube.com/watch?v=tggiFvaxjrY
-public class Graph_lc_course_scheduling_topo_sort_kahn_algo {
+public class Graph_lc_course_schedule_2_topo_sort_kahn_algo {
     public int[] findOrder(int n, int[][] pre) {
         ArrayList<ArrayList<Integer>> l= new ArrayList<ArrayList<Integer>>();
         for(int i=0;i<n;++i)

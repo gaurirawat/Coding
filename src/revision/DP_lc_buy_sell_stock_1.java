@@ -3,7 +3,7 @@ package revision;
 //https://practice.geeksforgeeks.org/problems/stock-buy-and-sell/0
 import java.util.Scanner;
 
-public class Array_lc_buy_sell_stock_1_time {
+public class DP_lc_buy_sell_stock_1 {
     //leetcode
     public int maxProfit(int[] prices) {
         if(prices==null|| prices.length==0) return 0;

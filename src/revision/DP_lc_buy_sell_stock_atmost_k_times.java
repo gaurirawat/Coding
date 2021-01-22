@@ -2,7 +2,7 @@ package revision;
 
 import java.util.*;
 
-//Array_lc_buy_sell_stock_1_time
+//DP_lc_buy_sell_stock_1
 //Array_lc_buy_sell_stock_infinite_times
 //DP_lc_buy_sell_stock_atmost_2_times use same code for k=2
 //DP_lc_buy_sell_stock_atmost_k_times
@@ -55,9 +55,60 @@ public class DP_lc_buy_sell_stock_atmost_k_times {
         }
         return dp[k][pr.length - 1];
     }
+
+
+    /* Very easy to understand
+    dp[i, j] represents the max profit up until prices[j] using at most i transactions.
+    dp[i, j] = max(dp[k, i-1], prices[i] - prices[j] + dp[k-1, j-1]) { j in range of [0, i-1] }
+             = max(dp[k, i-1], prices[i] + max(dp[k-1, j-1] - prices[j]))
+     */
+    public int maxProfitt(int K, int[] prices) {
+        int n = prices.length;
+        if (n == 0 || K == 0) {
+            return 0;
+        }
+        if (K >= n / 2) {
+            int sum = 0;
+            for (int i = 1; i < prices.length; ++i)
+                if (prices[i] > prices[i - 1])
+                    sum += prices[i] - prices[i - 1];
+            return sum;
+        }
+
+        int[][] dp = new int[K + 1][n + 1];
+
+        for (int k = 1; k <= K; ++k) {
+            int maxElem = - prices[0];
+            for (int i = 2; i <= n; ++i) {
+                dp[k][i] = Math.max(dp[k - 1][i], dp[k][i - 1]);
+                dp[k][i] = Math.max(dp[k][i], prices[i - 1] + maxElem);
+                maxElem = Math.max(maxElem, dp[k - 1][i] - prices[i - 1]);
+            }
+        }
+        return dp[K][n];
+    }
 }
 
 /*
+
+public int maxProfit(int K, int[] prices) {
+    int n = prices.length;
+    int[][] dp = new int[K + 1][n + 1];
+
+    for (int k = 1; k <= K; ++k) {
+        for (int i = 1; i <= n; ++i) {
+            dp[k][i] = Math.max(dp[k - 1][i], dp[k][i - 1]);
+            for (int j = 1; j < i; ++j) {
+                int profit = prices[i - 1] - prices[j - 1];
+                if (profit > 0) {
+                    dp[k][i] = Math.max(dp[k][i], dp[k - 1][j - 1] + profit);
+                }
+            }
+        }
+    }
+    return dp[K][n];
+}
+
 BELOW CODE IS MORE UNDERSTANDABLE:
 
 Here basically we put dp[i][j] as max profit possible from the initial j elements using atmost i no of transactions.

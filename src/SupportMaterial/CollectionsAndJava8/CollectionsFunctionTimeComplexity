@@ -120,7 +120,7 @@ duplicates and pair insertion.
 ------------------------------------------------------------------------------------------------------------------------
 HASH SET
 
-HashSet uses HashMap internally to store it’s objects.
+HashSet uses HashTable internally to store it’s objects.
 
 The contains() method calls HashMap.containsKey(object).
 Whenever you insert an element into HashSet using add() method, it actually creates an entry in the internally backing

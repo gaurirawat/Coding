@@ -60,4 +60,31 @@ public class DP_Tree_lc_binary_lifting_find_kth_ancestor {
             return node;
         }
     }
+
+    /*
+    int[][] dp;
+    public TreeAncestor(int n, int[] parent) {
+        int ht = (int)(1.0 * Math.log(n) / Math.log(2));
+        dp = new int[ht + 1][n];
+        dp[0] = parent;
+        for (int i =1; i <= ht; ++i) {
+            for (int j = 0; j < n; ++j) {
+                if(dp[i - 1][j] == -1) {
+                    dp[i][j] = -1;
+                } else {
+                    dp[i][j] = dp[i - 1][dp[i - 1][j]];
+                }
+            }
+        }
+    }
+
+    public int getKthAncestor(int node, int k) {
+        while (k != 0 && node != -1) {
+            int ht = (int)(1.0 * Math.log(k) / Math.log(2));
+            k -= Math.pow(2, ht);
+            node = dp[ht][node];
+        }
+        return node;
+    }
+     */
 }

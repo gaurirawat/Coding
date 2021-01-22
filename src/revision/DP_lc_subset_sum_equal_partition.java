@@ -4,29 +4,34 @@ package revision;
 
 public class DP_lc_subset_sum_equal_partition {
 	public boolean canPartition(int[] nums) {
-		if(nums==null || nums.length==0)
+		int sum = 0;
+		for (int num :nums) {
+			sum += num;
+		}
+
+		if (sum % 2 != 0) {
 			return false;
-		int sum= 0;
-		for(int x: nums)
-			sum+=x;
-		if(sum%2==1)
-			return false;
-		else
-			return subsetSumDP(sum/2, nums);
+		}
+
+		sum /= 2;
+		return subsetSum(nums, sum);
 	}
 
-	public boolean subsetSumDP(int sum, int nums[]) {
-		boolean dp[][]= new boolean[sum+1][nums.length+1];
-		for(int i=1; i<nums.length;++i)
-			dp[0][i]=true;
-		for(int i=1; i<=sum; ++i){
-			for(int j=1; j<=nums.length; ++j){
-				if(i>=nums[j-1])
-					dp[i][j]=dp[i][j-1] || dp[i-nums[j-1]][j-1];
-				else
-					dp[i][j]=dp[i][j-1];
+	public boolean subsetSum(int[] nums, int sum) {
+		boolean dp[][] = new boolean[nums.length + 1][sum + 1];
+		for (boolean[]arr : dp) {
+			arr[0] = true;
+		}
+
+		for (int i = 1; i <= nums.length; ++i) {
+			for (int j = 1; j <= sum; ++j) {
+				dp[i][j] = dp[i - 1][j];
+				if (!dp[i][j] && nums[i - 1] <= j) {
+					dp[i][j] = dp[i][j] || dp[i - 1][j - nums[i - 1]];
+				}
 			}
 		}
-		return dp[sum][nums.length];
+
+		return dp[nums.length][sum];
 	}
 }

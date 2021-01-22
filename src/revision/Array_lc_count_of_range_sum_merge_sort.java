@@ -3,7 +3,7 @@ package revision;
 import java.util.Arrays;
 
 //https://leetcode.com/problems/count-of-range-sum/submissions/
-public class Array_lc_count_of_range_sum_merge_sort {
+public class    Array_lc_count_of_range_sum_merge_sort {
     public int countRangeSum(int[] nums, int lower, int upper) {
         if (nums.length==0) {
             return 0;
@@ -44,4 +44,44 @@ public class Array_lc_count_of_range_sum_merge_sort {
         Arrays.sort(nums, l, r+1);
         return c;
     }
+
+    /* same approach with merge instead of sort
+    public int innerCountRangeMerge(long[]nums, int l, int r, int mid, int lower, int upper) {
+        int a = mid + 1;
+        int b = mid + 1;
+        int count = 0;
+        for (int i = l; i <= mid; ++i) {
+            while (a <= r && nums[a] - nums[i] < lower) {
+                ++a;
+            }
+            while (b <= r && nums[b] - nums[i] <= upper) {
+                ++b;
+            }
+            count += b - a ;
+        }
+
+        long[] result = new long[r - l + 1];
+        a = l;
+        b = mid + 1;
+        int c = 0;
+        while (a <= mid && b <= r) {
+            if (nums[a] < nums[b]) {
+                result[c++] = nums[a++];
+            } else {
+                result[c++] = nums[b++];
+            }
+        }
+        while(a <= mid) {
+           result[c++] = nums[a++];
+        }
+        while(b <= r) {
+           result[c++] = nums[b++];
+        }
+
+        for (int i = 0; i < result.length; ++i) {
+            nums[l + i] = result[i];
+        }
+        return count;
+    }
+     */
 }

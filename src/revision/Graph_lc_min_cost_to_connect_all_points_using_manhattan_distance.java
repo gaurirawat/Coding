@@ -4,45 +4,41 @@ import java.util.Arrays;
 
 //https://leetcode.com/problems/min-cost-to-connect-all-points/
 public class Graph_lc_min_cost_to_connect_all_points_using_manhattan_distance {
-    public int minCostConnectPoints(int[][] p) {
-        int n=p.length;
-        boolean conn[]=new boolean[n];
-        int dis[]=new int[n];
-        Arrays.fill(dis, Integer.MAX_VALUE);
-        int min=0;
-        dis[0]=-1;
-        for(int i=0;i<n;++i){
-            int index=getMinDistPoint(conn, dis, p);
-            // System.out.println(dis[index]);
-            min+=dis[index]==-1?0:dis[index];
-            conn[index]=true;
-            updateDist(index, conn, dis, p);
+    public int minCostConnectPoints(int[][] points) {
+        int n = points.length;
+        boolean[] set = new boolean[n];
+        int[] distance = new int[n];
+        Arrays.fill(distance, Integer.MAX_VALUE);
+        distance[0] = 0;
+        int spanningDistance = 0;
+
+        for (int i = 0; i < n; ++i) {
+            int v = getMinDistance(distance, set);
+            set[v] = true;
+            spanningDistance += distance[v];
+            updateDistance(v, points, distance, set);
         }
-        return min;
+
+        return spanningDistance;
     }
 
-    public void updateDist(int index, boolean[]conn, int[]dis, int[][]p){
-        int inx=p[index][0];
-        int iny=p[index][1];
-        for(int i=0;i<dis.length;++i){
-            if(!conn[i]){
-                long distance=Math.abs(0l+inx-p[i][0])+Math.abs(0l+iny-p[i][1]);
-                if(distance<dis[i])
-                    dis[i]=(int)distance;
+    public int getMinDistance(int[] distance, boolean[]set) {
+        int v = -1;
+        int minDistance = Integer.MAX_VALUE;
+        for (int i = 0; i < distance.length; ++i) {
+            if (!set[i] && minDistance > distance[i]) {
+                minDistance = distance[i];
+                v = i;
             }
         }
+        return v;
     }
-
-
-    public int getMinDistPoint(boolean[]conn, int[]dis, int[][]p){
-        int minIndex=0;
-        int minVal=Integer.MAX_VALUE;
-        for(int i=0;i<conn.length;++i){
-            if(!conn[i] && dis[i]<minVal){
-                minVal=dis[i];
-                minIndex=i;
+    public void updateDistance(int u, int[][]points, int[]distance, boolean[]set) {
+        for (int v = 0; v <distance.length; ++v) {
+            int newDistance = Math.abs(points[u][0] - points[v][0]) + Math.abs(points[u][1] - points[v][1]);
+            if (!set[v] && distance[v] > newDistance) {
+                distance[v] = newDistance;
             }
         }
-        return minIndex;
     }
 }

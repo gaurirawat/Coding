@@ -6,72 +6,71 @@ https://leetcode.com/problems/lfu-cache/discuss/94657/Java-solutions-of-three-di
 https://leetcode.com/problems/lfu-cache/
 */
 public class Implementation_lc_LFU {
-    HashMap<Integer, MetaData > map;
-    PriorityQueue<MetaData> pq;
-    int cap;
-    int c;
-    public Implementation_lc_LFU(int capacity) {
-        cap=capacity;
-        c=0;
-        map=new HashMap<Integer, MetaData>();
-        pq=new PriorityQueue<MetaData>();
-    }
+    class LFUCache {
+        HashMap<Integer, Entry> map;
+        PriorityQueue<Entry> pq;
+        int cap;
+        int timestamp;
 
-    public int get(int key) {
-        if(cap==0){
-            return -1;
+        public LFUCache(int capacity) {
+            map = new HashMap<Integer, Entry>();
+            pq = new PriorityQueue<Entry>((a, b) -> (a.freq != b.freq ? a.freq - b.freq : a.time - b.time));
+            cap = capacity;
+            timestamp = 0;
         }
-        MetaData metaData=map.get(key);
-        if(metaData==null){
-            return -1;
-        }
-        pq.remove(metaData);
-        metaData.freq++;
-        metaData.c=c++;
-        pq.add(metaData);
-        return metaData.val;
-    }
 
-    public void put(int key, int value) {
-        if(cap==0){
-            return;
-        }
-        MetaData metaData=map.get(key);
-        if(metaData!=null) {
-            pq.remove(metaData);
-            metaData.freq++;
-            metaData.c=c++;
-            metaData.val=value;
-            pq.add(metaData);
-        } else {
-            if(map.size()==cap) {
-                MetaData toRemove=pq.poll();
-                map.remove(toRemove.key,toRemove);
+        public int get(int key) {
+            if (map.get(key) != null) {
+                Entry entry = map.get(key);
+
+                pq.remove(entry);
+                entry.freq++;
+                entry.time = timestamp++;
+                pq.add(entry);
+
+                return entry.value;
+            } else {
+                return -1;
             }
-            MetaData toAdd=new MetaData(key,value,1,c++);
-            map.put(key,toAdd);
-            pq.add(toAdd);
         }
-    }
 
-}
-class MetaData implements Comparable<MetaData>{
-    int key;
-    int val;
-    int freq;
-    int c;
-    public MetaData(int a, int b, int e, int d){
-        key=a;
-        val=b;
-        freq=e;
-        c=d;
-    }
+        public void put(int key, int value) {
+            if (cap == 0) {
+                return;
+            }
 
-    public int compareTo( MetaData b) {
-        MetaData a=this;
-        if (a.freq != b.freq) {
-            return a.freq - b.freq;
+            if (map.get(key) == null && map.size() == cap) {
+                map.remove(pq.poll().key);
+            }
+
+            if (map.get(key) == null) {
+                Entry entry = new Entry(key, value, 1, timestamp++);
+                map.put(key, entry);
+                pq.add(entry);
+            } else {
+                Entry entry = map.get(key);
+
+                pq.remove(entry);
+                entry.freq++;
+                entry.time = timestamp++;
+                entry.value = value;
+
+                pq.add(entry);
+            }
         }
-        return a.c - b.c;
+
+        class Entry {
+            int value;
+            int freq;
+            int time;
+            int key;
+
+            public Entry(int a, int b, int c, int d) {
+                key = a;
+                value = b;
+                time = d;
+                freq = c;
+            }
+        }
     }
 }

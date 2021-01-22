@@ -284,7 +284,6 @@ elements. Hence that case has to be handled.
 
 ------------------------------------------------------------------------------------------------------------------------
 
-
 PAINTERS PARTITION PROBLEM
 
 Problem:

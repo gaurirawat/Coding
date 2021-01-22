@@ -90,7 +90,7 @@ If we include then- current val+max value with the remaining wt and without elem
 
 --------------------------------------
 
-2. REPETITION ALLOWED
+2. REPETITION ALLOWED (UNBOUNDED KNAPSACK)
 
 Prob:
 DP_gfg_01Knapsack_duplicate_allowed
@@ -116,6 +116,27 @@ as possible and the max of these profits shall be taken
             // System.out.println(Arrays.toString(dp[i]));
         }
         return dp[value.length][wt];
+    }
+
+    // COIN CHANGE is a version of unbounded knapsack.
+    static int knapSack(int n, int w, int val[], int wt[])
+    {
+        int dp[] = new int[w + 1];
+        Arrays.fill(dp, Integer.MIN_VALUE);
+        dp[0] = 0;
+
+        int max = 0;
+        for (int i = 0; i < n; ++i) {
+            int currWt = wt[i];
+            for (int j = currWt; j <= w; ++j) {
+                if (dp[j - currWt] != Integer.MIN_VALUE) {
+                    dp[j] = Math.max(dp[j], dp[j - currWt] + val[i]);
+                }
+                max = Math.max(max, dp[j]);
+            }
+        }
+        
+        return max;
     }
 
 ------------------------------------------------------------------------------------------------------------------------
@@ -733,7 +754,7 @@ https://www.youtube.com/watch?v=ctZ7fjMbPWE&ab_channel=GauravSen
 
 Approach:
 This is a technique where we pre-compute parent of every node which are at a distance of 1, 2, 4, 8, 16 ..upto log(n);
-Now if n=5, maxPow=log(5)=2 and the tree is skewed, we need parent at distance 1, 2, 4.
+Now if n=5 and the tree is skewed, maxPow=log(5)=2 we need parent at distance 1, 2, 4.
 Therefore size becomes dp[maxPow+1][n];
 
 DP:

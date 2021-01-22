@@ -1,14 +1,21 @@
 @@  Tree_ib_shortest_unique_prefix    //map implementation imp.
     Matrix_Array_lc_spiral_order
     Tree_ib_least_common_ancestor   //uptil now we were using incorrect approach
-
-    String_lc_justified_string
     DP_ib_palindrome_partitioning_2
 
     String_lc_fractional_to_decimal         //3000 edge cases.
     BSearch_lc_median_of_2_sorted_arrays
-
     Pointer_lc_longest_continuous_array_with_absolute_difference_less_than_equal_to_k   //redo for o(n)
     String_lc_string_transform_all_occurrences_once     //difficult :(
     BSearch_lc_missing_element
-    Graph_implementation_robot_room_cleaner
+    Implementation_lc_iterator_flatten_nested_list
+    DP_lc_knight_probability
+    Graph_lc_cheapest_flight_within_k_stops
+    DP_lc_student_attendance_record
+
+    BSearch_ib_search_element_in_rotated_array
+    DP_lc_buy_sell_stock_atmost_k_times
+    DP_lc_buy_sell_stock_with_cooldown
+
+    articulation point,
+    bridgesl

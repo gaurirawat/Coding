@@ -14,21 +14,24 @@ value with the new length.
 Everything inside the for loop is O(1) so the total time is O(n). Please comment if you see something wrong.
 */
 
-public class Map_ib_longest_consecutive_sequence {
-    public int longestConsecutive(final List<Integer> a) {
-        HashMap<Integer, Integer> map= new HashMap<Integer, Integer>();
-        int max=0;
-        for(int x:a){
-            if(!map.containsKey(x)){
-                int l=map.containsKey(x-1)?map.get(x-1):0;
-                int r=map.containsKey(x+1)?map.get(x+1):0;
-                int val=1+l+r;
-                map.put(x,val);
-                map.put(x-l,val);
-                map.put(x+r,val);
-                max=Math.max(max, val);
-            }
+public class Hashing_ib_longest_consecutive_sequence {
+    public int longestConsecutive(int[] nums) {
+        HashSet<Integer> set = new HashSet<Integer>();
+        for (int num: nums) {
+            set.add(num);
         }
-        return max;
+        int maxLength = 0;
+        for (int i = 0; i < nums.length; ++i) {
+            if (set.contains(nums[i] - 1)) {
+                continue;
+            }
+            int num = nums[i];
+            while (set.contains(num)) {
+                num++;
+            }
+            maxLength = Math.max(maxLength, num - nums[i]);
+        }
+
+        return maxLength;
     }
 }
